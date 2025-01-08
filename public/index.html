@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emotional Intelligence Survey</title>
+    <link href="/css/styles.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+    <div class="min-h-screen bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-2xl mx-auto bg-white p-8 rounded-lg shadow">
+            <h1 class="text-2xl font-bold mb-8">Emotional Intelligence and Career Success Survey</h1>
+            
+            <form id="surveyForm" class="survey-form">
+                <!-- Step 1: Consent -->
+                <div id="step1" class="step active">
+                    <h2 class="text-xl font-semibold mb-4">Consent</h2>
+                    <div class="mb-6">
+                        <label class="block mb-2">
+                            <input type="radio" name="consent" value="yes" required class="mr-2">
+                            I consent to participate in this survey
+                        </label>
+                        <label class="block">
+                            <input type="radio" name="consent" value="no" class="mr-2">
+                            I do not consent
+                        </label>
+                    </div>
+                    <button type="button" id="nextToStep2"
+                        class="bg-blue-500 text-white px-4 py-2 rounded disabled:bg-gray-300"
+                        disabled>
+                        Next
+                    </button>
+                </div>
+
+                <!-- Step 2: Biographical Data -->
+                <div id="step2" class="step hidden">
+                    <h2 class="text-xl font-semibold mb-4">Biographical Data</h2>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block mb-1">Age</label>
+                            <input type="number" name="age" required
+                                class="w-full border rounded p-2">
+                        </div>
+                        <div>
+                            <label class="block mb-1">Gender</label>
+                            <select name="gender" required class="w-full border rounded p-2">
+                                <option value="">Select...</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                                <option value="prefer-not-say">Prefer not to say</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block mb-1">Job Title</label>
+                            <input type="text" name="jobTitle" required
+                                class="w-full border rounded p-2">
+                        </div>
+                        <div>
+                            <label class="block mb-1">Years of Experience</label>
+                            <input type="number" name="experience" required
+                                class="w-full border rounded p-2">
+                        </div>
+                    </div>
+                    <div class="mt-6 flex justify-between">
+                        <button type="button" id="backToStep1"
+                            class="bg-gray-500 text-white px-4 py-2 rounded">
+                            Back
+                        </button>
+                        <button type="button" id="nextToStep3"
+                            class="bg-blue-500 text-white px-4 py-2 rounded">
+                            Next
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 3: EI Assessment -->
+                <div id="step3" class="step hidden">
+                    <h2 class="text-xl font-semibold mb-4">EI Assessment</h2>
+                    <div class="space-y-6">
+                        <template id="categoryTemplate">
+                            <div class="category-item">
+                                <label class="block mb-2"></label>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-sm">Strongly Disagree</span>
+                                    <div class="rating-group flex space-x-4"></div>
+                                    <span class="text-sm">Strongly Agree</span>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                    <div class="mt-6 flex justify-between">
+                        <button type="button" id="backToStep2"
+                            class="bg-gray-500 text-white px-4 py-2 rounded">
+                            Back
+                        </button>
+                        <button type="submit"
+                            class="bg-green-500 text-white px-4 py-2 rounded">
+                            Submit
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="/js/main.js"></script>
+</body>
+</html> 
