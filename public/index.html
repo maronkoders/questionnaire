@@ -142,34 +142,185 @@
                     <h2 class="text-lg font-semibold mb-4">Section 3 of 5</h2>
                     <p class="mb-6 text-gray-600">The section below is based on the Perceived Career Satisfaction Scale (Greenhaus, Parasuraman, & Wormley, 1990). Please indicate the extent to which the following statements apply to your situation.</p>
                     
-                    <div class="space-y-8">
-                        <div class="question-group">
-                            <label class="block mb-4">I am satisfied with the success I have achieved in my career.</label>
-                            <div class="grid grid-cols-5 gap-4 text-center">
-                                <label class="flex flex-col items-center">
-                                    <input type="radio" name="career_success" value="1" required class="mb-2">
-                                    <span>Strongly Disagree</span>
-                                </label>
-                                <label class="flex flex-col items-center">
-                                    <input type="radio" name="career_success" value="2" required class="mb-2">
-                                    <span>Disagree to some extent</span>
-                                </label>
-                                <label class="flex flex-col items-center">
-                                    <input type="radio" name="career_success" value="3" required class="mb-2">
-                                    <span>Uncertain</span>
-                                </label>
-                                <label class="flex flex-col items-center">
-                                    <input type="radio" name="career_success" value="4" required class="mb-2">
-                                    <span>Agree to some extent</span>
-                                </label>
-                                <label class="flex flex-col items-center">
-                                    <input type="radio" name="career_success" value="5" required class="mb-2">
-                                    <span>Strongly agree</span>
-                                </label>
-                            </div>
-                        </div>
-
-                        <!-- Add more career satisfaction questions following the same pattern -->
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full bg-transparent">
+                            <tbody>
+                                <tr class="border-b">
+                                    <td class="py-4 px-6 text-left align-top">
+                                        <label class="block">I am satisfied with the success I have achieved in my career.</label>
+                                    </td>
+                                    <td class="py-4 px-6">
+                                        <div class="flex space-x-4">
+                                            <label class="flex flex-col items-center">
+                                                <span>Strongly Disagree</span>
+                                                <input type="radio" name="career_success" value="1" required class="mt-2">
+                                            </label>
+                                            <label class="flex flex-col items-center">
+                                                <span>Disagree to some extent</span>
+                                                <input type="radio" name="career_success" value="2" required class="mt-2">
+                                            </label>
+                                            <label class="flex flex-col items-center">
+                                                <span>Uncertain</span>
+                                                <input type="radio" name="career_success" value="3" required class="mt-2">
+                                            </label>
+                                            <label class="flex flex-col items-center">
+                                                <span>Agree to some extent</span>
+                                                <input type="radio" name="career_success" value="4" required class="mt-2">
+                                            </label>
+                                            <label class="flex flex-col items-center">
+                                                <span>Strongly agree</span>
+                                                <input type="radio" name="career_success" value="5" required class="mt-2">
+                                            </label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="border-b">
+                                    <td class="py-4 px-6 text-left align-top">
+                                        <label class="block">I am satisfied with the progress I have made towards meeting my overall career goals.</label>
+                                    </td>
+                                    <td class="py-4 px-6">
+                                        <div class="flex space-x-4">
+                                            <label class="flex flex-col items-center">
+                                                <span>Strongly Disagree</span>
+                                                <input type="radio" name="career_progress_overall" value="1" required class="mt-2">
+                                            </label>
+                                            <label class="flex flex-col items-center">
+                                                <span>Disagree to some extent</span>
+                                                <input type="radio" name="career_progress_overall" value="2" required class="mt-2">
+                                            </label>
+                                            <label class="flex flex-col items-center">
+                                                <span>Uncertain</span>
+                                                <input type="radio" name="career_progress_overall" value="3" required class="mt-2">
+                                            </label>
+                                            <label class="flex flex-col items-center">
+                                                <span>Agree to some extent</span>
+                                                <input type="radio" name="career_progress_overall" value="4" required class="mt-2">
+                                            </label>
+                                            <label class="flex flex-col items-center">
+                                                <span>Strongly agree</span>
+                                                <input type="radio" name="career_progress_overall" value="5" required class="mt-2">
+                                            </label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="border-b">
+                                    <td class="py-4 px-6 text-left align-top">
+                                        <label class="block">I am satisfied with the progress I have made towards meeting my goals for income.</label>
+                                    </td>
+                                    <td class="py-4 px-6">
+                                        <div class="flex space-x-4">
+                                            <label class="flex flex-col items-center">
+                                                <span>Strongly Disagree</span>
+                                                <input type="radio" name="career_progress_income" value="1" required class="mt-2">
+                                            </label>
+                                            <label class="flex flex-col items-center">
+                                                <span>Disagree to some extent</span>
+                                                <input type="radio" name="career_progress_income" value="2" required class="mt-2">
+                                            </label>
+                                            <label class="flex flex-col items-center">
+                                                <span>Uncertain</span>
+                                                <input type="radio" name="career_progress_income" value="3" required class="mt-2">
+                                            </label>
+                                            <label class="flex flex-col items-center">
+                                                <span>Agree to some extent</span>
+                                                <input type="radio" name="career_progress_income" value="4" required class="mt-2">
+                                            </label>
+                                            <label class="flex flex-col items-center">
+                                                <span>Strongly agree</span>
+                                                <input type="radio" name="career_progress_income" value="5" required class="mt-2">
+                                            </label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="border-b">
+                                    <td class="py-4 px-6 text-left align-top">
+                                        <label class="block">I am satisfied with the progress I have made towards meeting my goals for advancement.</label>
+                                    </td>
+                                    <td class="py-4 px-6">
+                                        <div class="flex space-x-4">
+                                            <label class="flex flex-col items-center">
+                                                <span>Strongly Disagree</span>
+                                                <input type="radio" name="career_progress_advancement" value="1" required class="mt-2">
+                                            </label>
+                                            <label class="flex flex-col items-center">
+                                                <span>Disagree to some extent</span>
+                                                <input type="radio" name="career_progress_advancement" value="2" required class="mt-2">
+                                            </label>
+                                            <label class="flex flex-col items-center">
+                                                <span>Uncertain</span>
+                                                <input type="radio" name="career_progress_advancement" value="3" required class="mt-2">
+                                            </label>
+                                            <label class="flex flex-col items-center">
+                                                <span>Agree to some extent</span>
+                                                <input type="radio" name="career_progress_advancement" value="4" required class="mt-2">
+                                            </label>
+                                            <label class="flex flex-col items-center">
+                                                <span>Strongly agree</span>
+                                                <input type="radio" name="career_progress_advancement" value="5" required class="mt-2">
+                                            </label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="border-b">
+                                    <td class="py-4 px-6 text-left align-top">
+                                        <label class="block">I am satisfied with the progress I have made towards meeting my goals for the development of new skills.</label>
+                                    </td>
+                                    <td class="py-4 px-6">
+                                        <div class="flex space-x-4">
+                                            <label class="flex flex-col items-center">
+                                                <span>Strongly Disagree</span>
+                                                <input type="radio" name="career_progress_skills" value="1" required class="mt-2">
+                                            </label>
+                                            <label class="flex flex-col items-center">
+                                                <span>Disagree to some extent</span>
+                                                <input type="radio" name="career_progress_skills" value="2" required class="mt-2">
+                                            </label>
+                                            <label class="flex flex-col items-center">
+                                                <span>Uncertain</span>
+                                                <input type="radio" name="career_progress_skills" value="3" required class="mt-2">
+                                            </label>
+                                            <label class="flex flex-col items-center">
+                                                <span>Agree to some extent</span>
+                                                <input type="radio" name="career_progress_skills" value="4" required class="mt-2">
+                                            </label>
+                                            <label class="flex flex-col items-center">
+                                                <span>Strongly agree</span>
+                                                <input type="radio" name="career_progress_skills" value="5" required class="mt-2">
+                                            </label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="border-b">
+                                    <td class="py-4 px-6 text-left align-top">
+                                        <label class="block">I am satisfied with the degree to which I have achieved a healthy work-life balance.</label>
+                                    </td>
+                                    <td class="py-4 px-6">
+                                        <div class="flex space-x-4">
+                                            <label class="flex flex-col items-center">
+                                                <span>Strongly Disagree</span>
+                                                <input type="radio" name="career_progress_work_life" value="1" required class="mt-2">
+                                            </label>
+                                            <label class="flex flex-col items-center">
+                                                <span>Disagree to some extent</span>
+                                                <input type="radio" name="career_progress_work_life" value="2" required class="mt-2">
+                                            </label>
+                                            <label class="flex flex-col items-center">
+                                                <span>Uncertain</span>
+                                                <input type="radio" name="career_progress_work_life" value="3" required class="mt-2">
+                                            </label>
+                                            <label class="flex flex-col items-center">
+                                                <span>Agree to some extent</span>
+                                                <input type="radio" name="career_progress_work_life" value="4" required class="mt-2">
+                                            </label>
+                                            <label class="flex flex-col items-center">
+                                                <span>Strongly agree</span>
+                                                <input type="radio" name="career_progress_work_life" value="5" required class="mt-2">
+                                            </label>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
 
                     <div class="mt-8 flex justify-between">
