@@ -6,28 +6,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const nextToStep3 = document.getElementById('nextToStep3');
     const backToStep1 = document.getElementById('backToStep1');
     const backToStep2 = document.getElementById('backToStep2');
+    const nonMemberMessage = document.getElementById('nonMemberMessage');
 
     // Initialize form data from localStorage or empty object
     let formData = JSON.parse(localStorage.getItem('surveyFormData')) || {};
 
-    // Restore form data if it exists
-    if (formData) {
-        Object.keys(formData).forEach(key => {
-            const input = form.querySelector(`[name="${key}"]`);
-            if (input) {
-                if (input.type === 'radio') {
-                    const radio = form.querySelector(`[name="${key}"][value="${formData[key]}"]`);
-                    if (radio) radio.checked = true;
-                } else {
-                    input.value = formData[key];
-                }
-            }
+    // Navigation functions
+    function showStep(stepNumber) {
+        steps.forEach((step, index) => {
+            step.classList.toggle('hidden', index + 1 !== stepNumber);
+            step.classList.toggle('active', index + 1 === stepNumber);
         });
-
-        // Enable/disable next button based on consent
-        if (formData.consent === 'yes') {
-            nextToStep2.disabled = false;
-        }
     }
 
     // Save form data to localStorage
@@ -35,14 +24,76 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('surveyFormData', JSON.stringify(data));
     }
 
-    // Handle input changes
-    form.addEventListener('change', (e) => {
-        formData[e.target.name] = e.target.value;
-        saveToLocalStorage(formData);
+    // Handle CPA membership response
+    function handleCPAMembershipResponse(value) {
+        if (value === 'no') {
+            nonMemberMessage.classList.remove('hidden');
+            nextToStep2.disabled = true;
 
-        // Handle consent specifically
-        if (e.target.name === 'consent') {
-            nextToStep2.disabled = e.target.value !== 'yes';
+            const responseData = {
+                cpa_member: 'no',
+                submitted_at: new Date().toISOString(),
+                status: 'non_member'
+            };
+
+            const responseId = `survey_response_${Date.now()}`;
+            localStorage.setItem(responseId, JSON.stringify(responseData));
+
+            fetch('/api/submit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(responseData),
+            })
+            .then(response => {
+                if (!response.ok) throw new Error('Server response was not ok');
+                setTimeout(() => {
+                    alert('Thank you for your interest. This survey is only for CPA members.');
+                    form.reset();
+                    nonMemberMessage.classList.add('hidden');
+                }, 1000);
+            })
+            .catch(error => {
+                console.error('Error submitting response:', error);
+                alert('Error submitting response. Please try again.');
+            });
+        } else if (value === 'yes') {
+            nextToStep2.disabled = false;
+            nonMemberMessage.classList.add('hidden');
+        }
+    }
+
+    // Add event listener for CPA membership radio buttons
+    const cpaMemberRadios = document.querySelectorAll('input[name="cpa_member"]');
+    cpaMemberRadios.forEach(radio => {
+        radio.addEventListener('change', (e) => {
+            handleCPAMembershipResponse(e.target.value);
+            formData.cpa_member = e.target.value;
+            saveToLocalStorage(formData);
+        });
+    });
+
+    // Restore form data if it exists
+    if (formData.cpa_member) {
+        const radio = form.querySelector(`input[name="cpa_member"][value="${formData.cpa_member}"]`);
+        if (radio) {
+            radio.checked = true;
+            handleCPAMembershipResponse(formData.cpa_member);
+        }
+    }
+
+    // Navigation event listeners
+    nextToStep2.addEventListener('click', () => showStep(2));
+    nextToStep3.addEventListener('click', () => showStep(3));
+    backToStep1.addEventListener('click', () => showStep(1));
+    backToStep2.addEventListener('click', () => showStep(2));
+
+    // Handle other form changes
+    form.addEventListener('change', (e) => {
+        if (e.target.name !== 'cpa_member') { // Skip CPA member handling as it's handled separately
+            formData[e.target.name] = e.target.value;
+            saveToLocalStorage(formData);
         }
     });
 
@@ -89,20 +140,6 @@ document.addEventListener('DOMContentLoaded', () => {
         
         container.appendChild(clone);
     });
-
-    // Navigation functions
-    function showStep(stepNumber) {
-        steps.forEach((step, index) => {
-            step.classList.toggle('hidden', index + 1 !== stepNumber);
-            step.classList.toggle('active', index + 1 === stepNumber);
-        });
-    }
-
-    // Navigation event listeners
-    nextToStep2.addEventListener('click', () => showStep(2));
-    nextToStep3.addEventListener('click', () => showStep(3));
-    backToStep1.addEventListener('click', () => showStep(1));
-    backToStep2.addEventListener('click', () => showStep(2));
 
     // Form submission
     form.addEventListener('submit', async (e) => {

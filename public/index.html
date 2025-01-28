@@ -3,98 +3,229 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Emotional Intelligence Survey</title>
+    <title>CPA Dissertation Questionnaire</title>
     <link href="/css/styles.css" rel="stylesheet">
 </head>
 <body class="bg-gray-100">
     <div class="min-h-screen bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
-        <div class="max-w-2xl mx-auto bg-white p-8 rounded-lg shadow">
-            <h1 class="text-2xl font-bold mb-8">Emotional Intelligence and Career Success Survey</h1>
+        <div class="max-w-3xl mx-auto bg-white p-8 rounded-lg shadow">
+            <h1 class="text-2xl font-bold mb-8">Dissertation Questionnaires</h1>
+            <p class="mb-6 text-gray-600">A questionnaire for CPA only.</p>
             
-            <form id="surveyForm" class="survey-form">
-                <!-- Step 1: Consent -->
+            <form id="surveyForm" class="survey-form space-y-8">
+                <!-- Section 1: CPA Membership -->
                 <div id="step1" class="step active">
-                    <h2 class="text-xl font-semibold mb-4">Consent</h2>
-                    <div class="mb-6">
-                        <label class="block mb-2">
-                            <input type="radio" name="consent" value="yes" required class="mr-2">
-                            I consent to participate in this survey
-                        </label>
-                        <label class="block">
-                            <input type="radio" name="consent" value="no" class="mr-2">
-                            I do not consent
-                        </label>
+                    <div class="mb-8">
+                        <h2 class="text-lg font-semibold mb-4">Section 1 of 5</h2>
+                        <div class="space-y-4">
+                            <div class="question-group">
+                                <label class="block mb-2 font-medium">Are you a member of CPA Canada? <span class="text-red-500">*</span></label>
+                                <div class="space-y-2">
+                                    <label class="flex items-center">
+                                        <input type="radio" name="cpa_member" value="yes" required class="mr-2">
+                                        <span>Yes</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="radio" name="cpa_member" value="no" required class="mr-2">
+                                        <span>No</span>
+                                    </label>
+                                </div>
+                                <p id="nonMemberMessage" class="mt-4 text-red-600 hidden">
+                                    Thank you for your interest. This survey is only for CPA members.
+                                </p>
+                            </div>
+                        </div>
                     </div>
-                    <button type="button" id="nextToStep2"
-                        class="bg-blue-500 text-white px-4 py-2 rounded disabled:bg-gray-300"
-                        disabled>
-                        Next
-                    </button>
+                    <div class="flex justify-end">
+                        <button type="button" id="nextToStep2" 
+                            class="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600 disabled:bg-gray-300"
+                            disabled>
+                            Continue
+                        </button>
+                    </div>
                 </div>
 
-                <!-- Step 2: Biographical Data -->
+                <!-- Section 2: Biographical Data -->
                 <div id="step2" class="step hidden">
-                    <h2 class="text-xl font-semibold mb-4">Biographical Data</h2>
-                    <div class="space-y-4">
-                        <div>
-                            <label class="block mb-1">Age</label>
-                            <input type="number" name="age" required
+                    <h2 class="text-lg font-semibold mb-4">Section 2 of 5</h2>
+                    <div class="space-y-6">
+                        <div class="question-group">
+                            <label class="block mb-2 font-medium">Please indicate the year you were born <span class="text-red-500">*</span></label>
+                            <input type="number" name="birth_year" required min="1940" max="2006"
                                 class="w-full border rounded p-2">
                         </div>
-                        <div>
-                            <label class="block mb-1">Gender</label>
-                            <select name="gender" required class="w-full border rounded p-2">
-                                <option value="">Select...</option>
-                                <option value="male">Male</option>
-                                <option value="female">Female</option>
-                                <option value="prefer-not-say">Prefer not to say</option>
-                            </select>
+
+                        <div class="question-group">
+                            <label class="block mb-2 font-medium">Please select the gender you are most comfortable disclosing <span class="text-red-500">*</span></label>
+                            <div class="space-y-2">
+                                <label class="flex items-center">
+                                    <input type="radio" name="gender" value="male" required class="mr-2">
+                                    <span>Male</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="radio" name="gender" value="female" required class="mr-2">
+                                    <span>Female</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="radio" name="gender" value="other" required class="mr-2">
+                                    <span>Other</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="radio" name="gender" value="prefer_not_disclose" required class="mr-2">
+                                    <span>Prefer not to disclose</span>
+                                </label>
+                            </div>
                         </div>
-                        <div>
-                            <label class="block mb-1">Job Title</label>
-                            <input type="text" name="jobTitle" required
-                                class="w-full border rounded p-2">
+
+                        <div class="question-group">
+                            <label class="block mb-2 font-medium">Please select the languages you are fluent in <span class="text-red-500">*</span></label>
+                            <div class="space-y-2">
+                                <label class="flex items-center">
+                                    <input type="checkbox" name="languages" value="english" class="mr-2">
+                                    <span>English</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" name="languages" value="french" class="mr-2">
+                                    <span>French</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" name="languages" value="indigenous" class="mr-2">
+                                    <span>Canadian Indigenous languages</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" name="languages" value="other" class="mr-2">
+                                    <span>Other</span>
+                                </label>
+                            </div>
                         </div>
-                        <div>
-                            <label class="block mb-1">Years of Experience</label>
-                            <input type="number" name="experience" required
-                                class="w-full border rounded p-2">
+
+                        <div class="question-group">
+                            <label class="block mb-2 font-medium">Please indicate the legacy designation that you hold <span class="text-red-500">*</span></label>
+                            <div class="space-y-2">
+                                <label class="flex items-center">
+                                    <input type="radio" name="legacy_designation" value="cga" required class="mr-2">
+                                    <span>CGA</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="radio" name="legacy_designation" value="ca" required class="mr-2">
+                                    <span>CA</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="radio" name="legacy_designation" value="cma" required class="mr-2">
+                                    <span>CMA</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="radio" name="legacy_designation" value="other" required class="mr-2">
+                                    <span>Other</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="radio" name="legacy_designation" value="none" required class="mr-2">
+                                    <span>None</span>
+                                </label>
+                            </div>
                         </div>
                     </div>
-                    <div class="mt-6 flex justify-between">
+                    <div class="mt-8 flex justify-between">
                         <button type="button" id="backToStep1"
-                            class="bg-gray-500 text-white px-4 py-2 rounded">
+                            class="bg-gray-500 text-white px-6 py-2 rounded hover:bg-gray-600">
                             Back
                         </button>
                         <button type="button" id="nextToStep3"
-                            class="bg-blue-500 text-white px-4 py-2 rounded">
-                            Next
+                            class="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600">
+                            Continue
                         </button>
                     </div>
                 </div>
 
-                <!-- Step 3: EI Assessment -->
+                <!-- Section 3: Career Satisfaction -->
                 <div id="step3" class="step hidden">
-                    <h2 class="text-xl font-semibold mb-4">EI Assessment</h2>
-                    <div class="space-y-6">
-                        <template id="categoryTemplate">
-                            <div class="category-item">
-                                <label class="block mb-2"></label>
-                                <div class="flex justify-between items-center">
-                                    <span class="text-sm">Strongly Disagree</span>
-                                    <div class="rating-group flex space-x-4"></div>
-                                    <span class="text-sm">Strongly Agree</span>
-                                </div>
+                    <h2 class="text-lg font-semibold mb-4">Section 3 of 5</h2>
+                    <p class="mb-6 text-gray-600">The section below is based on the Perceived Career Satisfaction Scale (Greenhaus, Parasuraman, & Wormley, 1990). Please indicate the extent to which the following statements apply to your situation.</p>
+                    
+                    <div class="space-y-8">
+                        <div class="question-group">
+                            <label class="block mb-4">I am satisfied with the success I have achieved in my career.</label>
+                            <div class="grid grid-cols-5 gap-4 text-center">
+                                <label class="flex flex-col items-center">
+                                    <input type="radio" name="career_success" value="1" required class="mb-2">
+                                    <span>Strongly Disagree</span>
+                                </label>
+                                <label class="flex flex-col items-center">
+                                    <input type="radio" name="career_success" value="2" required class="mb-2">
+                                    <span>Disagree to some extent</span>
+                                </label>
+                                <label class="flex flex-col items-center">
+                                    <input type="radio" name="career_success" value="3" required class="mb-2">
+                                    <span>Uncertain</span>
+                                </label>
+                                <label class="flex flex-col items-center">
+                                    <input type="radio" name="career_success" value="4" required class="mb-2">
+                                    <span>Agree to some extent</span>
+                                </label>
+                                <label class="flex flex-col items-center">
+                                    <input type="radio" name="career_success" value="5" required class="mb-2">
+                                    <span>Strongly agree</span>
+                                </label>
                             </div>
-                        </template>
+                        </div>
+
+                        <!-- Add more career satisfaction questions following the same pattern -->
                     </div>
-                    <div class="mt-6 flex justify-between">
+
+                    <div class="mt-8 flex justify-between">
                         <button type="button" id="backToStep2"
-                            class="bg-gray-500 text-white px-4 py-2 rounded">
+                            class="bg-gray-500 text-white px-6 py-2 rounded hover:bg-gray-600">
+                            Back
+                        </button>
+                        <button type="button" id="nextToStep4"
+                            class="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600">
+                            Continue
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Section 4: Emotional Intelligence Assessment -->
+                <div id="step4" class="step hidden">
+                    <h2 class="text-lg font-semibold mb-4">Section 4 of 5</h2>
+                    <p class="mb-6 text-gray-600">Below are a series of statements. Please circle the number corresponding to the statement that is most indicative of the way you typically think, feel and act at work.</p>
+
+                    <div class="space-y-8">
+                        <div class="question-group">
+                            <label class="block mb-4">I am aware of things that upset me at work.</label>
+                            <div class="grid grid-cols-5 gap-4 text-center">
+                                <label class="flex flex-col items-center">
+                                    <input type="radio" name="work_awareness" value="1" required class="mb-2">
+                                    <span>Almost Never</span>
+                                </label>
+                                <label class="flex flex-col items-center">
+                                    <input type="radio" name="work_awareness" value="2" required class="mb-2">
+                                    <span>Seldom</span>
+                                </label>
+                                <label class="flex flex-col items-center">
+                                    <input type="radio" name="work_awareness" value="3" required class="mb-2">
+                                    <span>Sometimes</span>
+                                </label>
+                                <label class="flex flex-col items-center">
+                                    <input type="radio" name="work_awareness" value="4" required class="mb-2">
+                                    <span>Usually</span>
+                                </label>
+                                <label class="flex flex-col items-center">
+                                    <input type="radio" name="work_awareness" value="5" required class="mb-2">
+                                    <span>Almost Always</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Add more EI assessment questions -->
+                    </div>
+
+                    <div class="mt-8 flex justify-between">
+                        <button type="button" id="backToStep3"
+                            class="bg-gray-500 text-white px-6 py-2 rounded hover:bg-gray-600">
                             Back
                         </button>
                         <button type="submit"
-                            class="bg-green-500 text-white px-4 py-2 rounded">
+                            class="bg-green-500 text-white px-6 py-2 rounded hover:bg-green-600">
                             Submit
                         </button>
                     </div>
