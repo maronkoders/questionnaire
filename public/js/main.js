@@ -86,6 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Navigation event listeners
     nextToStep2.addEventListener('click', () => showStep(2));
     nextToStep3.addEventListener('click', () => showStep(3));
+    nextToStep4.addEventListener('click', () => showStep(4));
     backToStep1.addEventListener('click', () => showStep(1));
     backToStep2.addEventListener('click', () => showStep(2));
 
