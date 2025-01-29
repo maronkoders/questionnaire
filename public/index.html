@@ -46,14 +46,99 @@
             white-space: normal;
             text-align: center;
         }
+
+        /* Header styles */
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #e5e7eb;
+        }
+
+        .title-section {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .section-indicator {
+            display: flex;
+            align-items: center;
+            padding: 0.5rem 1rem;
+            background: #f3f4f6;
+            border-radius: 2rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #4b5563;
+            transition: all 0.3s ease;
+        }
+
+        /* Theme toggle styles */
+        .theme-toggle {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem;
+            border-radius: 1.5rem;
+            background: #f3f4f6;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        /* Dark theme styles */
+        [data-theme="dark"] {
+            background-color: #1f2937;
+            color: #f3f4f6;
+        }
+
+        [data-theme="dark"] .section-indicator {
+            background: #374151;
+            color: #e5e7eb;
+        }
+
+        [data-theme="dark"] .theme-toggle {
+            background: #374151;
+        }
+
+        /* Theme icons */
+        .theme-icon {
+            width: 1.5rem;
+            height: 1.5rem;
+            padding: 0.25rem;
+            border-radius: 50%;
+        }
+
+        .theme-icon.active {
+            background: #60a5fa;
+            color: white;
+        }
     </style>
 </head>
 <body class="bg-gray-100">
     <div class="min-h-screen bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
         <div class="max-w-3xl mx-auto bg-white p-8 rounded-lg shadow">
-            <h1 class="text-2xl font-bold mb-8">Dissertation Questionnaires</h1>
+            <!-- Updated header structure -->
+            <div class="header-container">
+                <div class="title-section">
+                    <h1 class="text-2xl font-bold">Dissertation Questionnaires</h1>
+                    <div class="section-indicator">
+                        <span id="sectionIndicator">Section 1 of 5</span>
+                    </div>
+                </div>
+                <div class="theme-toggle" id="themeToggle">
+                    <svg class="theme-icon" id="lightIcon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                    </svg>
+                    <svg class="theme-icon" id="darkIcon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                    </svg>
+                </div>
+            </div>
+
             <p class="mb-6 text-gray-600">A questionnaire for CPA only.</p>
-            
+
             <form id="surveyForm" class="survey-form space-y-8">
                 <!-- Section 1: CPA Membership -->
                 <div id="step1" class="step active">
@@ -1939,6 +2024,50 @@ minutes to complete.
         // Call the function when the document is loaded
         document.addEventListener('DOMContentLoaded', () => {
             updateTableHeaders();
+        });
+
+        // Theme toggle functionality
+        document.addEventListener('DOMContentLoaded', () => {
+            const themeToggle = document.getElementById('themeToggle');
+            const lightIcon = document.getElementById('lightIcon');
+            const darkIcon = document.getElementById('darkIcon');
+            
+            // Check for saved theme preference or default to light
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            updateThemeIcons(savedTheme);
+
+            themeToggle.addEventListener('click', () => {
+                const currentTheme = document.documentElement.getAttribute('data-theme');
+                const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+                
+                document.documentElement.setAttribute('data-theme', newTheme);
+                localStorage.setItem('theme', newTheme);
+                updateThemeIcons(newTheme);
+            });
+
+            function updateThemeIcons(theme) {
+                if (theme === 'dark') {
+                    darkIcon.classList.add('active');
+                    lightIcon.classList.remove('active');
+                } else {
+                    lightIcon.classList.add('active');
+                    darkIcon.classList.remove('active');
+                }
+            }
+
+            // Update section indicator based on current step
+            function updateSectionIndicator(currentSection) {
+                const sectionIndicator = document.getElementById('sectionIndicator');
+                sectionIndicator.textContent = `Section ${currentSection} of 5`;
+            }
+
+            // Add this to your existing navigation functions
+            const existingShowStep = window.showStep;
+            window.showStep = function(step) {
+                existingShowStep(step);
+                updateSectionIndicator(step);
+            };
         });
     </script>
 </body>
