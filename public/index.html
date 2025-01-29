@@ -5,6 +5,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CPA Dissertation Questionnaire</title>
     <link href="/css/styles.css" rel="stylesheet">
+    <style>
+        /* Enhanced table header styles while keeping existing classes */
+        .min-w-full th {
+            font-family: 'Arial', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            white-space: nowrap;
+            background-color: #f8f9fa;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        /* Question column specific style */
+        .min-w-full th:first-child {
+            text-align: left;
+            width: 40%;
+            white-space: normal;
+        }
+
+        /* Rating columns style */
+        .min-w-full th:not(:first-child) {
+            width: 12%;
+        }
+
+        /* Header text style */
+        .header-text {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .header-number {
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+
+        .header-label {
+            font-size: 0.8rem;
+            white-space: normal;
+            text-align: center;
+        }
+    </style>
 </head>
 <body class="bg-gray-100">
     <div class="min-h-screen bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
@@ -1872,5 +1914,32 @@ minutes to complete.
         </div>
     </div>
     <script src="/js/main.js"></script>
+    <script>
+        // Function to update all table headers with the new format
+        function updateTableHeaders() {
+            const tables = document.querySelectorAll('.min-w-full');
+            tables.forEach(table => {
+                const headerRow = table.querySelector('thead tr');
+                if (headerRow) {
+                    const headers = headerRow.querySelectorAll('th:not(:first-child)');
+                    const labels = ['Almost Never', 'Seldom', 'Sometimes', 'Usually', 'Almost Always'];
+                    
+                    headers.forEach((header, index) => {
+                        header.innerHTML = `
+                            <div class="header-text">
+                                <div class="header-number">${index + 1}</div>
+                                <div class="header-label">${labels[index]}</div>
+                            </div>
+                        `;
+                    });
+                }
+            });
+        }
+
+        // Call the function when the document is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            updateTableHeaders();
+        });
+    </script>
 </body>
 </html> 
