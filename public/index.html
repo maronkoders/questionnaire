@@ -345,7 +345,111 @@
                         </div>
 
 
+                        <div class="question-group">
+                            <label class="block mb-2 font-medium"> Please indicate the number of staff (including yourself) in the organization you work for. If you are retired or unemployed, state position on retirement or at your last employer. <span class="text-red-500">*</span></label>
+                            <input type="text" 
+                                name="staff_number" 
+                                required 
+                                class="w-full border rounded p-2"
+                                placeholder="Your answer">
+                        </div>
+
+
+                        <div class="question-group">
+                            <label class="block mb-2 font-medium">Please indicate the option that best suits the nature of your work. <span class="text-red-500">*</span></label>
+                            <div class="space-y-2">
+                                <label class="flex items-center">
+                                    <input type="radio" name="work_nature" value="full_time" required class="mr-2">
+                                    <span>Full-time</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="radio" name="work_nature" value="part_time" required class="mr-2">
+                                    <span>Part-time</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="radio" name="work_nature" value="contract" required class="mr-2">
+                                    <span>Contract</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="radio" name="work_nature" value="contract" required class="mr-2">
+                                    <span>Unemployed</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="radio" name="work_nature" value="retired" required class="mr-2">
+                                    <span>Retired</span>
+                                </label>
+                            </div>
+                        </div>
+
+
+                        <div class="question-group">
+                            <label class="block mb-2 font-medium"> What is your yearly compensation (before taxes, deductions and benefits). If you do not get compensation, please indicate zero. <span class="text-red-500">*</span></label>
+                            <input type="text" 
+                                name="yearly_compensation" 
+                                required 
+                                class="w-full border rounded p-2"
+                                placeholder="Your answer">
+                        </div>
+
+
+                        <div class="question-group">
+                            <label class="block mb-2 font-medium">What is your current job title or if you are retired or unemployed, state your position before retirement or unemployment? <span class="text-red-500">*</span></label>
+                            <div class="space-y-2">
+                                <label class="flex items-center">
+                                    <input type="radio" name="job_title" value="sole_practitioner" required class="mr-2">
+                                    <span>Sole Practitioner</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="radio" name="job_title" value="partner_principle" required class="mr-2">
+                                    <span>Partner or Principle in public accounting</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="radio" name="job_title" value="junior_entry_level" required class="mr-2">
+                                    <span>Junior or entry level roles</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="radio" name="job_title" value="intermediate_roles" required class="mr-2">
+                                    <span>Intermediate roles with no supervision</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="radio" name="job_title" value="manager_supervisor" required class="mr-2">
+                                    <span>Manager or supervisor</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="radio" name="job_title" value="senior_manager" required class="mr-2">
+                                    <span>Senior Manager  roles</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="radio" name="job_title" value="director_vp" required class="mr-2">
+                                    <span>Director or VP roles</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="radio" name="job_title" value="instructor_lecturer_professor" required class="mr-2">
+                                    <span>Instructor, lecturer, or professor roles</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="radio" name="job_title" value="president_ceo_owner" required class="mr-2">
+                                    <span>President, CEO, or owner in of non-public accounting firm</span>
+                                </label>
+                            </div>
+                        </div>
+
+
+                        
+                        <div class="question-group">
+                            <label class="block mb-2 font-medium"> Please indicate the number of individuals you oversee in your current position or oversaw before retirement or being unemployed. <span class="text-red-500">*</span></label>
+                            <input type="text" 
+                                name="oversee_number" 
+                                required 
+                                class="w-full border rounded p-2"
+                                placeholder="Your answer">
+                        </div>
+
+
                     </div>
+
+                    <br>
+                    <br>
                     <div class="mt-8 flex justify-between">
                         <button type="button" id="backToStep1"
                             class="bg-gray-500 text-white px-6 py-2 rounded hover:bg-gray-600">
