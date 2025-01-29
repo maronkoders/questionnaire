@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const nextToStep3 = document.getElementById('nextToStep3');
     const backToStep1 = document.getElementById('backToStep1');
     const backToStep2 = document.getElementById('backToStep2');
+    const backToStep3 = document.getElementById('backToStep3');
     const nonMemberMessage = document.getElementById('nonMemberMessage');
 
     // Initialize form data from localStorage or empty object
