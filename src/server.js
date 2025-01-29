@@ -31,20 +31,23 @@ app.get('/admin', (req, res) => {
     res.sendFile(join(__dirname, '../public/admin.html'));
 });
 
+
 // API Routes
-app.post('/api/submit', async (req, res) => {
+app.post('/api/submit-assessment', async (req, res) => {
     try {
         const data = req.body;
         data.created_at = new Date().toISOString();
+
+        console.log('data to BE', data);
         
         // Store in Supabase if configured
-        if (supabase) {
-            const { error } = await supabase
-                .from('survey_responses')
-                .insert([data]);
+        // if (supabase) {
+        //     const { error } = await supabase
+        //         .from('survey_responses')
+        //         .insert([data]);
 
-            if (error) throw error;
-        }
+        //     if (error) throw error;
+        // }
         
         res.json({ success: true, data });
     } catch (error) {

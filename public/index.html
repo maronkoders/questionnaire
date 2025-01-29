@@ -1836,33 +1836,5 @@
         </div>
     </div>
     <script src="/js/main.js"></script>
-    <script>
-        let currentPart = 1;
-        const totalParts = 7;
-    
-        function showPart(part) {
-            for (let i = 1; i <= totalParts; i++) {
-                document.getElementById(`part${i}`).classList.add('hidden');
-            }
-            document.getElementById(`part${part}`).classList.remove('hidden');
-        }
-    
-        function showNextPart() {
-            if (currentPart < totalParts) {
-                currentPart++;
-                showPart(currentPart);
-            }
-        }
-    
-        function showPreviousPart() {
-            if (currentPart > 1) {
-                currentPart--;
-                showPart(currentPart);
-            }
-        }
-    
-        // Initialize the first part
-        showPart(currentPart);
-    </script>
 </body>
 </html> 
