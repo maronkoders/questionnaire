@@ -51,7 +51,7 @@
         .header-container {
             display: flex;
             justify-content: space-between;
-            align-items: center;
+            align-items: flex-start;
             margin-bottom: 2rem;
             padding-bottom: 1rem;
             border-bottom: 2px solid #e5e7eb;
@@ -59,8 +59,20 @@
 
         .title-section {
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             gap: 2rem;
+        }
+
+        /* Add styles for the subtitle */
+        .title-section small p {
+            font-size: 0.875rem;
+            opacity: 0.8;
+            margin-top: 0.25rem;
+        }
+
+        /* Dark theme adjustment for subtitle */
+        [data-theme="dark"] .title-section small p {
+            color: #9ca3af;
         }
 
         .section-indicator {
@@ -122,7 +134,10 @@
             <!-- Updated header structure -->
             <div class="header-container">
                 <div class="title-section">
-                    <h1 class="text-2xl font-bold">Dissertation Questionnaires</h1>
+                    <div>
+                        <h1 class="text-2xl font-bold">Dissertation Questionnaires</h1>
+                        <small><p class="text-gray-600 mt-1">A questionnaire for CPA only.</p></small>
+                    </div>
                     <div class="section-indicator">
                         <span id="sectionIndicator">Section 1 of 5</span>
                     </div>
@@ -137,13 +152,12 @@
                 </div>
             </div>
 
-            <p class="mb-6 text-gray-600">A questionnaire for CPA only.</p>
+            
 
             <form id="surveyForm" class="survey-form space-y-8">
                 <!-- Section 1: CPA Membership -->
                 <div id="step1" class="step active">
                     <div class="mb-8">
-                        <h2 class="text-lg font-semibold mb-4">Section 1 of 5</h2>
                         <div class="space-y-4">
                             <div class="question-group">
                                 <label class="block mb-2 font-medium">Are you a member of CPA Canada? <span class="text-red-500">*</span></label>
