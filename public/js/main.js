@@ -38,6 +38,7 @@ function showPart(part) {
 
 function showNextPart() {
     if (currentPart < totalParts) {
+        saveCurrentStepPartData(currentPart);
         currentPart++;
         showPart(currentPart);
     }
@@ -310,8 +311,32 @@ function validateCurrentStep(stepNumber) {
     return allFilled;
 }
 
+function saveCurrentStepPartData(partNumber) {
+    const part = document.getElementById(`part${partNumber}`);
+    const inputs = part.querySelectorAll('input, select, textarea');
+    const partData = {};
+
+    inputs.forEach(input => {
+        if (input.type === 'radio' || input.type === 'checkbox') {
+            if (input.checked) {
+                partData[input.name] = input.value;
+            }
+        } else {
+            partData[input.name] = input.value;
+        }
+    });
+
+    // Add user agent and unique identifier
+    partData.userAgent = navigator.userAgent;
+    partData.uniqueId = `user_${Date.now()}`;
+
+    // Save to localStorage
+    localStorage.setItem(`part${partNumber}Data`, JSON.stringify(partData));
+}
+
 function saveCurrentStepData(stepNumber) {
     const step = document.getElementById(`step${stepNumber}`);
+    
     const inputs = step.querySelectorAll('input, select, textarea');
     const stepData = {};
 
