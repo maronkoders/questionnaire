@@ -43,6 +43,7 @@ try {
 
 // Middleware
 app.use(express.static(join(__dirname, '../public')));
+app.use('/assets', express.static(join(__dirname, '../src/assets')));
 app.use(express.json());
 
 // Add session middleware after other middleware
