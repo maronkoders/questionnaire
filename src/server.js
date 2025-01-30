@@ -7,6 +7,7 @@ import mongoose from 'mongoose';
 import Assessment from './models/Assessment.js';
 import session from 'express-session';
 import User from './models/User.js';
+import { connectDB } from './utils/db.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -22,24 +23,8 @@ const supabase = createClient(
     process.env.VITE_SUPABASE_ANON_KEY
 );
 
-// MongoDB Connection
-try {
-    const mongoURI = process.env.MONGODB_URI;
-    
-    if (!mongoURI) {
-        throw new Error('MongoDB URI is not defined in environment variables');
-    }
-    
-    await mongoose.connect(mongoURI, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-    });
-    
-    console.log('MongoDB Connected Successfully');
-} catch (error) {
-    console.error('MongoDB Connection Error:', error.message);
-    process.exit(1);
-}
+// Connect to MongoDB
+await connectDB();
 
 // Middleware
 app.use(express.static(join(__dirname, '../public')));
