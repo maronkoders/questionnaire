@@ -235,8 +235,6 @@ function submitAssessment() {
 
     console.log(assessmentData);
 
-
-
     if (validateAssessment()) {
         const jsonData = JSON.stringify(assessmentData, null, 2);
         
@@ -266,6 +264,7 @@ function submitAssessment() {
 }
 
 function validateAssessment() {
+    return true;
     // Validation logic for all sections
     const personalInfoFields = ['cpa_member', 'birth_year', 'gender', 'education', 'experience', 'industry'];
     for (const field of personalInfoFields) {

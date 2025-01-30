@@ -3,6 +3,8 @@ import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 import dotenv from 'dotenv';
 import { createClient } from '@supabase/supabase-js';
+import mongoose from 'mongoose';
+import Assessment from './models/Assessment.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -17,6 +19,25 @@ const supabase = createClient(
     process.env.VITE_SUPABASE_URL,
     process.env.VITE_SUPABASE_ANON_KEY
 );
+
+// MongoDB Connection
+try {
+    const mongoURI = process.env.MONGODB_URI;
+    
+    if (!mongoURI) {
+        throw new Error('MongoDB URI is not defined in environment variables');
+    }
+    
+    await mongoose.connect(mongoURI, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+    });
+    
+    console.log('MongoDB Connected Successfully');
+} catch (error) {
+    console.error('MongoDB Connection Error:', error.message);
+    process.exit(1);
+}
 
 // Middleware
 app.use(express.static(join(__dirname, '../public')));
@@ -37,22 +58,21 @@ app.post('/api/submit-assessment', async (req, res) => {
     try {
         const data = req.body;
         data.created_at = new Date().toISOString();
-
-        console.log('data to BE', data);
-        
-        // Store in Supabase if configured
-        // if (supabase) {
-        //     const { error } = await supabase
-        //         .from('survey_responses')
-        //         .insert([data]);
-
-        //     if (error) throw error;
-        // }
-        
-        res.json({ success: true, data });
+        const assessment = new Assessment(data);
+        await assessment.save();
+        res.status(200).json({success: true, message:'Survey has been saved'});
     } catch (error) {
-        console.error('Error submitting response:', error);
-        res.status(500).json({ error: 'Failed to submit response' });
+        res.status(500).json({success: false, message: error.message });
+    }
+});
+
+
+app.get('/api/get-assessments', async (req, res) => {
+    try {
+        const assessments = await Assessment.find();
+        res.status(200).json({success: true, assessments});
+    } catch (error) {
+        res.status(500).json({success: false, message: error.message });
     }
 });
 
