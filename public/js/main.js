@@ -51,7 +51,7 @@ function showPreviousPart() {
         // If we're at the first part of section 4, go back to section 3
         const emotionalAssessment = document.getElementById('emotionalAssessment');
         const step3 = document.getElementById('step3');
-        
+
         if (emotionalAssessment && step3) {
             emotionalAssessment.classList.add('hidden');
             step3.classList.remove('hidden');
@@ -127,12 +127,29 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Navigation event listeners
-    document.getElementById('nextToStep2')?.addEventListener('click', () => showStep(2));
-    document.getElementById('nextToStep3')?.addEventListener('click', () => showStep(3));
-    document.getElementById('nextToStep4')?.addEventListener('click', () => showStep(4));
+    document.getElementById('nextToStep2')?.addEventListener('click', () => {
+        showStep(2);
+    });
+    
+    document.getElementById('nextToStep3')?.addEventListener('click', () => {
+        if (validateCurrentStep(2)) {
+            saveCurrentStepData(2);
+            showStep(3);
+        }
+    });
+    document.getElementById('nextToStep4')?.addEventListener('click', () => {
+        if (validateCurrentStep(3)) {
+            saveCurrentStepData(3);
+            showStep(4);
+        }
+    });
+    
+
+    //Back button
     document.getElementById('backToStep1')?.addEventListener('click', () => showStep(1));
     document.getElementById('backToStep2')?.addEventListener('click', () => showStep(2));
     document.getElementById('backToStep3')?.addEventListener('click', () => showStep(3));
+    document.getElementById('backToStep4')?.addEventListener('click', () => showStep(4));
 
     // Handle other form changes
     form.addEventListener('change', (e) => {
@@ -150,6 +167,9 @@ document.addEventListener('DOMContentLoaded', () => {
             handleCPAMembershipResponse(formData.cpa_member);
         }
     }
+
+    // Load data for the current step on page load
+    loadCurrentStepData(2);
 });
 
 // Add submit button after the last part
@@ -263,6 +283,70 @@ function validateAssessment() {
     }
 
     return true;
+}
+
+function validateCurrentStep(stepNumber) {
+    const step = document.getElementById(`step${stepNumber}`);
+    const requiredInputs = step.querySelectorAll('input[required]');
+    let allFilled = true;
+
+    requiredInputs.forEach(input => {
+        if (input.type === 'radio') {
+            const name = input.name;
+            const group = step.querySelectorAll(`input[name="${name}"]`);
+            const isChecked = Array.from(group).some(radio => radio.checked);
+            if (!isChecked) {
+                allFilled = false;
+            }
+        } else if (!input.value) {
+            allFilled = false;
+        }
+    });
+
+    if (!allFilled) {
+        alert('Please answer all required questions before continuing.');
+    }
+
+    return allFilled;
+}
+
+function saveCurrentStepData(stepNumber) {
+    const step = document.getElementById(`step${stepNumber}`);
+    const inputs = step.querySelectorAll('input, select, textarea');
+    const stepData = {};
+
+    inputs.forEach(input => {
+        if (input.type === 'radio' || input.type === 'checkbox') {
+            if (input.checked) {
+                stepData[input.name] = input.value;
+            }
+        } else {
+            stepData[input.name] = input.value;
+        }
+    });
+
+    // Add user agent and unique identifier
+    stepData.userAgent = navigator.userAgent;
+    stepData.uniqueId = `user_${Date.now()}`;
+
+    // Save to localStorage
+    localStorage.setItem(`step${stepNumber}Data`, JSON.stringify(stepData));
+}
+
+function loadCurrentStepData(stepNumber) {
+    const savedData = JSON.parse(localStorage.getItem(`step${stepNumber}Data`));
+    if (savedData) {
+        const step = document.getElementById(`step${stepNumber}`);
+        const inputs = step.querySelectorAll('input, select, textarea');
+
+        inputs.forEach(input => {
+            if (input.type === 'radio' || input.type === 'checkbox') {
+                input.checked = savedData[input.name] === input.value;
+            } else {
+                input.value = savedData[input.name] || '';
+            }
+        });
+    }
 }
 
 showPart(currentPart);
