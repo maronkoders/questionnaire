@@ -41,6 +41,7 @@ function showNextPart() {
         saveCurrentStepPartData(currentPart);
         currentPart++;
         showPart(currentPart);
+        toggleButtons();
     }
 }
 
@@ -171,6 +172,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Load data for the current step on page load
     loadCurrentStepData(2);
+
+    toggleButtons();
 });
 
 // Add submit button after the last part
@@ -187,36 +190,36 @@ const submitButtonHtml = `
 document.querySelector('.flex.justify-between.mt-4')?.insertAdjacentHTML('afterend', submitButtonHtml);
 
 function submitAssessment() {
+    saveCurrentStepPartData(7);
     const form = document.getElementById('surveyForm');
     const formData = new FormData(form);
     const assessmentData = {
         personal_info: {},
         career_satisfaction: {},
-        work_preferences: {},
         emotional_intelligence: {}
     };
 
     // Collect all sections data
     assessmentData.personal_info = {
         cpa_member: document.querySelector('input[name="cpa_member"]:checked')?.value || null,
-        birth_year: document.getElementById('birth_year')?.value || null,
         gender: document.querySelector('input[name="gender"]:checked')?.value || null,
-        education: document.querySelector('input[name="education"]:checked')?.value || null,
-        experience: document.querySelector('input[name="experience"]:checked')?.value || null,
-        industry: document.querySelector('input[name="industry"]:checked')?.value || null
+        legacy_designation: document.querySelector('input[name="legacy_designation"]:checked')?.value || null,
+        industry_type: document.querySelector('input[name="industry_type"]:checked')?.value || null,
+        current_position: document.querySelector('input[name="current_position"]:checked')?.value || null,
+        work_nature: document.querySelector('input[name="work_nature"]:checked')?.value || null,
+        job_title: document.querySelector('input[name="job_title"]:checked')?.value || null,
+
+        birth_year: document.querySelector('input[name="birth_year"]')?.value || null,
+        staff_number: document.querySelector('input[name="staff_number"]')?.value || null,
+        oversee_number: document.querySelector('input[name="oversee_number"]')?.value || null,
+        primary_cpa_body: document.querySelector('input[name="primary_cpa_body"]')?.value || null,
+        yearly_compensation: document.querySelector('input[name="yearly_compensation"]')?.value || null,
     };
 
     // Collect Career Satisfaction
-    document.querySelectorAll('[name^="career_satisfaction_"]').forEach(question => {
+    document.querySelectorAll('[name^="career_"]').forEach(question => {
         if (question.checked) {
             assessmentData.career_satisfaction[question.name] = parseInt(question.value);
-        }
-    });
-
-    // Collect Work Preferences
-    document.querySelectorAll('[name^="work_preference_"]').forEach(question => {
-        if (question.checked) {
-            assessmentData.work_preferences[question.name] = parseInt(question.value);
         }
     });
 
@@ -228,6 +231,11 @@ function submitAssessment() {
             assessmentData.emotional_intelligence[questionName] = parseInt(value);
         }
     }
+
+
+    console.log(assessmentData);
+
+
 
     if (validateAssessment()) {
         const jsonData = JSON.stringify(assessmentData, null, 2);
@@ -371,6 +379,19 @@ function loadCurrentStepData(stepNumber) {
                 input.value = savedData[input.name] || '';
             }
         });
+    }
+}
+
+function toggleButtons() {
+    const nextButton = document.getElementById('nextButton');
+    const submitButton = document.getElementById('submitButton');
+
+    if (currentPart === totalParts) {
+        nextButton.style.display = 'none';
+        submitButton.style.display = 'block';
+    } else {
+        nextButton.style.display = 'block';
+        submitButton.style.display = 'none';
     }
 }
 
