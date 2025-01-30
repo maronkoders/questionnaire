@@ -2,73 +2,7 @@
 <html>
 <head>
     <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            margin: 0;
-            padding: 20px;
-            background-color: #f5f7fa;
-        }
-        .dashboard {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        .header {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            margin-bottom: 20px;
-        }
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            margin-bottom: 20px;
-        }
-        .card {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        .stat {
-            font-size: 24px;
-            font-weight: bold;
-            color: #2563eb;
-            margin: 10px 0;
-        }
-        .label {
-            color: #4b5563;
-            font-size: 14px;
-        }
-        .progress-bar {
-            width: 100%;
-            height: 8px;
-            background: #e5e7eb;
-            border-radius: 4px;
-            margin: 8px 0;
-        }
-        .progress-bar-fill {
-            height: 100%;
-            background: #2563eb;
-            border-radius: 4px;
-            transition: width 0.3s ease;
-        }
-        .score-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 10px;
-        }
-        .score-item {
-            padding: 10px;
-            background: #f3f4f6;
-            border-radius: 4px;
-        }
-        .chart {
-            width: 100%;
-            height: 300px;
-            margin-top: 20px;
-        }
+        /* ... existing styles ... */
     </style>
 </head>
 <body>
@@ -78,113 +12,50 @@
             <p>CPA Member • CMA Legacy Designation • Education Industry</p>
         </div>
         
-        <div class="grid">
-            <div class="card">
-                <div class="label">Professional Experience</div>
-                <div class="stat">12 years</div>
-                <div class="label">Birth Year: 2001</div>
-            </div>
-            <div class="card">
-                <div class="label">Current Position</div>
-                <div class="stat">Intermediate Role</div>
-                <div class="label">Contract Position</div>
-            </div>
-            <div class="card">
-                <div class="label">Team Overview</div>
-                <div class="stat">469</div>
-                <div class="label">Team Members Overseen</div>
-            </div>
-        </div>
-
-        <div class="card">
-            <h2>Career Satisfaction Metrics</h2>
-            <div class="score-grid">
-                <div class="score-item">
-                    <div class="label">Overall Success</div>
-                    <div class="progress-bar">
-                        <div class="progress-bar-fill" style="width: 80%"></div>
-                    </div>
-                    <div class="label">4/5</div>
-                </div>
-                <div class="score-item">
-                    <div class="label">Income Progress</div>
-                    <div class="progress-bar">
-                        <div class="progress-bar-fill" style="width: 60%"></div>
-                    </div>
-                    <div class="label">3/5</div>
-                </div>
-                <div class="score-item">
-                    <div class="label">Career Advancement</div>
-                    <div class="progress-bar">
-                        <div class="progress-bar-fill" style="width: 40%"></div>
-                    </div>
-                    <div class="label">2/5</div>
-                </div>
-                <div class="score-item">
-                    <div class="label">Work-Life Balance</div>
-                    <div class="progress-bar">
-                        <div class="progress-bar-fill" style="width: 80%"></div>
-                    </div>
-                    <div class="label">4/5</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="card">
-            <h2>Emotional Intelligence Dimensions</h2>
-            <div class="score-grid">
-                <div class="score-item">
-                    <div class="label">Self-Awareness</div>
-                    <div class="progress-bar">
-                        <div class="progress-bar-fill" style="width: 60%"></div>
-                    </div>
-                    <div class="label">3/5</div>
-                </div>
-                <div class="score-item">
-                    <div class="label">Self-Management</div>
-                    <div class="progress-bar">
-                        <div class="progress-bar-fill" style="width: 20%"></div>
-                    </div>
-                    <div class="label">1/5</div>
-                </div>
-                <div class="score-item">
-                    <div class="label">Social Awareness</div>
-                    <div class="progress-bar">
-                        <div class="progress-bar-fill" style="width: 80%"></div>
-                    </div>
-                    <div class="label">4/5</div>
-                </div>
-                <div class="score-item">
-                    <div class="label">Relationship Management</div>
-                    <div class="progress-bar">
-                        <div class="progress-bar-fill" style="width: 100%"></div>
-                    </div>
-                    <div class="label">5/5</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="card">
-            <h2>Notable EI Indicators</h2>
-            <div class="score-grid">
-                <div class="score-item">
-                    <div class="label">Work Awareness</div>
-                    <div class="stat">5/5</div>
-                </div>
-                <div class="score-item">
-                    <div class="label">Body Language Awareness</div>
-                    <div class="stat">1/5</div>
-                </div>
-                <div class="score-item">
-                    <div class="label">Emotional Expression</div>
-                    <div class="stat">2/5</div>
-                </div>
-                <div class="score-item">
-                    <div class="label">Colleague Understanding</div>
-                    <div class="stat">4/5</div>
-                </div>
-            </div>
+        <div id="assessments-container" class="grid">
+            <!-- Participant responses will be inserted here -->
         </div>
     </div>
+
+    <script>
+        async function fetchAssessments() {
+            try {
+                const response = await fetch('/api/get-assessments');
+                const data = await response.json();
+
+                if (data.success) {
+                    const assessmentsContainer = document.getElementById('assessments-container');
+                    assessmentsContainer.innerHTML = '';
+
+                    data.assessments.forEach(assessment => {
+                        const card = document.createElement('div');
+                        card.className = 'card';
+
+                        const personalInfo = assessment.personal_info;
+                        const careerSatisfaction = assessment.career_satisfaction;
+                        const emotionalIntelligence = assessment.emotional_intelligence;
+
+                        card.innerHTML = `
+                            <div class="label">CPA Member: ${personalInfo.cpa_member}</div>
+                            <div class="label">Gender: ${personalInfo.gender}</div>
+                            <div class="label">Current Position: ${personalInfo.current_position}</div>
+                            <div class="label">Career Success: ${careerSatisfaction.career_success}</div>
+                            <div class="label">Emotional Awareness: ${emotionalIntelligence.emotional_awareness_1}</div>
+                            <div class="label">Created At: ${new Date(assessment.created_at).toLocaleString()}</div>
+                        `;
+
+                        assessmentsContainer.appendChild(card);
+                    });
+                } else {
+                    console.error('Failed to fetch assessments:', data.error);
+                }
+            } catch (error) {
+                console.error('Error fetching assessments:', error);
+            }
+        }
+
+        // Fetch assessments when the page loads
+        window.onload = fetchAssessments;
+    </script>
 </body>
 </html>
