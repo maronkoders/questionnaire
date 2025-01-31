@@ -96,14 +96,13 @@
                         <a href="#language-stats" class="nav-question">Language Preference</a>
                         <a href="#designation-stats" class="nav-question">Legacy Designation</a>
                         <a href="#cpa-body-stats" class="nav-question">Provincial CPA Body</a>
-                        <!-- <a href="#years-designation-stats" class="nav-question">Years Since Designation</a> -->
                         <a href="#industry-stats" class="nav-question">Industry Type</a>
                         <a href="#position-stats" class="nav-question">Current Position</a>
                         <a href="#org-size-stats" class="nav-question">Organization Size</a>
                         <a href="#work-nature-stats" class="nav-question">Nature of Work</a>
                         <a href="#yearly-compensation-stats" class="nav-question">Yearly Compensation</a>
                         <a href="#job-title-stats" class="nav-question">Job Title</a>
-                        <a href="#supervision-stats" class="nav-question">Supervision Responsibility</a>
+                        <a href="#supervision-responsibility-stats" class="nav-question">Supervision Responsibility</a>
                     </div>
                 </div>
 
@@ -763,9 +762,9 @@
                         </div>
 
                         <!-- Number of Supervised Individuals -->
-                        <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+                        <div id='supervision-responsibility-stats' class="bg-white shadow overflow-hidden sm:rounded-lg">
                             <div class="px-4 py-5 sm:px-6">
-                                <h3 class="text-lg leading-6 font-medium text-gray-900">Supervision Responsibility</h3>
+                                <h3 class="text-lg leading-6 font-medium text-gray-900">Please indicate the number of individuals you oversee in your current position or oversaw before retirement or being unemployed</h3>
                             </div>
                             <div class="border-t border-gray-200 p-6">
                                 <div class="space-y-2">
@@ -784,25 +783,7 @@
                         </div>
 
 
-                          <!-- Years Since Designation -->
-                          <!-- <div id='years-designation-stats' class="bg-white shadow overflow-hidden sm:rounded-lg">
-                            <div class="px-4 py-5 sm:px-6">
-                                <h3 class="text-lg leading-6 font-medium text-gray-900">Years Since Designation</h3>
-                            </div>
-                            <div class="border-t border-gray-200 p-6">
-                                <div class="space-y-2">
-                                    <div class="flex justify-between items-center">
-                                        <span class="text-gray-800 font-medium">Average Years:</span>
-                                        <span id="avgYearsSince">-</span>
-                                    </div>
-                                    <div class="flex justify-between items-center">
-                                        <span class="text-gray-800 font-medium">Range:</span>
-                                        <span id="yearsSinceRange">-</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> -->
-
+                        <h5>Section B: Career Satisfaction</h1>
                         <!-- Career Success -->
                         <div class="bg-white shadow overflow-hidden sm:rounded-lg">
                             <div class="px-4 py-5 sm:px-6">
@@ -5104,11 +5085,15 @@
                   document.getElementById('presidentCEOPercentage').textContent = 
                         `(${((jobTitleCounts.president / totalJobTitle) * 100).toFixed(1)}%)`;
 
-
-
+                    //Supervision Responsibility
+                    const supervisionResponses = data.assessments.filter(a => a.personal_info?.oversee_number != null).map(a => a.personal_info.oversee_number);
+                    const sumSupervision = supervisionResponses.map(Number).reduce((a, b) => a + b);
+                    const avgSupervision = sumSupervision / supervisionResponses.length;
+                    document.getElementById('avgSupervised').textContent = avgSupervision.toFixed(1);
+                    document.getElementById('supervisedRange').textContent = 
+                        `${Math.min(...supervisionResponses)} - ${Math.max(...supervisionResponses)}`;
 
                     // Update numeric statistics
-
                     const yearsSinceStats = calculateNumericStats(data.assessments, 'years_since_designation');
                     document.getElementById('avgYearsSince').textContent = yearsSinceStats.avg.toFixed(1);
                     document.getElementById('yearsSinceRange').textContent = 
