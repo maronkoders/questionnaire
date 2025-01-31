@@ -353,12 +353,12 @@
                             <div class="border-t border-gray-200 p-6">
                                 <div class="space-y-2">
                                     <div class="flex justify-between items-center">
-                                        <span class="text-gray-800 font-medium">Average Year:</span>
-                                        <span id="avgBirthYear">-</span>
-                                    </div>
-                                    <div class="flex justify-between items-center">
                                         <span class="text-gray-800 font-medium">Range:</span>
                                         <span id="birthYearRange">-</span>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-800 font-medium">Age :</span>
+                                        <span id="ageRange">-</span>
                                     </div>
                                 </div>
                             </div>
@@ -4823,25 +4823,19 @@
         async function loadDashboardData() {
             try {
                 const response = await fetch('/api/get-assessments');
-                const data = await response.json();
-
-
-                console.log(data.assessments[2]);
-                
+                const data = await response.json();                
                 if (data.success) {
 
                     document.getElementById('totalResponses').textContent = data.assessments.length;
                     document.getElementById('totalCPA').textContent = data.assessments.filter(assessment => assessment.personal_info != null).length;
                     document.getElementById('totalNonCPA').textContent = data.assessments.filter(assessment => assessment.personal_info == null).length;
                     
-
                     const genderCounts = {
                             male: data.assessments.filter(a => a.personal_info?.gender === 'male').length,
                             female: data.assessments.filter(a => a.personal_info?.gender === 'female').length,
                             other: data.assessments.filter(a => a.personal_info?.gender === 'other').length,
                             preferNot: data.assessments.filter(a => a.personal_info?.gender === 'prefer_not_disclose').length
                         };
-
 
                         const total = Object.values(genderCounts).reduce((a, b) => a + b, 0);
 
@@ -4862,6 +4856,15 @@
                         
                         document.getElementById('totalGenderResponses').textContent = total;
 
+
+                //Birth Year
+
+                    const birthYearStats =  data.assessments.filter(a => a.personal_info != null).map(a => a.personal_info.birth_year);
+                    document.getElementById('birthYearRange').textContent = 
+                        `${Math.min(...birthYearStats)} - ${Math.max(...birthYearStats)}`;
+
+                    document.getElementById('ageRange').textContent = 
+                        `${new Date().getFullYear() - Math.max(...birthYearStats)} years - ${new Date().getFullYear() - Math.min(...birthYearStats)} years`;
                     //Statistics for languages
 
                     const languageCounts = {
@@ -4903,11 +4906,6 @@
                     updateStatSection('jobTitleStats', calculateStats(data.assessments, 'job_title'));
 
                     // Update numeric statistics
-
-                    const birthYearStats = calculateNumericStats(data.assessments.personal_info, 'birth_year');
-                    document.getElementById('avgBirthYear').textContent = birthYearStats.avg.toFixed(0);
-                    document.getElementById('birthYearRange').textContent = 
-                        `${birthYearStats.min} - ${birthYearStats.max}`;
 
                     const yearsSinceStats = calculateNumericStats(data.assessments, 'years_since_designation');
                     document.getElementById('avgYearsSince').textContent = yearsSinceStats.avg.toFixed(1);
