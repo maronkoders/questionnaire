@@ -545,9 +545,9 @@
                         </div>
 
                         <!-- Position Type -->
-                        <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+                        <div id="position-stats" class="bg-white shadow overflow-hidden sm:rounded-lg">
                             <div class="px-4 py-5 sm:px-6">
-                                <h3 class="text-lg leading-6 font-medium text-gray-900">Current Position</h3>
+                                <h3 class="text-lg leading-6 font-medium text-gray-900">Please indicate the option below that best describes your current position or your most recent position before retirement.</h3>
                             </div>
                             <div class="border-t border-gray-200 p-6">
                                 <div class="space-y-4" id="positionStats">
@@ -4981,11 +4981,41 @@
                    document.getElementById('totalIndustryResponses').textContent = industryTotal;         
 
                   
-                    // updateStatSection('industryStats', calculateStats(data.assessments, 'industry_type'));
-                    updateStatSection('positionStats', calculateStats(data.assessments, 'current_position'));
+                    //Current Position
+                    const currentPositionCounts = {
+                        soleProprietor: data.assessments.filter(a => a.personal_info?.current_position === 'sole_proprietor').length,
+                        partner: data.assessments.filter(a => a.personal_info?.current_position === 'partner').length,
+                        owner: data.assessments.filter(a => a.personal_info?.current_position === 'owner_non_accounting').length,
+                        employee: data.assessments.filter(a => a.personal_info?.current_position === 'employee_accounting').length,
+                        nonAccountingFirmEmployee: data.assessments.filter(a => a.personal_info?.current_position === 'employee_non_accounting').length,
+                    };
+
+                    const currentPositionTotal = Object.values(currentPositionCounts).reduce((a, b) => a + b, 0);
+
+                    document.getElementById('soleProprietorCount').textContent = currentPositionCounts.soleProprietor;
+                    document.getElementById('partnerCount').textContent = currentPositionCounts.partner;
+                    document.getElementById('nonAccountingOwnerCount').textContent = currentPositionCounts.owner;
+                    document.getElementById('accountingEmployeeCount').textContent = currentPositionCounts.employee;
+                    document.getElementById('nonAccountingEmployeeCount').textContent = currentPositionCounts.nonAccountingFirmEmployee;
+
+                    document.getElementById('soleProprietorPercentage').textContent = 
+                        `(${((currentPositionCounts.soleProprietor / currentPositionTotal) * 100).toFixed(1)}%)`;
+                    document.getElementById('partnerPercentage').textContent = 
+                        `(${((currentPositionCounts.partner / currentPositionTotal) * 100).toFixed(1)}%)`;
+                    document.getElementById('nonAccountingOwnerPercentage').textContent = 
+                        `(${((currentPositionCounts.owner / currentPositionTotal) * 100).toFixed(1)}%)`;
+                    document.getElementById('accountingEmployeePercentage').textContent = 
+                        `(${((currentPositionCounts.employee / currentPositionTotal) * 100).toFixed(1)}%)`;
+                    document.getElementById('nonAccountingEmployeePercentage').textContent = 
+
+
+                        `(${((currentPositionCounts.nonAccountingFirmEmployee / currentPositionTotal) * 100).toFixed(1)}%)`;
+
+                    document.getElementById('totalPositionResponses').textContent = currentPositionTotal;
+
+
                     updateStatSection('workNatureStats', calculateStats(data.assessments, 'work_nature'));
                     updateStatSection('jobTitleStats', calculateStats(data.assessments, 'job_title'));
-
                     // Update numeric statistics
 
                     const yearsSinceStats = calculateNumericStats(data.assessments, 'years_since_designation');
