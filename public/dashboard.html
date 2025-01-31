@@ -609,10 +609,11 @@
                         </div>
 
                         <!-- Work Nature -->
-                        <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+                        <div id='work-nature-stats' class="bg-white shadow overflow-hidden sm:rounded-lg">
                             <div class="px-4 py-5 sm:px-6">
-                                <h3 class="text-lg leading-6 font-medium text-gray-900">Nature of Work</h3>
+                                <h3 class="text-lg leading-6 font-medium text-gray-900">Please indicate the option that best suits the nature of your work</h3>
                             </div>
+
                             <div class="border-t border-gray-200 p-6">
                                 <div class="space-y-4" id="workNatureStats">
                                     <div class="flex justify-between items-center">
@@ -5015,7 +5016,40 @@
 
                         // document.getElementById('orgSizeCount').textContent = orgSizeResponses.length;
 
-                    updateStatSection('workNatureStats', calculateStats(data.assessments, 'work_nature'));
+                  
+                    //Work Nature
+                    const workNatureCounts = {
+                        fullTime: data.assessments.filter(a => a.personal_info?.work_nature === 'full_time').length,
+                        partTime: data.assessments.filter(a => a.personal_info?.work_nature === 'part_time').length,
+                        contract: data.assessments.filter(a => a.personal_info?.work_nature === 'contract').length,
+                        unemployed: data.assessments.filter(a => a.personal_info?.work_nature === 'unemployed').length,
+                        retired: data.assessments.filter(a => a.personal_info?.work_nature === 'retired').length
+                    };
+
+                    const workNatureTotal = Object.values(workNatureCounts).reduce((a, b) => a + b, 0);
+
+                    document.getElementById('fullTimeCount').textContent = workNatureCounts.fullTime;
+                    document.getElementById('partTimeCount').textContent = workNatureCounts.partTime;
+                    document.getElementById('contractCount').textContent = workNatureCounts.contract;
+                    document.getElementById('unemployedCount').textContent = workNatureCounts.unemployed;
+                    document.getElementById('retiredCount').textContent = workNatureCounts.retired;
+
+                    document.getElementById('fullTimePercentage').textContent = 
+                        `(${((workNatureCounts.fullTime / workNatureTotal) * 100).toFixed(1)}%)`;
+                    document.getElementById('partTimePercentage').textContent = 
+                        `(${((workNatureCounts.partTime / workNatureTotal) * 100).toFixed(1)}%)`;
+                    document.getElementById('contractPercentage').textContent = 
+                        `(${((workNatureCounts.contract / workNatureTotal) * 100).toFixed(1)}%)`;
+                    document.getElementById('unemployedPercentage').textContent = 
+                        `(${((workNatureCounts.unemployed / workNatureTotal) * 100).toFixed(1)}%)`;
+                    document.getElementById('retiredPercentage').textContent = 
+                        `(${((workNatureCounts.retired / workNatureTotal) * 100).toFixed(1)}%)`;
+
+                    document.getElementById('totalWorkNatureResponses').textContent = workNatureTotal;
+
+
+
+
                     updateStatSection('jobTitleStats', calculateStats(data.assessments, 'job_title'));
                     // Update numeric statistics
 
