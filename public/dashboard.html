@@ -101,7 +101,7 @@
                         <a href="#position-stats" class="nav-question">Current Position</a>
                         <a href="#org-size-stats" class="nav-question">Organization Size</a>
                         <a href="#work-nature-stats" class="nav-question">Nature of Work</a>
-                        <a href="#compensation-stats" class="nav-question">Yearly Compensation</a>
+                        <a href="#yearly-compensation-stats" class="nav-question">Yearly Compensation</a>
                         <a href="#job-title-stats" class="nav-question">Job Title</a>
                         <a href="#supervision-stats" class="nav-question">Supervision Responsibility</a>
                     </div>
@@ -662,10 +662,11 @@
                         </div>
 
                         <!-- Yearly Compensation -->
-                        <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+                        <div id='yearly-compensation-stats' class="bg-white shadow overflow-hidden sm:rounded-lg">
                             <div class="px-4 py-5 sm:px-6">
-                                <h3 class="text-lg leading-6 font-medium text-gray-900">Yearly Compensation</h3>
+                                <h3 class="text-lg leading-6 font-medium text-gray-900">What is your yearly compensation (before taxes, deductions and benefits). If you do not get compensation, please indicate zero</h3>
                             </div>
+
                             <div class="border-t border-gray-200 p-6">
                                 <div class="space-y-2">
                                     <div class="flex justify-between items-center">
@@ -5047,10 +5048,17 @@
 
                     document.getElementById('totalWorkNatureResponses').textContent = workNatureTotal;
 
-
-
+                    //Compensation
+                    const compensationResponses = data.assessments.filter(a => a.personal_info?.yearly_compensation != null).map(a => a.personal_info.yearly_compensation);
+                    const sum = compensationResponses.map(Number).reduce((a, b) => a + b);
+                    const avg = sum / compensationResponses.length;
+                    document.getElementById('avgCompensation').textContent = 
+                        `$${avg.toFixed(2)}`;
+                    document.getElementById('compensationRange').textContent = 
+                        `$${Math.min(...compensationResponses)} - $${Math.max(...compensationResponses)}`;
 
                     updateStatSection('jobTitleStats', calculateStats(data.assessments, 'job_title'));
+
                     // Update numeric statistics
 
                     const yearsSinceStats = calculateNumericStats(data.assessments, 'years_since_designation');
