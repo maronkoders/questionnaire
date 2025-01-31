@@ -344,12 +344,13 @@
                         </div>
                     </div>
 
-                    <div id="birth-year-stats" class="mt-8 space-y-8">
+                    <div class="mt-8 space-y-8">
                         <!-- Birth Year Statistics -->
-                        <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+                        <div id="birth-year-stats" class="bg-white shadow overflow-hidden sm:rounded-lg">
                             <div class="px-4 py-5 sm:px-6">
                                 <h3 class="text-lg leading-6 font-medium text-gray-900">Birth Year Distribution</h3>
                             </div>
+
                             <div class="border-t border-gray-200 p-6">
                                 <div class="space-y-2">
                                     <div class="flex justify-between items-center">
@@ -411,10 +412,11 @@
                         </div>
 
                         <!-- Legacy Designation -->
-                        <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+                        <div id="designation-stats" class="bg-white shadow overflow-hidden sm:rounded-lg">
                             <div class="px-4 py-5 sm:px-6">
                                 <h3 class="text-lg leading-6 font-medium text-gray-900">Legacy Designation</h3>
                             </div>
+
                             <div class="border-t border-gray-200 p-6">
                                 <div class="space-y-4" id="designationStats">
                                     <div class="flex justify-between items-center">
@@ -4894,6 +4896,40 @@
                         
                         document.getElementById('totalLanguageResponses').textContent = totalLanguage;
 
+
+
+                        //Designation Stats
+                        const designationCounts = {
+                            cga: data.assessments.filter(a => a.personal_info?.legacy_designation === 'cga').length,
+                            ca: data.assessments.filter(a => a.personal_info?.legacy_designation === 'ca').length,
+                            cma: data.assessments.filter(a => a.personal_info?.legacy_designation === 'cma').length,
+                            other: data.assessments.filter(a => a.personal_info?.legacy_designation === 'other').length,
+                            none: data.assessments.filter(a => a.personal_info?.legacy_designation === 'none').length
+                        };
+
+                        const designationTotal = Object.values(designationCounts).reduce((a, b) => a + b, 0);
+
+
+                        // Update the DOM with counts and percentages
+                        document.getElementById('cgaCount').textContent = designationCounts.cga;
+                        document.getElementById('caCount').textContent = designationCounts.ca;
+                        document.getElementById('cmaCount').textContent = designationCounts.cma;
+                        document.getElementById('noneCount').textContent = designationCounts.none;
+                        
+
+                        document.getElementById('cgaPercentage').textContent = 
+                            `(${((designationCounts.cga / designationTotal) * 100).toFixed(1)}%)`;
+                        document.getElementById('caPercentage').textContent = 
+                            `(${((designationCounts.ca / designationTotal) * 100).toFixed(1)}%)`;
+                        document.getElementById('cmaPercentage').textContent = 
+                            `(${((designationCounts.cma / designationTotal) * 100).toFixed(1)}%)`;
+                        document.getElementById('otherPercentage').textContent = 
+                            `(${((designationCounts.other / designationTotal) * 100).toFixed(1)}%)`;
+                        document.getElementById('nonePercentage').textContent = 
+                            `(${((designationCounts.none / designationTotal) * 100).toFixed(1)}%)`;
+                        document.getElementById('totalDesignationResponses').textContent = designationTotal;
+
+                    
 
 
 
