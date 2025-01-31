@@ -597,20 +597,13 @@
                         </div>
 
                         <!-- Organization Size -->
-                        <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+                        <div  id ='org-size-stats' class="bg-white shadow overflow-hidden sm:rounded-lg">
                             <div class="px-4 py-5 sm:px-6">
-                                <h3 class="text-lg leading-6 font-medium text-gray-900">Organization Size</h3>
+                                <h3 class="text-lg leading-6 font-medium text-gray-900">Please indicate the number of staff (including yourself) in the organization you work for. If you are retired or unemployed, state position on retirement or at your last employer</h3>
                             </div>
                             <div class="border-t border-gray-200 p-6">
                                 <div class="space-y-2">
-                                    <div class="flex justify-between items-center">
-                                        <span class="text-gray-800 font-medium">Average Size:</span>
-                                        <span id="avgOrgSize">-</span>
-                                    </div>
-                                    <div class="flex justify-between items-center">
-                                        <span class="text-gray-800 font-medium">Range:</span>
-                                        <span id="orgSizeRange">-</span>
-                                    </div>
+                                  <div id='orgSizeResponses'></div>
                                 </div>
                             </div>
                         </div>
@@ -4853,12 +4846,10 @@
                             `(${((genderCounts.other / total) * 100).toFixed(1)}%)`;
                         document.getElementById('preferNotPercentage').textContent = 
                             `(${((genderCounts.preferNot / total) * 100).toFixed(1)}%)`;
-                        
                         document.getElementById('totalGenderResponses').textContent = total;
 
 
-                //Birth Year
-
+                    //Birth Year
                     const birthYearStats =  data.assessments.filter(a => a.personal_info != null).map(a => a.personal_info.birth_year);
                     document.getElementById('birthYearRange').textContent = 
                         `${Math.min(...birthYearStats)} - ${Math.max(...birthYearStats)}`;
@@ -5013,6 +5004,16 @@
 
                     document.getElementById('totalPositionResponses').textContent = currentPositionTotal;
 
+
+                    //Organization Size
+                    const orgSizeResponses = data.assessments.filter(a => a.personal_info?.staff_number != null).map(a => a.personal_info.staff_number);
+                        orgSizeResponses.forEach(response => {
+                            const li = document.createElement('li');
+                            li.textContent = response;
+                            document.getElementById('orgSizeResponses').appendChild(li);
+                        });
+
+                        // document.getElementById('orgSizeCount').textContent = orgSizeResponses.length;
 
                     updateStatSection('workNatureStats', calculateStats(data.assessments, 'work_nature'));
                     updateStatSection('jobTitleStats', calculateStats(data.assessments, 'job_title'));
