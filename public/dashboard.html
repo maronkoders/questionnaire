@@ -4855,23 +4855,9 @@
                 
                 if (data.success) {
                     document.getElementById('totalResponses').textContent = data.assessments.length;
-                    document.getElementById('totalCPA').textContent = data.assessments.filter(assessment => assessment.personal_info.cpa_member === 'Yes').length;
-                    document.getElementById('totalNonCPA').textContent = data.assessments.filter(assessment => assessment.personal_info.cpa_member === 'No').length;
+                    document.getElementById('totalCPA').textContent = data.assessments.filter(assessment => assessment.personal_info != null).length;
+                    document.getElementById('totalNonCPA').textContent = data.assessments.filter(assessment => assessment.personal_info == null).length;
                     
-                    const responsesTable = document.getElementById('responsesTable');
-                    responsesTable.innerHTML = data.assessments
-                        .map(assessment => `
-                            <tr>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                    ${new Date(assessment.created_at).toLocaleDateString()}
-                                </td>
-                                <td class="px-6 py-4 text-sm text-gray-500">
-                                    <div class="text-sm text-gray-900">${assessment.personal_info.job_title}</div>
-                                    <div class="text-sm text-gray-500">${assessment.personal_info.gender}</div>
-                                </td>
-                            </tr>
-                        `)
-                        .join('');
 
                     const genderCounts = {
                             male: data.assessments.filter(a => a.personal_info.gender === 'Male').length,
