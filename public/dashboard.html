@@ -292,34 +292,6 @@
                         <!-- Add more statistics cards as needed -->
                     </div>
 
-                    <!-- Recent Responses Table -->
-                    <!-- <div class="mt-8 bg-white shadow overflow-hidden sm:rounded-lg">
-                        <div class="px-4 py-5 sm:px-6">
-                            <h3 class="text-lg leading-6 font-medium text-gray-900">
-                                Recent Responses
-                            </h3>
-                        </div>
-                        <div class="border-t border-gray-200">
-                            <div class="overflow-x-auto">
-                                <table class="min-w-full divide-y divide-gray-200">
-                                    <thead class="bg-gray-50">
-                                        <tr>
-                                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                Date
-                                            </th>
-                                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                Details
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="bg-white divide-y divide-gray-200" id="responsesTable">
-                                        <!-- Data will be populated here -->
-                                    <!-- </tbody>
-                                </table>
-                            </div>
-                        </div> -->
-                    <!-- </div> --> 
-
 
                     <div id="gender-stats" class="mt-8 bg-white shadow overflow-hidden sm:rounded-lg">
                         <div class="px-4 py-5 sm:px-6">
@@ -4852,19 +4824,24 @@
             try {
                 const response = await fetch('/api/get-assessments');
                 const data = await response.json();
+
+
+                console.log(data.assessments[3].personal_info);
                 
                 if (data.success) {
+
                     document.getElementById('totalResponses').textContent = data.assessments.length;
                     document.getElementById('totalCPA').textContent = data.assessments.filter(assessment => assessment.personal_info != null).length;
                     document.getElementById('totalNonCPA').textContent = data.assessments.filter(assessment => assessment.personal_info == null).length;
                     
 
                     const genderCounts = {
-                            male: data.assessments.filter(a => a.personal_info.gender === 'Male').length,
-                            female: data.assessments.filter(a => a.personal_info.gender === 'Female').length,
-                            other: data.assessments.filter(a => a.personal_info.gender === 'Other').length,
-                            preferNot: data.assessments.filter(a => a.personal_info.gender === 'Prefer not to disclose').length
+                            male: data.assessments.filter(a => a.personal_info?.gender === 'male').length,
+                            female: data.assessments.filter(a => a.personal_info?.gender === 'female').length,
+                            other: data.assessments.filter(a => a.personal_info?.gender === 'other').length,
+                            preferNot: data.assessments.filter(a => a.personal_info?.gender === 'prefer_not_disclose').length
                         };
+
 
                         const total = Object.values(genderCounts).reduce((a, b) => a + b, 0);
 
@@ -4872,7 +4849,7 @@
                         document.getElementById('maleCount').textContent = genderCounts.male;
                         document.getElementById('femaleCount').textContent = genderCounts.female;
                         document.getElementById('otherCount').textContent = genderCounts.other;
-                        document.getElementById('preferNotCount').textContent = genderCounts.preferNot;
+                        document.getElementById('preferNotCount').textContent = genderCounts.prefer_not_disclose;
                         
                         document.getElementById('malePercentage').textContent = 
                             `(${((genderCounts.male / total) * 100).toFixed(1)}%)`;
@@ -4895,7 +4872,8 @@
                     updateStatSection('jobTitleStats', calculateStats(data.assessments, 'job_title'));
 
                     // Update numeric statistics
-                    const birthYearStats = calculateNumericStats(data.assessments, 'birth_year');
+                    
+                    const birthYearStats = calculateNumericStats(data.assessments.personal_info, 'birth_year');
                     document.getElementById('avgBirthYear').textContent = birthYearStats.avg.toFixed(0);
                     document.getElementById('birthYearRange').textContent = 
                         `${birthYearStats.min} - ${birthYearStats.max}`;
@@ -4957,4 +4935,7 @@
         });
     </script>
 </body>
+</html> 
+</html> 
+</html> 
 </html> 
