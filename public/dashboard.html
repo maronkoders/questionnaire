@@ -682,10 +682,11 @@
                         </div>
 
                         <!-- Job Title -->
-                        <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+                        <div id="job-title-stats" class="bg-white shadow overflow-hidden sm:rounded-lg">
                             <div class="px-4 py-5 sm:px-6">
-                                <h3 class="text-lg leading-6 font-medium text-gray-900">Job Title Distribution</h3>
+                                <h3 class="text-lg leading-6 font-medium text-gray-900">What is your current job title or if you are retired or unemployed, state your position before retirement or unemployment?</h3>
                             </div>
+
                             <div class="border-t border-gray-200 p-6">
                                 <div class="space-y-4" id="jobTitleStats">
                                     <div class="flex justify-between items-center">
@@ -5057,7 +5058,54 @@
                     document.getElementById('compensationRange').textContent = 
                         `$${Math.min(...compensationResponses)} - $${Math.max(...compensationResponses)}`;
 
-                    updateStatSection('jobTitleStats', calculateStats(data.assessments, 'job_title'));
+                    //Job Title
+                    const jobTitleCounts = {
+                        soleProprietor: data.assessments.filter(a => a.personal_info?.job_title === 'sole_practitioner').length,
+                        partner: data.assessments.filter(a => a.personal_info?.job_title === 'partner_principle').length,
+                        junior: data.assessments.filter(a => a.personal_info?.job_title === 'junior_entry_level').length,
+                        intermediate: data.assessments.filter(a => a.personal_info?.job_title === 'intermediate_roles').length,
+                        manager: data.assessments.filter(a => a.personal_info?.job_title === 'manager_supervisor').length,
+                        seniorManager: data.assessments.filter(a => a.personal_info?.job_title === 'senior_manager').length,
+                        director: data.assessments.filter(a => a.personal_info?.job_title === 'director_vp').length,
+                        instructor: data.assessments.filter(a => a.personal_info?.job_title === 'instructor_lecturer_professor').length,
+                        president: data.assessments.filter(a => a.personal_info?.job_title === 'president_ceo_owner').length
+                    };
+
+                    document.getElementById('solePractitionerCount').textContent = jobTitleCounts.soleProprietor;
+                    document.getElementById('partnerPrincipalCount').textContent = jobTitleCounts.partner;
+                    document.getElementById('juniorRoleCount').textContent = jobTitleCounts.junior;
+                    document.getElementById('intermediateRoleCount').textContent = jobTitleCounts.intermediate;
+                    document.getElementById('managerCount').textContent = jobTitleCounts.manager;
+                    document.getElementById('seniorManagerCount').textContent = jobTitleCounts.seniorManager;
+                    document.getElementById('directorVPCount').textContent = jobTitleCounts.director;
+                    document.getElementById('instructorCount').textContent = jobTitleCounts.instructor;
+                    document.getElementById('presidentCEOCount').textContent = jobTitleCounts.president;
+
+
+                  const totalJobTitle = Object.values(jobTitleCounts).reduce((a, b) => a + b, 0);       
+                  document.getElementById('totalJobTitleResponses').textContent = totalJobTitle;
+
+                  document.getElementById('solePractitionerPercentage').textContent = 
+                        `(${((jobTitleCounts.soleProprietor / totalJobTitle) * 100).toFixed(1)}%)`;
+                  document.getElementById('partnerPrincipalPercentage').textContent = 
+                        `(${((jobTitleCounts.partner / totalJobTitle) * 100).toFixed(1)}%)`;
+                  document.getElementById('juniorRolePercentage').textContent = 
+                        `(${((jobTitleCounts.junior / totalJobTitle) * 100).toFixed(1)}%)`;
+                  document.getElementById('intermediateRolePercentage').textContent = 
+                        `(${((jobTitleCounts.intermediate / totalJobTitle) * 100).toFixed(1)}%)`;
+                  document.getElementById('managerPercentage').textContent = 
+                        `(${((jobTitleCounts.manager / totalJobTitle) * 100).toFixed(1)}%)`;
+                  document.getElementById('seniorManagerPercentage').textContent = 
+                        `(${((jobTitleCounts.seniorManager / totalJobTitle) * 100).toFixed(1)}%)`;
+                  document.getElementById('directorVPPercentage').textContent = 
+                        `(${((jobTitleCounts.director / totalJobTitle) * 100).toFixed(1)}%)`;
+                  document.getElementById('instructorPercentage').textContent = 
+                        `(${((jobTitleCounts.instructor / totalJobTitle) * 100).toFixed(1)}%)`;
+                  document.getElementById('presidentCEOPercentage').textContent = 
+                        `(${((jobTitleCounts.president / totalJobTitle) * 100).toFixed(1)}%)`;
+
+
+
 
                     // Update numeric statistics
 
