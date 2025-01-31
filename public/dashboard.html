@@ -443,23 +443,18 @@
                                     <div class="flex justify-between items-center">
                                         <span class="text-gray-600">Other</span>
                                         <div class="flex items-center">
-                                            <span class="text-gray-900 font-medium" id="otherDesignationCount">0</span>
-                                            <span class="text-gray-500 ml-2" id="otherDesignationPercentage">(0%)</span>
+                                            <span class="text-gray-900 font-medium" id="otherCount">0</span>
+                                            <span class="text-gray-500 ml-2" id="otherPercentage">(0%)</span>
                                         </div>
                                     </div>
                                     <div class="flex justify-between items-center">
                                         <span class="text-gray-600">None</span>
                                         <div class="flex items-center">
-                                            <span class="text-gray-900 font-medium" id="noDesignationCount">0</span>
-                                            <span class="text-gray-500 ml-2" id="noDesignationPercentage">(0%)</span>
+                                            <span class="text-gray-900 font-medium" id="noneCount">0</span>
+                                            <span class="text-gray-500 ml-2" id="nonePercentage">(0%)</span>
                                         </div>
                                     </div>
-                                    <div class="pt-4 border-t border-gray-200">
-                                        <div class="flex justify-between items-center">
-                                            <span class="text-gray-800 font-medium">Total Responses:</span>
-                                            <span class="text-gray-900 font-medium" id="totalDesignationResponses">0</span>
-                                        </div>
-                                    </div>
+                                   
                                 </div>
                             </div>
                         </div>
@@ -4909,12 +4904,11 @@
 
                         const designationTotal = Object.values(designationCounts).reduce((a, b) => a + b, 0);
 
-
-                        // Update the DOM with counts and percentages
                         document.getElementById('cgaCount').textContent = designationCounts.cga;
                         document.getElementById('caCount').textContent = designationCounts.ca;
                         document.getElementById('cmaCount').textContent = designationCounts.cma;
                         document.getElementById('noneCount').textContent = designationCounts.none;
+                        document.getElementById('otherCount').textContent = designationCounts.other;
                         
 
                         document.getElementById('cgaPercentage').textContent = 
@@ -4927,14 +4921,9 @@
                             `(${((designationCounts.other / designationTotal) * 100).toFixed(1)}%)`;
                         document.getElementById('nonePercentage').textContent = 
                             `(${((designationCounts.none / designationTotal) * 100).toFixed(1)}%)`;
-                        document.getElementById('totalDesignationResponses').textContent = designationTotal;
 
                     
-
-
-
-                    // updateStatSection('languageStats', calculateStats(data.assessments, 'preferred_language'));
-                    updateStatSection('designationStats', calculateStats(data.assessments, 'legacy_designation'));
+              
                     updateStatSection('cpaBodyStats', calculateStats(data.assessments, 'provincial_cpa_body'));
                     updateStatSection('industryStats', calculateStats(data.assessments, 'industry_type'));
                     updateStatSection('positionStats', calculateStats(data.assessments, 'current_position'));
