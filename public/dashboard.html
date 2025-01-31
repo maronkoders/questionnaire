@@ -4871,7 +4871,7 @@
                             english: data.assessments.filter(a => a.personal_info?.languages.includes('english')).length,
                             french: data.assessments.filter(a => a.personal_info?.languages.includes('french')).length,
                             other: data.assessments.filter(a => a.personal_info?.languages.includes('other')).length,
-                            preferNot: data.assessments.filter(a => a.personal_info?.languages.includes('prefer_not_disclose')).length
+                            preferNot: data.assessments.filter(a => a.personal_info?.languages.includes('indigenous')).length
                         };
 
 
@@ -4881,7 +4881,7 @@
                         document.getElementById('englishCount').textContent = languageCounts.english;
                         document.getElementById('frenchCount').textContent = languageCounts.french;
                         document.getElementById('otherLangCount').textContent = languageCounts.other;
-                        document.getElementById('preferNotCount').textContent = languageCounts.prefer_not_disclose;
+                        document.getElementById('indigenousCount').textContent = languageCounts.preferNot;
                         
                         document.getElementById('englishPercentage').textContent = 
                             `(${((languageCounts.english / totalLanguage) * 100).toFixed(1)}%)`;
@@ -4889,7 +4889,7 @@
                             `(${((languageCounts.french / totalLanguage) * 100).toFixed(1)}%)`;
                         document.getElementById('otherLangPercentage').textContent = 
                             `(${((languageCounts.other / totalLanguage) * 100).toFixed(1)}%)`;
-                        document.getElementById('preferNotPercentage').textContent = 
+                        document.getElementById('indigenousPercentage').textContent = 
                             `(${((languageCounts.preferNot / totalLanguage) * 100).toFixed(1)}%)`;
                         
                         document.getElementById('totalLanguageResponses').textContent = totalLanguage;
