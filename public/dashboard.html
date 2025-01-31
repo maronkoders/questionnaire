@@ -96,7 +96,7 @@
                         <a href="#language-stats" class="nav-question">Language Preference</a>
                         <a href="#designation-stats" class="nav-question">Legacy Designation</a>
                         <a href="#cpa-body-stats" class="nav-question">Provincial CPA Body</a>
-                        <a href="#years-designation-stats" class="nav-question">Years Since Designation</a>
+                        <!-- <a href="#years-designation-stats" class="nav-question">Years Since Designation</a> -->
                         <a href="#industry-stats" class="nav-question">Industry Type</a>
                         <a href="#position-stats" class="nav-question">Current Position</a>
                         <a href="#org-size-stats" class="nav-question">Organization Size</a>
@@ -414,7 +414,7 @@
                         <!-- Legacy Designation -->
                         <div id="designation-stats" class="bg-white shadow overflow-hidden sm:rounded-lg">
                             <div class="px-4 py-5 sm:px-6">
-                                <h3 class="text-lg leading-6 font-medium text-gray-900">Legacy Designation</h3>
+                                <h3 class="text-lg leading-6 font-medium text-gray-900">Please indicate the legacy designation that you hold</h3>
                             </div>
 
                             <div class="border-t border-gray-200 p-6">
@@ -471,29 +471,10 @@
                             </div>
                         </div>
 
-                        <!-- Years Since Designation -->
-                        <div class="bg-white shadow overflow-hidden sm:rounded-lg">
-                            <div class="px-4 py-5 sm:px-6">
-                                <h3 class="text-lg leading-6 font-medium text-gray-900">Years Since Designation</h3>
-                            </div>
-                            <div class="border-t border-gray-200 p-6">
-                                <div class="space-y-2">
-                                    <div class="flex justify-between items-center">
-                                        <span class="text-gray-800 font-medium">Average Years:</span>
-                                        <span id="avgYearsSince">-</span>
-                                    </div>
-                                    <div class="flex justify-between items-center">
-                                        <span class="text-gray-800 font-medium">Range:</span>
-                                        <span id="yearsSinceRange">-</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
                         <!-- Industry Type -->
-                        <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+                        <div id="industry-stats" class="bg-white shadow overflow-hidden sm:rounded-lg">
                             <div class="px-4 py-5 sm:px-6">
-                                <h3 class="text-lg leading-6 font-medium text-gray-900">Industry Distribution</h3>
+                                <h3 class="text-lg leading-6 font-medium text-gray-900">Please indicate the type of industry that best fits where you work? If you are retired or unemployed, indicate the industry at your retirement or your last employer?</h3>
                             </div>
                             <div class="border-t border-gray-200 p-6">
                                 <div class="space-y-4" id="industryStats">
@@ -507,15 +488,15 @@
                                     <div class="flex justify-between items-center">
                                         <span class="text-gray-600">Private corporation</span>
                                         <div class="flex items-center">
-                                            <span class="text-gray-900 font-medium" id="privateCorpCount">0</span>
-                                            <span class="text-gray-500 ml-2" id="privateCorpPercentage">(0%)</span>
+                                            <span class="text-gray-900 font-medium" id="privateCorporationCount">0</span>
+                                            <span class="text-gray-500 ml-2" id="privateCorporationPercentage">(0%)</span>
                                         </div>
                                     </div>
                                     <div class="flex justify-between items-center">
                                         <span class="text-gray-600">Publicly traded corporation</span>
                                         <div class="flex items-center">
-                                            <span class="text-gray-900 font-medium" id="publicCorpCount">0</span>
-                                            <span class="text-gray-500 ml-2" id="publicCorpPercentage">(0%)</span>
+                                            <span class="text-gray-900 font-medium" id="publiclyTradedCorporationCount">0</span>
+                                            <span class="text-gray-500 ml-2" id="publiclyTradedCorporationPercentage">(0%)</span>
                                         </div>
                                     </div>
                                     <div class="flex justify-between items-center">
@@ -802,7 +783,29 @@
                                     </div>
                                 </div>
                             </div>
+
+                            
                         </div>
+
+
+                          <!-- Years Since Designation -->
+                          <!-- <div id='years-designation-stats' class="bg-white shadow overflow-hidden sm:rounded-lg">
+                            <div class="px-4 py-5 sm:px-6">
+                                <h3 class="text-lg leading-6 font-medium text-gray-900">Years Since Designation</h3>
+                            </div>
+                            <div class="border-t border-gray-200 p-6">
+                                <div class="space-y-2">
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-800 font-medium">Average Years:</span>
+                                        <span id="avgYearsSince">-</span>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-800 font-medium">Range:</span>
+                                        <span id="yearsSinceRange">-</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> -->
 
                         <!-- Career Success -->
                         <div class="bg-white shadow overflow-hidden sm:rounded-lg">
@@ -4931,24 +4934,54 @@
                             document.getElementById('cpaBodyResponses').appendChild(li);
                         });
 
-                        document.getElementById('cpaBodyCount').textContent = cpaBodyResponses.length;
+                        // document.getElementById('cpaBodyCount').textContent = cpaBodyResponses.length;
                         
 
-                        document.getElementById('cgaPercentage').textContent = 
-                            `(${((designationCounts.cga / designationTotal) * 100).toFixed(1)}%)`;
-                        document.getElementById('caPercentage').textContent = 
-                            `(${((designationCounts.ca / designationTotal) * 100).toFixed(1)}%)`;
-                        document.getElementById('cmaPercentage').textContent = 
-                            `(${((designationCounts.cma / designationTotal) * 100).toFixed(1)}%)`;
-                        document.getElementById('otherPercentage').textContent = 
-                            `(${((designationCounts.other / designationTotal) * 100).toFixed(1)}%)`;
-                        document.getElementById('nonePercentage').textContent = 
-                            `(${((designationCounts.none / designationTotal) * 100).toFixed(1)}%)`;
 
-                    
-              
+                        //industry type
+                        const industryCounts = {
+                            publicPractice: data.assessments.filter(a => a.personal_info?.industry_type === 'public_practice').length,
+                            privateCorporation: data.assessments.filter(a => a.personal_info?.industry_type === 'private_corporation').length,
+                            publiclyTradedCorporation: data.assessments.filter(a => a.personal_info?.industry_type === 'publicly_traded_corporation').length,
+                            education: data.assessments.filter(a => a.personal_info?.industry_type === 'education').length,
+                            government: data.assessments.filter(a => a.personal_info?.industry_type === 'government').length,
+                            notForProfit: data.assessments.filter(a => a.personal_info?.industry_type === 'not_for_profit').length,
+                            other: data.assessments.filter(a => a.personal_info?.industry_type === 'other').length,
+                            unemployed: data.assessments.filter(a => a.personal_info?.industry_type === 'unemployed').length
+                        };
+
+                        console.log(industryCounts);
+
+
+                        const industryTotal = Object.values(industryCounts).reduce((a, b) => a + b, 0);
+
+                        document.getElementById('publicPracticeCount').textContent = industryCounts.publicPractice;
+                        document.getElementById('privateCorporationCount').textContent = industryCounts.privateCorporation;
+                        document.getElementById('publiclyTradedCorporationCount').textContent = industryCounts.publiclyTradedCorporation;
+                        document.getElementById('educationCount').textContent = industryCounts.education;
+                        document.getElementById('governmentCount').textContent = industryCounts.government;
+                        document.getElementById('notForProfitCount').textContent = industryCounts.notForProfit;
+                        document.getElementById('otherCount').textContent = industryCounts.other;
+                        document.getElementById('unemployedCount').textContent = industryCounts.unemployed;
+
+
+                        document.getElementById('publicPracticePercentage').textContent = 
+                            `(${((industryCounts.publicPractice / industryTotal) * 100).toFixed(1)}%)`;
+                        document.getElementById('privateCorporationPercentage').textContent = 
+                            `(${((industryCounts.privateCorporation / industryTotal) * 100).toFixed(1)}%)`;
+                        document.getElementById('publiclyTradedCorporationPercentage').textContent = 
+                            `(${((industryCounts.publiclyTradedCorporation / industryTotal) * 100).toFixed(1)}%)`;
+                        document.getElementById('educationPercentage').textContent = 
+                            `(${((industryCounts.education / industryTotal) * 100).toFixed(1)}%)`;
+                        document.getElementById('governmentPercentage').textContent = 
+                            `(${((industryCounts.government / industryTotal) * 100).toFixed(1)}%)`;
+                        document.getElementById('notForProfitPercentage').textContent = 
+                            `(${((industryCounts.notForProfit / industryTotal) * 100).toFixed(1)}%)`;
+
+                   document.getElementById('totalIndustryResponses').textContent = industryTotal;         
+
                   
-                    updateStatSection('industryStats', calculateStats(data.assessments, 'industry_type'));
+                    // updateStatSection('industryStats', calculateStats(data.assessments, 'industry_type'));
                     updateStatSection('positionStats', calculateStats(data.assessments, 'current_position'));
                     updateStatSection('workNatureStats', calculateStats(data.assessments, 'work_nature'));
                     updateStatSection('jobTitleStats', calculateStats(data.assessments, 'job_title'));
