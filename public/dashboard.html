@@ -767,12 +767,13 @@
                             </div>
                         </div>
 
+                        <!-- Career Success -->
                         <div class="bg-white shadow overflow-hidden sm:rounded-lg">
                             <div class="px-4 py-5 sm:px-6">
                                 <h3 class="text-lg leading-6 font-medium text-gray-900">I am satisfied with the success I have achieved in my career.</h3>
                             </div>
                             <div class="border-t border-gray-200 p-6">
-                                <div class="space-y-4" id="satisfactionStats">
+                                <div class="space-y-4" id="careerSuccessStats">
                                     <div class="flex justify-between items-center">
                                         <span class="text-gray-600">Strongly disagree</span>
                                         <div class="flex items-center">
@@ -818,6 +819,278 @@
                             </div>
                         </div>
 
+                        <!-- Career Goals Progress -->
+                        <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+                            <div class="px-4 py-5 sm:px-6">
+                                <h3 class="text-lg leading-6 font-medium text-gray-900">I am satisfied with the progress I have made towards meeting my overall career goals.</h3>
+                            </div>
+                            <div class="border-t border-gray-200 p-6">
+                                <div class="space-y-4" id="careerGoalsStats">
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-600">Strongly disagree</span>
+                                        <div class="flex items-center">
+                                            <span class="text-gray-900 font-medium" id="goalsStronglyDisagreeCount">0</span>
+                                            <span class="text-gray-500 ml-2" id="goalsStronglyDisagreePercentage">(0%)</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-600">Disagree to some extent</span>
+                                        <div class="flex items-center">
+                                            <span class="text-gray-900 font-medium" id="goalsDisagreeCount">0</span>
+                                            <span class="text-gray-500 ml-2" id="goalsDisagreePercentage">(0%)</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-600">Uncertain</span>
+                                        <div class="flex items-center">
+                                            <span class="text-gray-900 font-medium" id="goalsUncertainCount">0</span>
+                                            <span class="text-gray-500 ml-2" id="goalsUncertainPercentage">(0%)</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-600">Agree to some extent</span>
+                                        <div class="flex items-center">
+                                            <span class="text-gray-900 font-medium" id="goalsAgreeCount">0</span>
+                                            <span class="text-gray-500 ml-2" id="goalsAgreePercentage">(0%)</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-600">Strongly agree</span>
+                                        <div class="flex items-center">
+                                            <span class="text-gray-900 font-medium" id="goalsStronglyAgreeCount">0</span>
+                                            <span class="text-gray-500 ml-2" id="goalsStronglyAgreePercentage">(0%)</span>
+                                        </div>
+                                    </div>
+                                    <div class="pt-4 border-t border-gray-200">
+                                        <div class="flex justify-between items-center">
+                                            <span class="text-gray-800 font-medium">Total Responses:</span>
+                                            <span class="text-gray-900 font-medium" id="totalGoalsResponses">0</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Income Goals -->
+                        <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+                            <div class="px-4 py-5 sm:px-6">
+                                <h3 class="text-lg leading-6 font-medium text-gray-900">I am satisfied with the progress I have made towards meeting my goals for income.</h3>
+                            </div>
+                            <div class="border-t border-gray-200 p-6">
+                                <div class="space-y-4" id="incomeGoalsStats">
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-600">Strongly disagree</span>
+                                        <div class="flex items-center">
+                                            <span class="text-gray-900 font-medium" id="incomeStronglyDisagreeCount">0</span>
+                                            <span class="text-gray-500 ml-2" id="incomeStronglyDisagreePercentage">(0%)</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-600">Disagree to some extent</span>
+                                        <div class="flex items-center">
+                                            <span class="text-gray-900 font-medium" id="incomeDisagreeCount">0</span>
+                                            <span class="text-gray-500 ml-2" id="incomeDisagreePercentage">(0%)</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-600">Uncertain</span>
+                                        <div class="flex items-center">
+                                            <span class="text-gray-900 font-medium" id="incomeUncertainCount">0</span>
+                                            <span class="text-gray-500 ml-2" id="incomeUncertainPercentage">(0%)</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-600">Agree to some extent</span>
+                                        <div class="flex items-center">
+                                            <span class="text-gray-900 font-medium" id="incomeAgreeCount">0</span>
+                                            <span class="text-gray-500 ml-2" id="incomeAgreePercentage">(0%)</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-600">Strongly agree</span>
+                                        <div class="flex items-center">
+                                            <span class="text-gray-900 font-medium" id="incomeStronglyAgreeCount">0</span>
+                                            <span class="text-gray-500 ml-2" id="incomeStronglyAgreePercentage">(0%)</span>
+                                        </div>
+                                    </div>
+                                    <div class="pt-4 border-t border-gray-200">
+                                        <div class="flex justify-between items-center">
+                                            <span class="text-gray-800 font-medium">Total Responses:</span>
+                                            <span class="text-gray-900 font-medium" id="totalIncomeResponses">0</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Advancement Goals -->
+                        <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+                            <div class="px-4 py-5 sm:px-6">
+                                <h3 class="text-lg leading-6 font-medium text-gray-900">I am satisfied with the progress I have made towards meeting my goals for advancement.</h3>
+                            </div>
+                            <div class="border-t border-gray-200 p-6">
+                                <div class="space-y-4" id="advancementGoalsStats">
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-600">Strongly disagree</span>
+                                        <div class="flex items-center">
+                                            <span class="text-gray-900 font-medium" id="advancementStronglyDisagreeCount">0</span>
+                                            <span class="text-gray-500 ml-2" id="advancementStronglyDisagreePercentage">(0%)</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-600">Disagree to some extent</span>
+                                        <div class="flex items-center">
+                                            <span class="text-gray-900 font-medium" id="advancementDisagreeCount">0</span>
+                                            <span class="text-gray-500 ml-2" id="advancementDisagreePercentage">(0%)</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-600">Uncertain</span>
+                                        <div class="flex items-center">
+                                            <span class="text-gray-900 font-medium" id="advancementUncertainCount">0</span>
+                                            <span class="text-gray-500 ml-2" id="advancementUncertainPercentage">(0%)</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-600">Agree to some extent</span>
+                                        <div class="flex items-center">
+                                            <span class="text-gray-900 font-medium" id="advancementAgreeCount">0</span>
+                                            <span class="text-gray-500 ml-2" id="advancementAgreePercentage">(0%)</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-600">Strongly agree</span>
+                                        <div class="flex items-center">
+                                            <span class="text-gray-900 font-medium" id="advancementStronglyAgreeCount">0</span>
+                                            <span class="text-gray-500 ml-2" id="advancementStronglyAgreePercentage">(0%)</span>
+                                        </div>
+                                    </div>
+                                    <div class="pt-4 border-t border-gray-200">
+                                        <div class="flex justify-between items-center">
+                                            <span class="text-gray-800 font-medium">Total Responses:</span>
+                                            <span class="text-gray-900 font-medium" id="totalAdvancementResponses">0</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Skills Development -->
+                        <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+                            <div class="px-4 py-5 sm:px-6">
+                                <h3 class="text-lg leading-6 font-medium text-gray-900">I am satisfied with the progress I have made towards meeting my goals for the development of new skills.</h3>
+                            </div>
+                            <div class="border-t border-gray-200 p-6">
+                                <div class="space-y-4" id="skillsGoalsStats">
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-600">Strongly disagree</span>
+                                        <div class="flex items-center">
+                                            <span class="text-gray-900 font-medium" id="skillsStronglyDisagreeCount">0</span>
+                                            <span class="text-gray-500 ml-2" id="skillsStronglyDisagreePercentage">(0%)</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-600">Disagree to some extent</span>
+                                        <div class="flex items-center">
+                                            <span class="text-gray-900 font-medium" id="skillsDisagreeCount">0</span>
+                                            <span class="text-gray-500 ml-2" id="skillsDisagreePercentage">(0%)</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-600">Uncertain</span>
+                                        <div class="flex items-center">
+                                            <span class="text-gray-900 font-medium" id="skillsUncertainCount">0</span>
+                                            <span class="text-gray-500 ml-2" id="skillsUncertainPercentage">(0%)</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-600">Agree to some extent</span>
+                                        <div class="flex items-center">
+                                            <span class="text-gray-900 font-medium" id="skillsAgreeCount">0</span>
+                                            <span class="text-gray-500 ml-2" id="skillsAgreePercentage">(0%)</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-600">Strongly agree</span>
+                                        <div class="flex items-center">
+                                            <span class="text-gray-900 font-medium" id="skillsStronglyAgreeCount">0</span>
+                                            <span class="text-gray-500 ml-2" id="skillsStronglyAgreePercentage">(0%)</span>
+                                        </div>
+                                    </div>
+                                    <div class="pt-4 border-t border-gray-200">
+                                        <div class="flex justify-between items-center">
+                                            <span class="text-gray-800 font-medium">Total Responses:</span>
+                                            <span class="text-gray-900 font-medium" id="totalSkillsResponses">0</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Work-Life Balance -->
+                        <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+                            <div class="px-4 py-5 sm:px-6">
+                                <h3 class="text-lg leading-6 font-medium text-gray-900">I am satisfied with the degree to which I have achieved a healthy work-life balance.</h3>
+                            </div>
+                            <div class="border-t border-gray-200 p-6">
+                                <div class="space-y-4" id="workLifeBalanceStats">
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-600">Strongly disagree</span>
+                                        <div class="flex items-center">
+                                            <span class="text-gray-900 font-medium" id="workLifeStronglyDisagreeCount">0</span>
+                                            <span class="text-gray-500 ml-2" id="workLifeStronglyDisagreePercentage">(0%)</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-600">Disagree to some extent</span>
+                                        <div class="flex items-center">
+                                            <span class="text-gray-900 font-medium" id="workLifeDisagreeCount">0</span>
+                                            <span class="text-gray-500 ml-2" id="workLifeDisagreePercentage">(0%)</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-600">Uncertain</span>
+                                        <div class="flex items-center">
+                                            <span class="text-gray-900 font-medium" id="workLifeUncertainCount">0</span>
+                                            <span class="text-gray-500 ml-2" id="workLifeUncertainPercentage">(0%)</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-600">Agree to some extent</span>
+                                        <div class="flex items-center">
+                                            <span class="text-gray-900 font-medium" id="workLifeAgreeCount">0</span>
+                                            <span class="text-gray-500 ml-2" id="workLifeAgreePercentage">(0%)</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-600">Strongly agree</span>
+                                        <div class="flex items-center">
+                                            <span class="text-gray-900 font-medium" id="workLifeStronglyAgreeCount">0</span>
+                                            <span class="text-gray-500 ml-2" id="workLifeStronglyAgreePercentage">(0%)</span>
+                                        </div>
+                                    </div>
+                                    <div class="pt-4 border-t border-gray-200">
+                                        <div class="flex justify-between items-center">
+                                            <span class="text-gray-800 font-medium">Total Responses:</span>
+                                            <span class="text-gray-900 font-medium" id="totalWorkLifeResponses">0</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Open Ended Response -->
+                        <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+                            <div class="px-4 py-5 sm:px-6">
+                                <h3 class="text-lg leading-6 font-medium text-gray-900">Career Challenges and Opportunities</h3>
+                                <p class="mt-1 text-sm text-gray-500">Responses to open-ended question about career challenges and opportunities</p>
+                            </div>
+                            <div class="border-t border-gray-200 p-6">
+                                <div class="space-y-4" id="openEndedResponses">
+                                    <!-- Responses will be populated dynamically -->
+                                </div>
+                            </div>
+                        </div>
 
                     </div>
                 </div>
