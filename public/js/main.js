@@ -202,6 +202,7 @@ function submitAssessment() {
     // Collect all sections data
     assessmentData.personal_info = {
         cpa_member: document.querySelector('input[name="cpa_member"]:checked')?.value || null,
+        languages: Array.from(document.querySelectorAll('input[name="languages"]:checked')).map(lang => lang.value) || [],
         gender: document.querySelector('input[name="gender"]:checked')?.value || null,
         legacy_designation: document.querySelector('input[name="legacy_designation"]:checked')?.value || null,
         industry_type: document.querySelector('input[name="industry_type"]:checked')?.value || null,

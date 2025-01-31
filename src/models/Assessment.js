@@ -4,6 +4,7 @@ const personalInfoSchema = new mongoose.Schema({
     cpa_member: String,
     gender: String,
     legacy_designation: String,
+    languages: Array,
     industry_type: String,
     current_position: String,
     work_nature: String,

@@ -367,7 +367,7 @@
                         <!-- Language Preference -->
                         <div id="language-stats" class="bg-white shadow overflow-hidden sm:rounded-lg">
                             <div class="px-4 py-5 sm:px-6">
-                                <h3 class="text-lg leading-6 font-medium text-gray-900">Preferred Language</h3>
+                                <h3 class="text-lg leading-6 font-medium text-gray-900">Please select the languages you are fluent in</h3>
                             </div>
                             <div class="border-t border-gray-200 p-6">
                                 <div class="space-y-4" id="languageStats">
@@ -4826,7 +4826,7 @@
                 const data = await response.json();
 
 
-                console.log(data.assessments[3].personal_info);
+                console.log(data.assessments[2]);
                 
                 if (data.success) {
 
@@ -4862,8 +4862,39 @@
                         
                         document.getElementById('totalGenderResponses').textContent = total;
 
-                    // Update all statistical sections
-                    updateStatSection('languageStats', calculateStats(data.assessments, 'preferred_language'));
+                    //Statistics for languages
+
+                    const languageCounts = {
+                            english: data.assessments.filter(a => a.personal_info?.languages.includes('english')).length,
+                            french: data.assessments.filter(a => a.personal_info?.languages.includes('french')).length,
+                            other: data.assessments.filter(a => a.personal_info?.languages.includes('other')).length,
+                            preferNot: data.assessments.filter(a => a.personal_info?.languages.includes('prefer_not_disclose')).length
+                        };
+
+
+                        const totalLanguage = Object.values(languageCounts).reduce((a, b) => a + b, 0);
+
+                        // Update the DOM with counts and percentages
+                        document.getElementById('englishCount').textContent = languageCounts.english;
+                        document.getElementById('frenchCount').textContent = languageCounts.french;
+                        document.getElementById('otherLangCount').textContent = languageCounts.other;
+                        document.getElementById('preferNotCount').textContent = languageCounts.prefer_not_disclose;
+                        
+                        document.getElementById('englishPercentage').textContent = 
+                            `(${((languageCounts.english / totalLanguage) * 100).toFixed(1)}%)`;
+                        document.getElementById('frenchPercentage').textContent = 
+                            `(${((languageCounts.french / totalLanguage) * 100).toFixed(1)}%)`;
+                        document.getElementById('otherLangPercentage').textContent = 
+                            `(${((languageCounts.other / totalLanguage) * 100).toFixed(1)}%)`;
+                        document.getElementById('preferNotPercentage').textContent = 
+                            `(${((languageCounts.preferNot / totalLanguage) * 100).toFixed(1)}%)`;
+                        
+                        document.getElementById('totalLanguageResponses').textContent = totalLanguage;
+
+
+
+
+                    // updateStatSection('languageStats', calculateStats(data.assessments, 'preferred_language'));
                     updateStatSection('designationStats', calculateStats(data.assessments, 'legacy_designation'));
                     updateStatSection('cpaBodyStats', calculateStats(data.assessments, 'provincial_cpa_body'));
                     updateStatSection('industryStats', calculateStats(data.assessments, 'industry_type'));
@@ -4872,7 +4903,7 @@
                     updateStatSection('jobTitleStats', calculateStats(data.assessments, 'job_title'));
 
                     // Update numeric statistics
-                    
+
                     const birthYearStats = calculateNumericStats(data.assessments.personal_info, 'birth_year');
                     document.getElementById('avgBirthYear').textContent = birthYearStats.avg.toFixed(0);
                     document.getElementById('birthYearRange').textContent = 
