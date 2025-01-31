@@ -5,681 +5,879 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .dashboard {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 300px;
+            background-color: #f3f4f6;
+            padding: 1rem;
+            border-right: 1px solid #e5e7eb;
+            height: 100vh;
+            position: fixed;
+            overflow-y: auto;
+        }
+
+        .main-content {
+            margin-left: 300px;
+            flex: 1;
+            padding: 1rem;
+        }
+
+        .nav-section {
+            margin-bottom: 1rem;
+        }
+
+        .nav-section-title {
+            font-weight: 600;
+            color: #374151;
+            padding: 0.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-section-title:hover {
+            background-color: #e5e7eb;
+            border-radius: 0.375rem;
+        }
+
+        .nav-questions {
+            margin-left: 1rem;
+            display: none;
+        }
+
+        .nav-questions.active {
+            display: block;
+        }
+
+        .nav-question {
+            padding: 0.5rem;
+            color: #6b7280;
+            text-decoration: none;
+            display: block;
+            font-size: 0.875rem;
+        }
+
+        .nav-question:hover {
+            color: #374151;
+            background-color: #e5e7eb;
+            border-radius: 0.375rem;
+        }
+
+        .chevron {
+            transition: transform 0.2s;
+        }
+
+        .nav-section-title.active .chevron {
+            transform: rotate(180deg);
+        }
+    </style>
 </head>
 <body class="bg-gray-100">
-    <nav class="bg-white shadow-lg">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="flex justify-between h-16">
-                <div class="flex items-center">
-                    <h1 class="text-xl font-bold text-gray-800">Admin Dashboard</h1>
+    <div class="dashboard">
+        <!-- Sidebar Navigation -->
+        <div class="sidebar">
+            <nav>
+                <div class="nav-section">
+                    <div class="nav-section-title" onclick="toggleSection('sectionA')">
+                        Section A: Demographics
+                        <svg class="chevron" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                    <div class="nav-questions" id="sectionA">
+                        <a href="#gender-stats" class="nav-question">Gender Distribution</a>
+                        <a href="#birth-year-stats" class="nav-question">Birth Year</a>
+                        <a href="#language-stats" class="nav-question">Language Preference</a>
+                        <a href="#designation-stats" class="nav-question">Legacy Designation</a>
+                        <a href="#cpa-body-stats" class="nav-question">Provincial CPA Body</a>
+                        <a href="#years-designation-stats" class="nav-question">Years Since Designation</a>
+                        <a href="#industry-stats" class="nav-question">Industry Type</a>
+                        <a href="#position-stats" class="nav-question">Current Position</a>
+                        <a href="#org-size-stats" class="nav-question">Organization Size</a>
+                        <a href="#work-nature-stats" class="nav-question">Nature of Work</a>
+                        <a href="#compensation-stats" class="nav-question">Yearly Compensation</a>
+                        <a href="#job-title-stats" class="nav-question">Job Title</a>
+                        <a href="#supervision-stats" class="nav-question">Supervision Responsibility</a>
+                    </div>
                 </div>
-                <div class="flex items-center">
-                    <button id="logoutBtn" class="ml-4 px-4 py-2 text-sm text-white bg-red-500 rounded hover:bg-red-600">
-                        Logout
-                    </button>
+
+                <div class="nav-section">
+                    <div class="nav-section-title" onclick="toggleSection('sectionB')">
+                        Section B: Career Satisfaction
+                        <svg class="chevron" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                    <div class="nav-questions" id="sectionB">
+                        <a href="#career-success-stats" class="nav-question">Career Success</a>
+                        <a href="#job-satisfaction-stats" class="nav-question">Job Satisfaction</a>
+                    </div>
+                </div>
+
+                <div class="nav-section">
+                    <div class="nav-section-title" onclick="toggleSection('sectionC')">
+                        Section C: Emotional Intelligence
+                        <svg class="chevron" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                    <div class="nav-questions" id="sectionC">
+                        <a href="#emotional-awareness-stats" class="nav-question">Emotional Awareness</a>
+                        <a href="#emotional-management-stats" class="nav-question">Emotional Management</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <nav class="bg-white shadow-lg">
+                <div class="max-w-7xl mx-auto px-4">
+                    <div class="flex justify-between h-16">
+                        <div class="flex items-center">
+                            <h1 class="text-xl font-bold text-gray-800">Admin Dashboard</h1>
+                        </div>
+                        <div class="flex items-center">
+                            <button id="logoutBtn" class="ml-4 px-4 py-2 text-sm text-white bg-red-500 rounded hover:bg-red-600">
+                                Logout
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+
+            <main class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+                <div class="px-4 py-6 sm:px-0">
+                    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                        <!-- Statistics Cards -->
+                        <div class="bg-white overflow-hidden shadow rounded-lg">
+                            <div class="p-5">
+                                <div class="flex items-center">
+                                    <div class="flex-shrink-0 bg-indigo-500 rounded-md p-3">
+                                        <svg class="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                                        </svg>
+                                    </div>
+                                    <div class="ml-5 w-0 flex-1">
+                                        <dl>
+                                            <dt class="text-sm font-medium text-gray-500 truncate">
+                                                Total Responses
+                                            </dt>
+                                            <dd class="text-lg font-medium text-gray-900" id="totalResponses">
+                                                Loading...
+                                            </dd>
+                                        </dl>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white overflow-hidden shadow rounded-lg">
+                            <div class="p-5">
+                                <div class="flex items-center">
+                                    <div class="flex-shrink-0 bg-indigo-500 rounded-md p-3">
+                                        <svg class="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                                        </svg>
+                                    </div>
+                                    <div class="ml-5 w-0 flex-1">
+                                        <dl>
+                                            <dt class="text-sm font-medium text-gray-500 truncate">
+                                                Total CPA Members
+                                            </dt>
+                                            <dd class="text-lg font-medium text-gray-900" id="totalCPA">
+                                                Loading...
+                                            </dd>
+                                        </dl>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white overflow-hidden shadow rounded-lg">
+                            <div class="p-5">
+                                <div class="flex items-center">
+                                    <div class="flex-shrink-0 bg-indigo-500 rounded-md p-3">
+                                        <svg class="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                                        </svg>
+                                    </div>
+                                    <div class="ml-5 w-0 flex-1">
+                                        <dl>
+                                            <dt class="text-sm font-medium text-gray-500 truncate">
+                                                Total Non CPA Members
+                                            </dt>
+                                            <dd class="text-lg font-medium text-gray-900" id="totalNonCPA">
+                                                Loading...
+                                            </dd>
+                                        </dl>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>                
+                        <!-- Add more statistics cards as needed -->
+                    </div>
+
+                    <!-- Recent Responses Table -->
+                    <!-- <div class="mt-8 bg-white shadow overflow-hidden sm:rounded-lg">
+                        <div class="px-4 py-5 sm:px-6">
+                            <h3 class="text-lg leading-6 font-medium text-gray-900">
+                                Recent Responses
+                            </h3>
+                        </div>
+                        <div class="border-t border-gray-200">
+                            <div class="overflow-x-auto">
+                                <table class="min-w-full divide-y divide-gray-200">
+                                    <thead class="bg-gray-50">
+                                        <tr>
+                                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                Date
+                                            </th>
+                                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                Details
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="bg-white divide-y divide-gray-200" id="responsesTable">
+                                        <!-- Data will be populated here -->
+                                    <!-- </tbody>
+                                </table>
+                            </div>
+                        </div> -->
+                    <!-- </div> --> 
+
+
+                    <div id="gender-stats" class="mt-8 bg-white shadow overflow-hidden sm:rounded-lg">
+                        <div class="px-4 py-5 sm:px-6">
+                            <h3 class="text-lg leading-6 font-medium text-gray-900">
+                                Gender Distribution
+                            </h3>
+                        </div>
+                        <div class="border-t border-gray-200">
+                            <div class="p-6">
+                                <h4 class="text-md font-medium text-gray-800 mb-4">
+                                    Please select the gender you are most comfortable disclosing:
+                                </h4>
+                                <div class="space-y-4">
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-600">Male</span>
+                                        <div class="flex items-center">
+                                            <span class="text-gray-900 font-medium" id="maleCount">0</span>
+                                            <span class="text-gray-500 ml-2" id="malePercentage">(0%)</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-600">Female</span>
+                                        <div class="flex items-center">
+                                            <span class="text-gray-900 font-medium" id="femaleCount">0</span>
+                                            <span class="text-gray-500 ml-2" id="femalePercentage">(0%)</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-600">Other</span>
+                                        <div class="flex items-center">
+                                            <span class="text-gray-900 font-medium" id="otherCount">0</span>
+                                            <span class="text-gray-500 ml-2" id="otherPercentage">(0%)</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-600">Prefer not to disclose</span>
+                                        <div class="flex items-center">
+                                            <span class="text-gray-900 font-medium" id="preferNotCount">0</span>
+                                            <span class="text-gray-500 ml-2" id="preferNotPercentage">(0%)</span>
+                                        </div>
+                                    </div>
+                                    <div class="pt-4 border-t border-gray-200">
+                                        <div class="flex justify-between items-center">
+                                            <span class="text-gray-800 font-medium">Total Responses:</span>
+                                            <span class="text-gray-900 font-medium" id="totalGenderResponses">0</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="birth-year-stats" class="mt-8 space-y-8">
+                        <!-- Birth Year Statistics -->
+                        <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+                            <div class="px-4 py-5 sm:px-6">
+                                <h3 class="text-lg leading-6 font-medium text-gray-900">Birth Year Distribution</h3>
+                            </div>
+                            <div class="border-t border-gray-200 p-6">
+                                <div class="space-y-2">
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-800 font-medium">Average Year:</span>
+                                        <span id="avgBirthYear">-</span>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-800 font-medium">Range:</span>
+                                        <span id="birthYearRange">-</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Language Preference -->
+                        <div id="language-stats" class="bg-white shadow overflow-hidden sm:rounded-lg">
+                            <div class="px-4 py-5 sm:px-6">
+                                <h3 class="text-lg leading-6 font-medium text-gray-900">Preferred Language</h3>
+                            </div>
+                            <div class="border-t border-gray-200 p-6">
+                                <div class="space-y-4" id="languageStats">
+                                    <!-- Template for each language -->
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-600">English</span>
+                                        <div class="flex items-center">
+                                            <span class="text-gray-900 font-medium" id="englishCount">0</span>
+                                            <span class="text-gray-500 ml-2" id="englishPercentage">(0%)</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-600">French</span>
+                                        <div class="flex items-center">
+                                            <span class="text-gray-900 font-medium" id="frenchCount">0</span>
+                                            <span class="text-gray-500 ml-2" id="frenchPercentage">(0%)</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-600">Canadian Indigenous Languages</span>
+                                        <div class="flex items-center">
+                                            <span class="text-gray-900 font-medium" id="indigenousCount">0</span>
+                                            <span class="text-gray-500 ml-2" id="indigenousPercentage">(0%)</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-600">Other</span>
+                                        <div class="flex items-center">
+                                            <span class="text-gray-900 font-medium" id="otherLangCount">0</span>
+                                            <span class="text-gray-500 ml-2" id="otherLangPercentage">(0%)</span>
+                                        </div>
+                                    </div>
+                                    <div class="pt-4 border-t border-gray-200">
+                                        <div class="flex justify-between items-center">
+                                            <span class="text-gray-800 font-medium">Total Responses:</span>
+                                            <span class="text-gray-900 font-medium" id="totalLanguageResponses">0</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Legacy Designation -->
+                        <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+                            <div class="px-4 py-5 sm:px-6">
+                                <h3 class="text-lg leading-6 font-medium text-gray-900">Legacy Designation</h3>
+                            </div>
+                            <div class="border-t border-gray-200 p-6">
+                                <div class="space-y-4" id="designationStats">
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-600">CGA</span>
+                                        <div class="flex items-center">
+                                            <span class="text-gray-900 font-medium" id="cgaCount">0</span>
+                                            <span class="text-gray-500 ml-2" id="cgaPercentage">(0%)</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-600">CA</span>
+                                        <div class="flex items-center">
+                                            <span class="text-gray-900 font-medium" id="caCount">0</span>
+                                            <span class="text-gray-500 ml-2" id="caPercentage">(0%)</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-600">CMA</span>
+                                        <div class="flex items-center">
+                                            <span class="text-gray-900 font-medium" id="cmaCount">0</span>
+                                            <span class="text-gray-500 ml-2" id="cmaPercentage">(0%)</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-600">Other</span>
+                                        <div class="flex items-center">
+                                            <span class="text-gray-900 font-medium" id="otherDesignationCount">0</span>
+                                            <span class="text-gray-500 ml-2" id="otherDesignationPercentage">(0%)</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-600">None</span>
+                                        <div class="flex items-center">
+                                            <span class="text-gray-900 font-medium" id="noDesignationCount">0</span>
+                                            <span class="text-gray-500 ml-2" id="noDesignationPercentage">(0%)</span>
+                                        </div>
+                                    </div>
+                                    <div class="pt-4 border-t border-gray-200">
+                                        <div class="flex justify-between items-center">
+                                            <span class="text-gray-800 font-medium">Total Responses:</span>
+                                            <span class="text-gray-900 font-medium" id="totalDesignationResponses">0</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Provincial CPA Body -->
+                        <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+                            <div class="px-4 py-5 sm:px-6">
+                                <h3 class="text-lg leading-6 font-medium text-gray-900">Primary Provincial CPA Body</h3>
+                            </div>
+                            <div class="border-t border-gray-200 p-6">
+                                <div class="space-y-4" id="cpaBodyStats">
+                                    <!-- Will be populated dynamically -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Years Since Designation -->
+                        <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+                            <div class="px-4 py-5 sm:px-6">
+                                <h3 class="text-lg leading-6 font-medium text-gray-900">Years Since Designation</h3>
+                            </div>
+                            <div class="border-t border-gray-200 p-6">
+                                <div class="space-y-2">
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-800 font-medium">Average Years:</span>
+                                        <span id="avgYearsSince">-</span>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-800 font-medium">Range:</span>
+                                        <span id="yearsSinceRange">-</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Industry Type -->
+                        <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+                            <div class="px-4 py-5 sm:px-6">
+                                <h3 class="text-lg leading-6 font-medium text-gray-900">Industry Distribution</h3>
+                            </div>
+                            <div class="border-t border-gray-200 p-6">
+                                <div class="space-y-4" id="industryStats">
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-600">Public practice</span>
+                                        <div class="flex items-center">
+                                            <span class="text-gray-900 font-medium" id="publicPracticeCount">0</span>
+                                            <span class="text-gray-500 ml-2" id="publicPracticePercentage">(0%)</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-600">Private corporation</span>
+                                        <div class="flex items-center">
+                                            <span class="text-gray-900 font-medium" id="privateCorpCount">0</span>
+                                            <span class="text-gray-500 ml-2" id="privateCorpPercentage">(0%)</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-600">Publicly traded corporation</span>
+                                        <div class="flex items-center">
+                                            <span class="text-gray-900 font-medium" id="publicCorpCount">0</span>
+                                            <span class="text-gray-500 ml-2" id="publicCorpPercentage">(0%)</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-600">Education</span>
+                                        <div class="flex items-center">
+                                            <span class="text-gray-900 font-medium" id="educationCount">0</span>
+                                            <span class="text-gray-500 ml-2" id="educationPercentage">(0%)</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-600">Government</span>
+                                        <div class="flex items-center">
+                                            <span class="text-gray-900 font-medium" id="governmentCount">0</span>
+                                            <span class="text-gray-500 ml-2" id="governmentPercentage">(0%)</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-600">Not-for-profit</span>
+                                        <div class="flex items-center">
+                                            <span class="text-gray-900 font-medium" id="notForProfitCount">0</span>
+                                            <span class="text-gray-500 ml-2" id="notForProfitPercentage">(0%)</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-600">Other</span>
+                                        <div class="flex items-center">
+                                            <span class="text-gray-900 font-medium" id="otherIndustryCount">0</span>
+                                            <span class="text-gray-500 ml-2" id="otherIndustryPercentage">(0%)</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-600">Unemployed</span>
+                                        <div class="flex items-center">
+                                            <span class="text-gray-900 font-medium" id="unemployedCount">0</span>
+                                            <span class="text-gray-500 ml-2" id="unemployedPercentage">(0%)</span>
+                                        </div>
+                                    </div>
+                                    <div class="pt-4 border-t border-gray-200">
+                                        <div class="flex justify-between items-center">
+                                            <span class="text-gray-800 font-medium">Total Responses:</span>
+                                            <span class="text-gray-900 font-medium" id="totalIndustryResponses">0</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Position Type -->
+                        <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+                            <div class="px-4 py-5 sm:px-6">
+                                <h3 class="text-lg leading-6 font-medium text-gray-900">Current Position</h3>
+                            </div>
+                            <div class="border-t border-gray-200 p-6">
+                                <div class="space-y-4" id="positionStats">
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-600">Sole Proprietor of an accounting firm</span>
+                                        <div class="flex items-center">
+                                            <span class="text-gray-900 font-medium" id="soleProprietorCount">0</span>
+                                            <span class="text-gray-500 ml-2" id="soleProprietorPercentage">(0%)</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-600">Partner of an accounting firm</span>
+                                        <div class="flex items-center">
+                                            <span class="text-gray-900 font-medium" id="partnerCount">0</span>
+                                            <span class="text-gray-500 ml-2" id="partnerPercentage">(0%)</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-600">Owner of a non-accounting firm</span>
+                                        <div class="flex items-center">
+                                            <span class="text-gray-900 font-medium" id="nonAccountingOwnerCount">0</span>
+                                            <span class="text-gray-500 ml-2" id="nonAccountingOwnerPercentage">(0%)</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-600">Employee of an accounting firm</span>
+                                        <div class="flex items-center">
+                                            <span class="text-gray-900 font-medium" id="accountingEmployeeCount">0</span>
+                                            <span class="text-gray-500 ml-2" id="accountingEmployeePercentage">(0%)</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-600">Employee of a non-accounting firm</span>
+                                        <div class="flex items-center">
+                                            <span class="text-gray-900 font-medium" id="nonAccountingEmployeeCount">0</span>
+                                            <span class="text-gray-500 ml-2" id="nonAccountingEmployeePercentage">(0%)</span>
+                                        </div>
+                                    </div>
+                                    <div class="pt-4 border-t border-gray-200">
+                                        <div class="flex justify-between items-center">
+                                            <span class="text-gray-800 font-medium">Total Responses:</span>
+                                            <span class="text-gray-900 font-medium" id="totalPositionResponses">0</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Organization Size -->
+                        <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+                            <div class="px-4 py-5 sm:px-6">
+                                <h3 class="text-lg leading-6 font-medium text-gray-900">Organization Size</h3>
+                            </div>
+                            <div class="border-t border-gray-200 p-6">
+                                <div class="space-y-2">
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-800 font-medium">Average Size:</span>
+                                        <span id="avgOrgSize">-</span>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-800 font-medium">Range:</span>
+                                        <span id="orgSizeRange">-</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Work Nature -->
+                        <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+                            <div class="px-4 py-5 sm:px-6">
+                                <h3 class="text-lg leading-6 font-medium text-gray-900">Nature of Work</h3>
+                            </div>
+                            <div class="border-t border-gray-200 p-6">
+                                <div class="space-y-4" id="workNatureStats">
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-600">Full-time</span>
+                                        <div class="flex items-center">
+                                            <span class="text-gray-900 font-medium" id="fullTimeCount">0</span>
+                                            <span class="text-gray-500 ml-2" id="fullTimePercentage">(0%)</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-600">Part-time</span>
+                                        <div class="flex items-center">
+                                            <span class="text-gray-900 font-medium" id="partTimeCount">0</span>
+                                            <span class="text-gray-500 ml-2" id="partTimePercentage">(0%)</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-600">Contract</span>
+                                        <div class="flex items-center">
+                                            <span class="text-gray-900 font-medium" id="contractCount">0</span>
+                                            <span class="text-gray-500 ml-2" id="contractPercentage">(0%)</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-600">Unemployed</span>
+                                        <div class="flex items-center">
+                                            <span class="text-gray-900 font-medium" id="unemployedWorkCount">0</span>
+                                            <span class="text-gray-500 ml-2" id="unemployedWorkPercentage">(0%)</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-600">Retired</span>
+                                        <div class="flex items-center">
+                                            <span class="text-gray-900 font-medium" id="retiredCount">0</span>
+                                            <span class="text-gray-500 ml-2" id="retiredPercentage">(0%)</span>
+                                        </div>
+                                    </div>
+                                    <div class="pt-4 border-t border-gray-200">
+                                        <div class="flex justify-between items-center">
+                                            <span class="text-gray-800 font-medium">Total Responses:</span>
+                                            <span class="text-gray-900 font-medium" id="totalWorkNatureResponses">0</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Yearly Compensation -->
+                        <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+                            <div class="px-4 py-5 sm:px-6">
+                                <h3 class="text-lg leading-6 font-medium text-gray-900">Yearly Compensation</h3>
+                            </div>
+                            <div class="border-t border-gray-200 p-6">
+                                <div class="space-y-2">
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-800 font-medium">Average:</span>
+                                        <span id="avgCompensation">-</span>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-800 font-medium">Range:</span>
+                                        <span id="compensationRange">-</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Job Title -->
+                        <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+                            <div class="px-4 py-5 sm:px-6">
+                                <h3 class="text-lg leading-6 font-medium text-gray-900">Job Title Distribution</h3>
+                            </div>
+                            <div class="border-t border-gray-200 p-6">
+                                <div class="space-y-4" id="jobTitleStats">
+                                    <!-- Will be populated dynamically -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Number of Supervised Individuals -->
+                        <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+                            <div class="px-4 py-5 sm:px-6">
+                                <h3 class="text-lg leading-6 font-medium text-gray-900">Supervision Responsibility</h3>
+                            </div>
+                            <div class="border-t border-gray-200 p-6">
+                                <div class="space-y-2">
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-800 font-medium">Average Number of Supervised Staff:</span>
+                                        <span id="avgSupervised">-</span>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-800 font-medium">Range:</span>
+                                        <span id="supervisedRange">-</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </nav>
+    </div>
 
-    <main class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-        <div class="px-4 py-6 sm:px-0">
-            <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                <!-- Statistics Cards -->
-                <div class="bg-white overflow-hidden shadow rounded-lg">
-                    <div class="p-5">
-                        <div class="flex items-center">
-                            <div class="flex-shrink-0 bg-indigo-500 rounded-md p-3">
-                                <svg class="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                                </svg>
-                            </div>
-                            <div class="ml-5 w-0 flex-1">
-                                <dl>
-                                    <dt class="text-sm font-medium text-gray-500 truncate">
-                                        Total Responses
-                                    </dt>
-                                    <dd class="text-lg font-medium text-gray-900" id="totalResponses">
-                                        Loading...
-                                    </dd>
-                                </dl>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="bg-white overflow-hidden shadow rounded-lg">
-                    <div class="p-5">
-                        <div class="flex items-center">
-                            <div class="flex-shrink-0 bg-indigo-500 rounded-md p-3">
-                                <svg class="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                                </svg>
-                            </div>
-                            <div class="ml-5 w-0 flex-1">
-                                <dl>
-                                    <dt class="text-sm font-medium text-gray-500 truncate">
-                                        Total CPA Members
-                                    </dt>
-                                    <dd class="text-lg font-medium text-gray-900" id="totalCPA">
-                                        Loading...
-                                    </dd>
-                                </dl>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="bg-white overflow-hidden shadow rounded-lg">
-                    <div class="p-5">
-                        <div class="flex items-center">
-                            <div class="flex-shrink-0 bg-indigo-500 rounded-md p-3">
-                                <svg class="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                                </svg>
-                            </div>
-                            <div class="ml-5 w-0 flex-1">
-                                <dl>
-                                    <dt class="text-sm font-medium text-gray-500 truncate">
-                                        Total Non CPA Members
-                                    </dt>
-                                    <dd class="text-lg font-medium text-gray-900" id="totalNonCPA">
-                                        Loading...
-                                    </dd>
-                                </dl>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Add more statistics cards as needed -->
-            </div>
-
-            <!-- Recent Responses Table -->
-            <!-- <div class="mt-8 bg-white shadow overflow-hidden sm:rounded-lg">
-                <div class="px-4 py-5 sm:px-6">
-                    <h3 class="text-lg leading-6 font-medium text-gray-900">
-                        Recent Responses
-                    </h3>
-                </div>
-                <div class="border-t border-gray-200">
-                    <div class="overflow-x-auto">
-                        <table class="min-w-full divide-y divide-gray-200">
-                            <thead class="bg-gray-50">
-                                <tr>
-                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Date
-                                    </th>
-                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Details
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody class="bg-white divide-y divide-gray-200" id="responsesTable">
-                                <!-- Data will be populated here -->
-                            <!-- </tbody>
-                        </table>
-                    </div>
-                </div> -->
-            <!-- </div> --> 
-
-
-            <div class="mt-8 bg-white shadow overflow-hidden sm:rounded-lg">
-                <div class="px-4 py-5 sm:px-6">
-                    <h3 class="text-lg leading-6 font-medium text-gray-900">
-                        Gender Distribution
-                    </h3>
-                </div>
-                <div class="border-t border-gray-200">
-                    <div class="p-6">
-                        <h4 class="text-md font-medium text-gray-800 mb-4">
-                            Please select the gender you are most comfortable disclosing:
-                        </h4>
-                        <div class="space-y-4">
-                            <div class="flex justify-between items-center">
-                                <span class="text-gray-600">Male</span>
-                                <div class="flex items-center">
-                                    <span class="text-gray-900 font-medium" id="maleCount">0</span>
-                                    <span class="text-gray-500 ml-2" id="malePercentage">(0%)</span>
-                                </div>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span class="text-gray-600">Female</span>
-                                <div class="flex items-center">
-                                    <span class="text-gray-900 font-medium" id="femaleCount">0</span>
-                                    <span class="text-gray-500 ml-2" id="femalePercentage">(0%)</span>
-                                </div>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span class="text-gray-600">Other</span>
-                                <div class="flex items-center">
-                                    <span class="text-gray-900 font-medium" id="otherCount">0</span>
-                                    <span class="text-gray-500 ml-2" id="otherPercentage">(0%)</span>
-                                </div>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span class="text-gray-600">Prefer not to disclose</span>
-                                <div class="flex items-center">
-                                    <span class="text-gray-900 font-medium" id="preferNotCount">0</span>
-                                    <span class="text-gray-500 ml-2" id="preferNotPercentage">(0%)</span>
-                                </div>
-                            </div>
-                            <div class="pt-4 border-t border-gray-200">
-                                <div class="flex justify-between items-center">
-                                    <span class="text-gray-800 font-medium">Total Responses:</span>
-                                    <span class="text-gray-900 font-medium" id="totalGenderResponses">0</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="mt-8 space-y-8">
-                <!-- Birth Year Statistics -->
-                <div class="bg-white shadow overflow-hidden sm:rounded-lg">
-                    <div class="px-4 py-5 sm:px-6">
-                        <h3 class="text-lg leading-6 font-medium text-gray-900">Birth Year Distribution</h3>
-                    </div>
-                    <div class="border-t border-gray-200 p-6">
-                        <div class="space-y-2">
-                            <div class="flex justify-between items-center">
-                                <span class="text-gray-800 font-medium">Average Year:</span>
-                                <span id="avgBirthYear">-</span>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span class="text-gray-800 font-medium">Range:</span>
-                                <span id="birthYearRange">-</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Language Preference -->
-                <div class="bg-white shadow overflow-hidden sm:rounded-lg">
-                    <div class="px-4 py-5 sm:px-6">
-                        <h3 class="text-lg leading-6 font-medium text-gray-900">Preferred Language</h3>
-                    </div>
-                    <div class="border-t border-gray-200 p-6">
-                        <div class="space-y-4" id="languageStats">
-                            <!-- Template for each language -->
-                            <div class="flex justify-between items-center">
-                                <span class="text-gray-600">English</span>
-                                <div class="flex items-center">
-                                    <span class="text-gray-900 font-medium" id="englishCount">0</span>
-                                    <span class="text-gray-500 ml-2" id="englishPercentage">(0%)</span>
-                                </div>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span class="text-gray-600">French</span>
-                                <div class="flex items-center">
-                                    <span class="text-gray-900 font-medium" id="frenchCount">0</span>
-                                    <span class="text-gray-500 ml-2" id="frenchPercentage">(0%)</span>
-                                </div>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span class="text-gray-600">Canadian Indigenous Languages</span>
-                                <div class="flex items-center">
-                                    <span class="text-gray-900 font-medium" id="indigenousCount">0</span>
-                                    <span class="text-gray-500 ml-2" id="indigenousPercentage">(0%)</span>
-                                </div>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span class="text-gray-600">Other</span>
-                                <div class="flex items-center">
-                                    <span class="text-gray-900 font-medium" id="otherLangCount">0</span>
-                                    <span class="text-gray-500 ml-2" id="otherLangPercentage">(0%)</span>
-                                </div>
-                            </div>
-                            <div class="pt-4 border-t border-gray-200">
-                                <div class="flex justify-between items-center">
-                                    <span class="text-gray-800 font-medium">Total Responses:</span>
-                                    <span class="text-gray-900 font-medium" id="totalLanguageResponses">0</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Legacy Designation -->
-                <div class="bg-white shadow overflow-hidden sm:rounded-lg">
-                    <div class="px-4 py-5 sm:px-6">
-                        <h3 class="text-lg leading-6 font-medium text-gray-900">Legacy Designation</h3>
-                    </div>
-                    <div class="border-t border-gray-200 p-6">
-                        <div class="space-y-4" id="designationStats">
-                            <div class="flex justify-between items-center">
-                                <span class="text-gray-600">CGA</span>
-                                <div class="flex items-center">
-                                    <span class="text-gray-900 font-medium" id="cgaCount">0</span>
-                                    <span class="text-gray-500 ml-2" id="cgaPercentage">(0%)</span>
-                                </div>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span class="text-gray-600">CA</span>
-                                <div class="flex items-center">
-                                    <span class="text-gray-900 font-medium" id="caCount">0</span>
-                                    <span class="text-gray-500 ml-2" id="caPercentage">(0%)</span>
-                                </div>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span class="text-gray-600">CMA</span>
-                                <div class="flex items-center">
-                                    <span class="text-gray-900 font-medium" id="cmaCount">0</span>
-                                    <span class="text-gray-500 ml-2" id="cmaPercentage">(0%)</span>
-                                </div>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span class="text-gray-600">Other</span>
-                                <div class="flex items-center">
-                                    <span class="text-gray-900 font-medium" id="otherDesignationCount">0</span>
-                                    <span class="text-gray-500 ml-2" id="otherDesignationPercentage">(0%)</span>
-                                </div>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span class="text-gray-600">None</span>
-                                <div class="flex items-center">
-                                    <span class="text-gray-900 font-medium" id="noDesignationCount">0</span>
-                                    <span class="text-gray-500 ml-2" id="noDesignationPercentage">(0%)</span>
-                                </div>
-                            </div>
-                            <div class="pt-4 border-t border-gray-200">
-                                <div class="flex justify-between items-center">
-                                    <span class="text-gray-800 font-medium">Total Responses:</span>
-                                    <span class="text-gray-900 font-medium" id="totalDesignationResponses">0</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Provincial CPA Body -->
-                <div class="bg-white shadow overflow-hidden sm:rounded-lg">
-                    <div class="px-4 py-5 sm:px-6">
-                        <h3 class="text-lg leading-6 font-medium text-gray-900">Primary Provincial CPA Body</h3>
-                    </div>
-                    <div class="border-t border-gray-200 p-6">
-                        <div class="space-y-4" id="cpaBodyStats">
-                            <!-- Will be populated dynamically -->
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Years Since Designation -->
-                <div class="bg-white shadow overflow-hidden sm:rounded-lg">
-                    <div class="px-4 py-5 sm:px-6">
-                        <h3 class="text-lg leading-6 font-medium text-gray-900">Years Since Designation</h3>
-                    </div>
-                    <div class="border-t border-gray-200 p-6">
-                        <div class="space-y-2">
-                            <div class="flex justify-between items-center">
-                                <span class="text-gray-800 font-medium">Average Years:</span>
-                                <span id="avgYearsSince">-</span>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span class="text-gray-800 font-medium">Range:</span>
-                                <span id="yearsSinceRange">-</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Industry Type -->
-                <div class="bg-white shadow overflow-hidden sm:rounded-lg">
-                    <div class="px-4 py-5 sm:px-6">
-                        <h3 class="text-lg leading-6 font-medium text-gray-900">Industry Distribution</h3>
-                    </div>
-                    <div class="border-t border-gray-200 p-6">
-                        <div class="space-y-4" id="industryStats">
-                            <div class="flex justify-between items-center">
-                                <span class="text-gray-600">Public practice</span>
-                                <div class="flex items-center">
-                                    <span class="text-gray-900 font-medium" id="publicPracticeCount">0</span>
-                                    <span class="text-gray-500 ml-2" id="publicPracticePercentage">(0%)</span>
-                                </div>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span class="text-gray-600">Private corporation</span>
-                                <div class="flex items-center">
-                                    <span class="text-gray-900 font-medium" id="privateCorpCount">0</span>
-                                    <span class="text-gray-500 ml-2" id="privateCorpPercentage">(0%)</span>
-                                </div>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span class="text-gray-600">Publicly traded corporation</span>
-                                <div class="flex items-center">
-                                    <span class="text-gray-900 font-medium" id="publicCorpCount">0</span>
-                                    <span class="text-gray-500 ml-2" id="publicCorpPercentage">(0%)</span>
-                                </div>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span class="text-gray-600">Education</span>
-                                <div class="flex items-center">
-                                    <span class="text-gray-900 font-medium" id="educationCount">0</span>
-                                    <span class="text-gray-500 ml-2" id="educationPercentage">(0%)</span>
-                                </div>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span class="text-gray-600">Government</span>
-                                <div class="flex items-center">
-                                    <span class="text-gray-900 font-medium" id="governmentCount">0</span>
-                                    <span class="text-gray-500 ml-2" id="governmentPercentage">(0%)</span>
-                                </div>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span class="text-gray-600">Not-for-profit</span>
-                                <div class="flex items-center">
-                                    <span class="text-gray-900 font-medium" id="notForProfitCount">0</span>
-                                    <span class="text-gray-500 ml-2" id="notForProfitPercentage">(0%)</span>
-                                </div>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span class="text-gray-600">Other</span>
-                                <div class="flex items-center">
-                                    <span class="text-gray-900 font-medium" id="otherIndustryCount">0</span>
-                                    <span class="text-gray-500 ml-2" id="otherIndustryPercentage">(0%)</span>
-                                </div>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span class="text-gray-600">Unemployed</span>
-                                <div class="flex items-center">
-                                    <span class="text-gray-900 font-medium" id="unemployedCount">0</span>
-                                    <span class="text-gray-500 ml-2" id="unemployedPercentage">(0%)</span>
-                                </div>
-                            </div>
-                            <div class="pt-4 border-t border-gray-200">
-                                <div class="flex justify-between items-center">
-                                    <span class="text-gray-800 font-medium">Total Responses:</span>
-                                    <span class="text-gray-900 font-medium" id="totalIndustryResponses">0</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Position Type -->
-                <div class="bg-white shadow overflow-hidden sm:rounded-lg">
-                    <div class="px-4 py-5 sm:px-6">
-                        <h3 class="text-lg leading-6 font-medium text-gray-900">Current Position</h3>
-                    </div>
-                    <div class="border-t border-gray-200 p-6">
-                        <div class="space-y-4" id="positionStats">
-                            <!-- Will be populated dynamically -->
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Organization Size -->
-                <div class="bg-white shadow overflow-hidden sm:rounded-lg">
-                    <div class="px-4 py-5 sm:px-6">
-                        <h3 class="text-lg leading-6 font-medium text-gray-900">Organization Size</h3>
-                    </div>
-                    <div class="border-t border-gray-200 p-6">
-                        <div class="space-y-2">
-                            <div class="flex justify-between items-center">
-                                <span class="text-gray-800 font-medium">Average Size:</span>
-                                <span id="avgOrgSize">-</span>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span class="text-gray-800 font-medium">Range:</span>
-                                <span id="orgSizeRange">-</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Work Nature -->
-                <div class="bg-white shadow overflow-hidden sm:rounded-lg">
-                    <div class="px-4 py-5 sm:px-6">
-                        <h3 class="text-lg leading-6 font-medium text-gray-900">Nature of Work</h3>
-                    </div>
-                    <div class="border-t border-gray-200 p-6">
-                        <div class="space-y-4" id="workNatureStats">
-                            <div class="flex justify-between items-center">
-                                <span class="text-gray-600">Full-time</span>
-                                <div class="flex items-center">
-                                    <span class="text-gray-900 font-medium" id="fullTimeCount">0</span>
-                                    <span class="text-gray-500 ml-2" id="fullTimePercentage">(0%)</span>
-                                </div>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span class="text-gray-600">Part-time</span>
-                                <div class="flex items-center">
-                                    <span class="text-gray-900 font-medium" id="partTimeCount">0</span>
-                                    <span class="text-gray-500 ml-2" id="partTimePercentage">(0%)</span>
-                                </div>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span class="text-gray-600">Contract</span>
-                                <div class="flex items-center">
-                                    <span class="text-gray-900 font-medium" id="contractCount">0</span>
-                                    <span class="text-gray-500 ml-2" id="contractPercentage">(0%)</span>
-                                </div>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span class="text-gray-600">Unemployed</span>
-                                <div class="flex items-center">
-                                    <span class="text-gray-900 font-medium" id="unemployedWorkCount">0</span>
-                                    <span class="text-gray-500 ml-2" id="unemployedWorkPercentage">(0%)</span>
-                                </div>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span class="text-gray-600">Retired</span>
-                                <div class="flex items-center">
-                                    <span class="text-gray-900 font-medium" id="retiredCount">0</span>
-                                    <span class="text-gray-500 ml-2" id="retiredPercentage">(0%)</span>
-                                </div>
-                            </div>
-                            <div class="pt-4 border-t border-gray-200">
-                                <div class="flex justify-between items-center">
-                                    <span class="text-gray-800 font-medium">Total Responses:</span>
-                                    <span class="text-gray-900 font-medium" id="totalWorkNatureResponses">0</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Yearly Compensation -->
-                <div class="bg-white shadow overflow-hidden sm:rounded-lg">
-                    <div class="px-4 py-5 sm:px-6">
-                        <h3 class="text-lg leading-6 font-medium text-gray-900">Yearly Compensation</h3>
-                    </div>
-                    <div class="border-t border-gray-200 p-6">
-                        <div class="space-y-2">
-                            <div class="flex justify-between items-center">
-                                <span class="text-gray-800 font-medium">Average:</span>
-                                <span id="avgCompensation">-</span>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span class="text-gray-800 font-medium">Range:</span>
-                                <span id="compensationRange">-</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Job Title -->
-                <div class="bg-white shadow overflow-hidden sm:rounded-lg">
-                    <div class="px-4 py-5 sm:px-6">
-                        <h3 class="text-lg leading-6 font-medium text-gray-900">Job Title Distribution</h3>
-                    </div>
-                    <div class="border-t border-gray-200 p-6">
-                        <div class="space-y-4" id="jobTitleStats">
-                            <!-- Will be populated dynamically -->
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Number of Supervised Individuals -->
-                <div class="bg-white shadow overflow-hidden sm:rounded-lg">
-                    <div class="px-4 py-5 sm:px-6">
-                        <h3 class="text-lg leading-6 font-medium text-gray-900">Supervision Responsibility</h3>
-                    </div>
-                    <div class="border-t border-gray-200 p-6">
-                        <div class="space-y-2">
-                            <div class="flex justify-between items-center">
-                                <span class="text-gray-800 font-medium">Average Number of Supervised Staff:</span>
-                                <span id="avgSupervised">-</span>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span class="text-gray-800 font-medium">Range:</span>
-                                <span id="supervisedRange">-</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <script>
-                // Logout functionality
-                document.getElementById('logoutBtn').addEventListener('click', async () => {
-                    try {
-                        const response = await fetch('/api/logout', {
-                            method: 'POST'
-                        });
-                        if (response.ok) {
-                            window.location.href = '/login';
-                        }
-                    } catch (error) {
-                        console.error('Logout failed:', error);
-                    }
+    <script>
+        // Logout functionality
+        document.getElementById('logoutBtn').addEventListener('click', async () => {
+            try {
+                const response = await fetch('/api/logout', {
+                    method: 'POST'
                 });
+                if (response.ok) {
+                    window.location.href = '/login';
+                }
+            } catch (error) {
+                console.error('Logout failed:', error);
+            }
+        });
 
-                function calculateStats(data, field) {
-                    const counts = {};
-                    let total = 0;
+        function calculateStats(data, field) {
+            const counts = {};
+            let total = 0;
+            
+            data.forEach(item => {
+                const value = item[field];
+                counts[value] = (counts[value] || 0) + 1;
+                total++;
+            });
+
+            return Object.entries(counts).map(([key, count]) => ({
+                label: key,
+                count,
+                percentage: ((count / total) * 100).toFixed(1)
+            }));
+        }
+
+        function updateStatSection(elementId, stats) {
+            const container = document.getElementById(elementId);
+            container.innerHTML = stats.map(stat => `
+                <div class="flex justify-between items-center">
+                    <span class="text-gray-600">${stat.label}</span>
+                    <div class="flex items-center">
+                        <span class="text-gray-900 font-medium">${stat.count}</span>
+                        <span class="text-gray-500 ml-2">(${stat.percentage}%)</span>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function calculateNumericStats(data, field) {
+            const values = data.map(item => Number(item[field])).filter(val => !isNaN(val));
+            const avg = values.reduce((a, b) => a + b, 0) / values.length;
+            const min = Math.min(...values);
+            const max = Math.max(...values);
+            return { avg, min, max };
+        }
+
+        async function loadDashboardData() {
+            try {
+                const response = await fetch('/api/get-assessments');
+                const data = await response.json();
+                
+                if (data.success) {
+                    document.getElementById('totalResponses').textContent = data.assessments.length;
+                    document.getElementById('totalCPA').textContent = data.assessments.filter(assessment => assessment.personal_info.cpa_member === 'Yes').length;
+                    document.getElementById('totalNonCPA').textContent = data.assessments.filter(assessment => assessment.personal_info.cpa_member === 'No').length;
                     
-                    data.forEach(item => {
-                        const value = item[field];
-                        counts[value] = (counts[value] || 0) + 1;
-                        total++;
-                    });
+                    const responsesTable = document.getElementById('responsesTable');
+                    responsesTable.innerHTML = data.assessments
+                        .map(assessment => `
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                    ${new Date(assessment.created_at).toLocaleDateString()}
+                                </td>
+                                <td class="px-6 py-4 text-sm text-gray-500">
+                                    <div class="text-sm text-gray-900">${assessment.personal_info.job_title}</div>
+                                    <div class="text-sm text-gray-500">${assessment.personal_info.gender}</div>
+                                </td>
+                            </tr>
+                        `)
+                        .join('');
 
-                    return Object.entries(counts).map(([key, count]) => ({
-                        label: key,
-                        count,
-                        percentage: ((count / total) * 100).toFixed(1)
-                    }));
-                }
+                    const genderCounts = {
+                            male: data.assessments.filter(a => a.personal_info.gender === 'Male').length,
+                            female: data.assessments.filter(a => a.personal_info.gender === 'Female').length,
+                            other: data.assessments.filter(a => a.personal_info.gender === 'Other').length,
+                            preferNot: data.assessments.filter(a => a.personal_info.gender === 'Prefer not to disclose').length
+                        };
 
-                function updateStatSection(elementId, stats) {
-                    const container = document.getElementById(elementId);
-                    container.innerHTML = stats.map(stat => `
-                        <div class="flex justify-between items-center">
-                            <span class="text-gray-600">${stat.label}</span>
-                            <div class="flex items-center">
-                                <span class="text-gray-900 font-medium">${stat.count}</span>
-                                <span class="text-gray-500 ml-2">(${stat.percentage}%)</span>
-                            </div>
-                        </div>
-                    `).join('');
-                }
+                        const total = Object.values(genderCounts).reduce((a, b) => a + b, 0);
 
-                function calculateNumericStats(data, field) {
-                    const values = data.map(item => Number(item[field])).filter(val => !isNaN(val));
-                    const avg = values.reduce((a, b) => a + b, 0) / values.length;
-                    const min = Math.min(...values);
-                    const max = Math.max(...values);
-                    return { avg, min, max };
-                }
-
-                async function loadDashboardData() {
-                    try {
-                        const response = await fetch('/api/get-assessments');
-                        const data = await response.json();
+                        // Update the DOM with counts and percentages
+                        document.getElementById('maleCount').textContent = genderCounts.male;
+                        document.getElementById('femaleCount').textContent = genderCounts.female;
+                        document.getElementById('otherCount').textContent = genderCounts.other;
+                        document.getElementById('preferNotCount').textContent = genderCounts.preferNot;
                         
-                        if (data.success) {
-                            document.getElementById('totalResponses').textContent = data.assessments.length;
-                            document.getElementById('totalCPA').textContent = data.assessments.filter(assessment => assessment.personal_info.cpa_member === 'Yes').length;
-                            document.getElementById('totalNonCPA').textContent = data.assessments.filter(assessment => assessment.personal_info.cpa_member === 'No').length;
-                            
-                            const responsesTable = document.getElementById('responsesTable');
-                            responsesTable.innerHTML = data.assessments
-                                .map(assessment => `
-                                    <tr>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                            ${new Date(assessment.created_at).toLocaleDateString()}
-                                        </td>
-                                        <td class="px-6 py-4 text-sm text-gray-500">
-                                            <div class="text-sm text-gray-900">${assessment.personal_info.job_title}</div>
-                                            <div class="text-sm text-gray-500">${assessment.personal_info.gender}</div>
-                                        </td>
-                                    </tr>
-                                `)
-                                .join('');
+                        document.getElementById('malePercentage').textContent = 
+                            `(${((genderCounts.male / total) * 100).toFixed(1)}%)`;
+                        document.getElementById('femalePercentage').textContent = 
+                            `(${((genderCounts.female / total) * 100).toFixed(1)}%)`;
+                        document.getElementById('otherPercentage').textContent = 
+                            `(${((genderCounts.other / total) * 100).toFixed(1)}%)`;
+                        document.getElementById('preferNotPercentage').textContent = 
+                            `(${((genderCounts.preferNot / total) * 100).toFixed(1)}%)`;
+                        
+                        document.getElementById('totalGenderResponses').textContent = total;
 
-                            const genderCounts = {
-                                    male: data.assessments.filter(a => a.personal_info.gender === 'Male').length,
-                                    female: data.assessments.filter(a => a.personal_info.gender === 'Female').length,
-                                    other: data.assessments.filter(a => a.personal_info.gender === 'Other').length,
-                                    preferNot: data.assessments.filter(a => a.personal_info.gender === 'Prefer not to disclose').length
-                                };
+                    // Update all statistical sections
+                    updateStatSection('languageStats', calculateStats(data.assessments, 'preferred_language'));
+                    updateStatSection('designationStats', calculateStats(data.assessments, 'legacy_designation'));
+                    updateStatSection('cpaBodyStats', calculateStats(data.assessments, 'provincial_cpa_body'));
+                    updateStatSection('industryStats', calculateStats(data.assessments, 'industry_type'));
+                    updateStatSection('positionStats', calculateStats(data.assessments, 'current_position'));
+                    updateStatSection('workNatureStats', calculateStats(data.assessments, 'work_nature'));
+                    updateStatSection('jobTitleStats', calculateStats(data.assessments, 'job_title'));
 
-                                const total = Object.values(genderCounts).reduce((a, b) => a + b, 0);
+                    // Update numeric statistics
+                    const birthYearStats = calculateNumericStats(data.assessments, 'birth_year');
+                    document.getElementById('avgBirthYear').textContent = birthYearStats.avg.toFixed(0);
+                    document.getElementById('birthYearRange').textContent = 
+                        `${birthYearStats.min} - ${birthYearStats.max}`;
 
-                                // Update the DOM with counts and percentages
-                                document.getElementById('maleCount').textContent = genderCounts.male;
-                                document.getElementById('femaleCount').textContent = genderCounts.female;
-                                document.getElementById('otherCount').textContent = genderCounts.other;
-                                document.getElementById('preferNotCount').textContent = genderCounts.preferNot;
-                                
-                                document.getElementById('malePercentage').textContent = 
-                                    `(${((genderCounts.male / total) * 100).toFixed(1)}%)`;
-                                document.getElementById('femalePercentage').textContent = 
-                                    `(${((genderCounts.female / total) * 100).toFixed(1)}%)`;
-                                document.getElementById('otherPercentage').textContent = 
-                                    `(${((genderCounts.other / total) * 100).toFixed(1)}%)`;
-                                document.getElementById('preferNotPercentage').textContent = 
-                                    `(${((genderCounts.preferNot / total) * 100).toFixed(1)}%)`;
-                                
-                                document.getElementById('totalGenderResponses').textContent = total;
+                    const yearsSinceStats = calculateNumericStats(data.assessments, 'years_since_designation');
+                    document.getElementById('avgYearsSince').textContent = yearsSinceStats.avg.toFixed(1);
+                    document.getElementById('yearsSinceRange').textContent = 
+                        `${yearsSinceStats.min} - ${yearsSinceStats.max}`;
 
-                            // Update all statistical sections
-                            updateStatSection('languageStats', calculateStats(data.assessments, 'preferred_language'));
-                            updateStatSection('designationStats', calculateStats(data.assessments, 'legacy_designation'));
-                            updateStatSection('cpaBodyStats', calculateStats(data.assessments, 'provincial_cpa_body'));
-                            updateStatSection('industryStats', calculateStats(data.assessments, 'industry_type'));
-                            updateStatSection('positionStats', calculateStats(data.assessments, 'current_position'));
-                            updateStatSection('workNatureStats', calculateStats(data.assessments, 'work_nature'));
-                            updateStatSection('jobTitleStats', calculateStats(data.assessments, 'job_title'));
+                    const orgSizeStats = calculateNumericStats(data.assessments, 'organization_size');
+                    document.getElementById('avgOrgSize').textContent = orgSizeStats.avg.toFixed(0);
+                    document.getElementById('orgSizeRange').textContent = 
+                        `${orgSizeStats.min} - ${orgSizeStats.max}`;
 
-                            // Update numeric statistics
-                            const birthYearStats = calculateNumericStats(data.assessments, 'birth_year');
-                            document.getElementById('avgBirthYear').textContent = birthYearStats.avg.toFixed(0);
-                            document.getElementById('birthYearRange').textContent = 
-                                `${birthYearStats.min} - ${birthYearStats.max}`;
+                    const compensationStats = calculateNumericStats(data.assessments, 'yearly_compensation');
+                    document.getElementById('avgCompensation').textContent = 
+                        `$${compensationStats.avg.toFixed(2)}`;
+                    document.getElementById('compensationRange').textContent = 
+                        `$${compensationStats.min} - $${compensationStats.max}`;
 
-                            const yearsSinceStats = calculateNumericStats(data.assessments, 'years_since_designation');
-                            document.getElementById('avgYearsSince').textContent = yearsSinceStats.avg.toFixed(1);
-                            document.getElementById('yearsSinceRange').textContent = 
-                                `${yearsSinceStats.min} - ${yearsSinceStats.max}`;
-
-                            const orgSizeStats = calculateNumericStats(data.assessments, 'organization_size');
-                            document.getElementById('avgOrgSize').textContent = orgSizeStats.avg.toFixed(0);
-                            document.getElementById('orgSizeRange').textContent = 
-                                `${orgSizeStats.min} - ${orgSizeStats.max}`;
-
-                            const compensationStats = calculateNumericStats(data.assessments, 'yearly_compensation');
-                            document.getElementById('avgCompensation').textContent = 
-                                `$${compensationStats.avg.toFixed(2)}`;
-                            document.getElementById('compensationRange').textContent = 
-                                `$${compensationStats.min} - $${compensationStats.max}`;
-
-                            const supervisedStats = calculateNumericStats(data.assessments, 'supervised_individuals');
-                            document.getElementById('avgSupervised').textContent = supervisedStats.avg.toFixed(1);
-                            document.getElementById('supervisedRange').textContent = 
-                                `${supervisedStats.min} - ${supervisedStats.max}`;
-                        }
-                    } catch (error) {
-                        console.error('Error loading dashboard data:', error);
-                    }
+                    const supervisedStats = calculateNumericStats(data.assessments, 'supervised_individuals');
+                    document.getElementById('avgSupervised').textContent = supervisedStats.avg.toFixed(1);
+                    document.getElementById('supervisedRange').textContent = 
+                        `${supervisedStats.min} - ${supervisedStats.max}`;
                 }
+            } catch (error) {
+                console.error('Error loading dashboard data:', error);
+            }
+        }
 
-                // Load data when page loads
-                document.addEventListener('DOMContentLoaded', loadDashboardData);
-            </script>
-        </div>
-    </main>
+        // Load data when page loads
+        document.addEventListener('DOMContentLoaded', loadDashboardData);
+
+        function toggleSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            const sectionTitle = section.previousElementSibling;
+            
+            // Toggle the active class on the questions container
+            section.classList.toggle('active');
+            
+            // Toggle the active class on the section title (for chevron rotation)
+            sectionTitle.classList.toggle('active');
+        }
+
+        // Add smooth scrolling to anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 </html> 

@@ -3,21 +3,158 @@
 <head>
     <style>
         /* ... existing styles ... */
+        .dashboard {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 300px;
+            background-color: #f3f4f6;
+            padding: 1rem;
+            border-right: 1px solid #e5e7eb;
+            height: 100vh;
+            position: fixed;
+            overflow-y: auto;
+        }
+
+        .main-content {
+            margin-left: 300px;
+            flex: 1;
+            padding: 1rem;
+        }
+
+        .nav-section {
+            margin-bottom: 1rem;
+        }
+
+        .nav-section-title {
+            font-weight: 600;
+            color: #374151;
+            padding: 0.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-section-title:hover {
+            background-color: #e5e7eb;
+            border-radius: 0.375rem;
+        }
+
+        .nav-questions {
+            margin-left: 1rem;
+            display: none;
+        }
+
+        .nav-questions.active {
+            display: block;
+        }
+
+        .nav-question {
+            padding: 0.5rem;
+            color: #6b7280;
+            text-decoration: none;
+            display: block;
+            font-size: 0.875rem;
+        }
+
+        .nav-question:hover {
+            color: #374151;
+            background-color: #e5e7eb;
+            border-radius: 0.375rem;
+        }
+
+        .chevron {
+            transition: transform 0.2s;
+        }
+
+        .nav-section-title.active .chevron {
+            transform: rotate(180deg);
+        }
     </style>
 </head>
 <body>
     <div class="dashboard">
-        <div class="header">
-            <h1>Professional Profile Dashboard</h1>
-            <p>CPA Member • CMA Legacy Designation • Education Industry</p>
+        <div class="sidebar">
+            <nav>
+                <div class="nav-section">
+                    <div class="nav-section-title" onclick="toggleSection('sectionA')">
+                        Section A: Personal Information
+                        <svg class="chevron" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                    <div class="nav-questions" id="sectionA">
+                        <a href="#gender" class="nav-question">Gender</a>
+                        <a href="#birth-year" class="nav-question">Birth Year</a>
+                        <a href="#language" class="nav-question">Preferred Language</a>
+                        <a href="#designation" class="nav-question">Legacy Designation</a>
+                        <a href="#cpa-body" class="nav-question">Provincial CPA Body</a>
+                        <a href="#years-designation" class="nav-question">Years Since Designation</a>
+                        <a href="#industry" class="nav-question">Industry Type</a>
+                        <a href="#position" class="nav-question">Current Position</a>
+                        <a href="#org-size" class="nav-question">Organization Size</a>
+                        <a href="#work-nature" class="nav-question">Nature of Work</a>
+                        <a href="#compensation" class="nav-question">Yearly Compensation</a>
+                        <a href="#job-title" class="nav-question">Job Title</a>
+                        <a href="#supervision" class="nav-question">Supervision Responsibility</a>
+                    </div>
+                </div>
+
+                <div class="nav-section">
+                    <div class="nav-section-title" onclick="toggleSection('sectionB')">
+                        Section B: Career Satisfaction
+                        <svg class="chevron" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                    <div class="nav-questions" id="sectionB">
+                        <a href="#career-success" class="nav-question">Career Success</a>
+                        <a href="#job-satisfaction" class="nav-question">Job Satisfaction</a>
+                    </div>
+                </div>
+
+                <div class="nav-section">
+                    <div class="nav-section-title" onclick="toggleSection('sectionC')">
+                        Section C: Emotional Intelligence
+                        <svg class="chevron" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                    <div class="nav-questions" id="sectionC">
+                        <a href="#emotional-awareness" class="nav-question">Emotional Awareness</a>
+                        <a href="#emotional-management" class="nav-question">Emotional Management</a>
+                    </div>
+                </div>
+            </nav>
         </div>
-        
-        <div id="assessments-container" class="grid">
-            <!-- Participant responses will be inserted here -->
+
+        <div class="main-content">
+            <div class="header">
+                <h1>Professional Profile Dashboard</h1>
+                <p>CPA Member • CMA Legacy Designation • Education Industry</p>
+            </div>
+            
+            <div id="assessments-container" class="grid">
+                <!-- Participant responses will be inserted here -->
+            </div>
         </div>
     </div>
 
     <script>
+        function toggleSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            const sectionTitle = section.previousElementSibling;
+            
+            // Toggle the active class on the questions container
+            section.classList.toggle('active');
+            
+            // Toggle the active class on the section title (for chevron rotation)
+            sectionTitle.classList.toggle('active');
+        }
+
         async function fetchAssessments() {
             try {
                 const response = await fetch('/api/get-assessments');
@@ -56,6 +193,14 @@
 
         // Fetch assessments when the page loads
         window.onload = fetchAssessments;
+
+        // Handle hash changes to scroll to the correct section
+        window.addEventListener('hashchange', function() {
+            const element = document.querySelector(window.location.hash);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
     </script>
 </body>
 </html>
