@@ -460,13 +460,13 @@
                         </div>
 
                         <!-- Provincial CPA Body -->
-                        <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+                        <div id="cpa-body-stats" class="bg-white shadow overflow-hidden sm:rounded-lg">
                             <div class="px-4 py-5 sm:px-6">
                                 <h3 class="text-lg leading-6 font-medium text-gray-900">Primary Provincial CPA Body</h3>
                             </div>
                             <div class="border-t border-gray-200 p-6">
-                                <div class="space-y-4" id="cpaBodyStats">
-                                    <!-- Will be populated dynamically -->
+                                <div class="space-y-4" id="cpaBodyResponses">
+                                  
                                 </div>
                             </div>
                         </div>
@@ -4922,9 +4922,32 @@
                         document.getElementById('nonePercentage').textContent = 
                             `(${((designationCounts.none / designationTotal) * 100).toFixed(1)}%)`;
 
+
+                            //CPA Body Stats
+                        const cpaBodyResponses = data.assessments.filter(a => a.personal_info?.primary_cpa_body != null).map(a => a.personal_info.primary_cpa_body);
+                        cpaBodyResponses.forEach(response => {
+                            const li = document.createElement('li');
+                            li.textContent = response;
+                            document.getElementById('cpaBodyResponses').appendChild(li);
+                        });
+
+                        document.getElementById('cpaBodyCount').textContent = cpaBodyResponses.length;
+                        
+
+                        document.getElementById('cgaPercentage').textContent = 
+                            `(${((designationCounts.cga / designationTotal) * 100).toFixed(1)}%)`;
+                        document.getElementById('caPercentage').textContent = 
+                            `(${((designationCounts.ca / designationTotal) * 100).toFixed(1)}%)`;
+                        document.getElementById('cmaPercentage').textContent = 
+                            `(${((designationCounts.cma / designationTotal) * 100).toFixed(1)}%)`;
+                        document.getElementById('otherPercentage').textContent = 
+                            `(${((designationCounts.other / designationTotal) * 100).toFixed(1)}%)`;
+                        document.getElementById('nonePercentage').textContent = 
+                            `(${((designationCounts.none / designationTotal) * 100).toFixed(1)}%)`;
+
                     
               
-                    updateStatSection('cpaBodyStats', calculateStats(data.assessments, 'provincial_cpa_body'));
+                  
                     updateStatSection('industryStats', calculateStats(data.assessments, 'industry_type'));
                     updateStatSection('positionStats', calculateStats(data.assessments, 'current_position'));
                     updateStatSection('workNatureStats', calculateStats(data.assessments, 'work_nature'));
