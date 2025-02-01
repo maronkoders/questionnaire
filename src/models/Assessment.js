@@ -22,7 +22,8 @@ const careerSatisfactionSchema = new mongoose.Schema({
     career_progress_income: Number,
     career_progress_advancement: Number,
     career_progress_skills: Number,
-    career_progress_work_life: Number
+    career_progress_work_life: Number,
+    career_thoughts: String,
 });
 
 const emotionalIntelligenceSchema = new mongoose.Schema({
