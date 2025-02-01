@@ -5215,7 +5215,7 @@
                         document.getElementById('educationCount').textContent = industryCounts.education;
                         document.getElementById('governmentCount').textContent = industryCounts.government;
                         document.getElementById('notForProfitCount').textContent = industryCounts.notForProfit;
-                        document.getElementById('otherCount').textContent = industryCounts.other;
+                        document.getElementById('otherIndustryCount').textContent = industryCounts.other;
                         document.getElementById('unemployedCount').textContent = industryCounts.unemployed;
 
 
@@ -5229,8 +5229,11 @@
                             `(${((industryCounts.education / industryTotal) * 100).toFixed(1)}%)`;
                         document.getElementById('governmentPercentage').textContent = 
                             `(${((industryCounts.government / industryTotal) * 100).toFixed(1)}%)`;
+                        document.getElementById('otherIndustryPercentage').textContent = 
+                            `(${((industryCounts.other / industryTotal) * 100).toFixed(1)}%)`;
                         document.getElementById('notForProfitPercentage').textContent = 
                             `(${((industryCounts.notForProfit / industryTotal) * 100).toFixed(1)}%)`;
+
 
                    document.getElementById('totalIndustryResponses').textContent = industryTotal;         
 
