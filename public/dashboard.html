@@ -448,8 +448,8 @@
                                     <div class="flex justify-between items-center">
                                         <span class="text-gray-600">Other</span>
                                         <div class="flex items-center">
-                                            <span class="text-gray-900 font-medium" id="otherCount">0</span>
-                                            <span class="text-gray-500 ml-2" id="otherPercentage">(0%)</span>
+                                            <span class="text-gray-900 font-medium" id="otherDesignationCount">0</span>
+                                            <span class="text-gray-500 ml-2" id="otherDesignationPercentage">(0%)</span>
                                         </div>
                                     </div>
                                     <div class="flex justify-between items-center">
@@ -5168,7 +5168,7 @@
                         document.getElementById('caCount').textContent = designationCounts.ca;
                         document.getElementById('cmaCount').textContent = designationCounts.cma;
                         document.getElementById('noneCount').textContent = designationCounts.none;
-                        document.getElementById('otherCount').textContent = designationCounts.other;
+                        document.getElementById('otherDesignationCount').textContent = designationCounts.other;
                         
 
                         document.getElementById('cgaPercentage').textContent = 
@@ -5177,7 +5177,7 @@
                             `(${((designationCounts.ca / designationTotal) * 100).toFixed(1)}%)`;
                         document.getElementById('cmaPercentage').textContent = 
                             `(${((designationCounts.cma / designationTotal) * 100).toFixed(1)}%)`;
-                        document.getElementById('otherPercentage').textContent = 
+                        document.getElementById('otherDesignationPercentage').textContent = 
                             `(${((designationCounts.other / designationTotal) * 100).toFixed(1)}%)`;
                         document.getElementById('nonePercentage').textContent = 
                             `(${((designationCounts.none / designationTotal) * 100).toFixed(1)}%)`;
