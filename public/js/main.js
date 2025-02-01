@@ -224,6 +224,8 @@ function submitAssessment() {
         }
     });
 
+    assessmentData.career_satisfaction.career_thoughts = document.querySelector('input[name="career_thoughts"]')?.value || null;
+
     // Collect Emotional Intelligence
     for (let i = 1; i <= 70; i++) {
         const questionName = document.querySelector(`input[name$="_${i}"]:checked`)?.name;

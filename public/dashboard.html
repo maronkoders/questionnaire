@@ -5178,6 +5178,13 @@
                 updateSatisfactionStats(data, 'career_progress_advancement', satisfactionResponses);
                 updateSatisfactionStats(data, 'career_progress_skills', satisfactionResponses);
                 updateSatisfactionStats(data, 'career_progress_work_life', satisfactionResponses);
+
+                const openEndedResponses = data.assessments.filter(a => a.personal_info?.staff_number != null).map(a => a.personal_info.staff_number);
+                        orgSizeResponses.forEach(response => {
+                            const li = document.createElement('li');
+                            li.textContent = response;
+                            document.getElementById('orgSizeResponses').appendChild(li);
+                        });
                     
                 }
             } catch (error) {
@@ -5187,8 +5194,6 @@
 
         // Load data when page loads
         document.addEventListener('DOMContentLoaded', loadDashboardData);
-
-        
 
         function toggleSection(sectionId) {
             const section = document.getElementById(sectionId);
