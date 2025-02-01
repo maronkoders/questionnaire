@@ -116,6 +116,12 @@
                     <div class="nav-questions" id="sectionB">
                         <a href="#career-success-stats" class="nav-question">Career Success</a>
                         <a href="#job-satisfaction-stats" class="nav-question">Job Satisfaction</a>
+                        <a href="#income-goals-stats" class="nav-question">Income Goals</a>
+                        <a href="#advancement-goals-stats" class="nav-question">Advancement Goals</a>
+                        <a href="#skills-development-stats" class="nav-question">Skills Development</a>
+                        <a href="#work-life-balance-stats" class="nav-question">Work-Life Balance</a> 
+                        <a href="#open-ended-responses" class="nav-question">Career Progress</a>
+                                              
                     </div>
                 </div>
 
@@ -783,53 +789,60 @@
                         </div>
 
 
-                        <h5>Section B: Career Satisfaction</h1>
+                        <h1 class="text-2xl font-bold">Section B: Career Satisfaction</h1>
+
                         <!-- Career Success -->
-                        <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+                        <div id="career-success-stats" class="bg-white shadow overflow-hidden sm:rounded-lg">
                             <div class="px-4 py-5 sm:px-6">
                                 <h3 class="text-lg leading-6 font-medium text-gray-900">I am satisfied with the success I have achieved in my career.</h3>
                             </div>
+
                             <div class="border-t border-gray-200 p-6">
                                 <div class="space-y-4" id="careerSuccessStats">
                                     <div class="flex justify-between items-center">
                                         <span class="text-gray-600">Strongly disagree</span>
                                         <div class="flex items-center">
-                                            <span class="text-gray-900 font-medium" id="stronglyDisagreeCount">0</span>
-                                            <span class="text-gray-500 ml-2" id="stronglyDisagreePercentage">(0%)</span>
+                                            <span class="text-gray-900 font-medium" id="career_success1Count">0</span>
+                                            <span class="text-gray-500 ml-2" id="career_success1Percentage">(0%)</span>
                                         </div>
                                     </div>
                                     <div class="flex justify-between items-center">
                                         <span class="text-gray-600">Disagree to some extent</span>
                                         <div class="flex items-center">
-                                            <span class="text-gray-900 font-medium" id="disagreeCount">0</span>
-                                            <span class="text-gray-500 ml-2" id="disagreePercentage">(0%)</span>
+                                            <span class="text-gray-900 font-medium" id="career_success2Count">0</span>
+                                            <span class="text-gray-500 ml-2" id="career_success2Percentage">(0%)</span>
                                         </div>
                                     </div>
+
+
                                     <div class="flex justify-between items-center">
                                         <span class="text-gray-600">Uncertain</span>
                                         <div class="flex items-center">
-                                            <span class="text-gray-900 font-medium" id="uncertainCount">0</span>
-                                            <span class="text-gray-500 ml-2" id="uncertainPercentage">(0%)</span>
+                                            <span class="text-gray-900 font-medium" id="career_success3Count">0</span>
+                                            <span class="text-gray-500 ml-2" id="career_success3Percentage">(0%)</span>
                                         </div>
                                     </div>
+
                                     <div class="flex justify-between items-center">
                                         <span class="text-gray-600">Agree to some extent</span>
                                         <div class="flex items-center">
-                                            <span class="text-gray-900 font-medium" id="agreeCount">0</span>
-                                            <span class="text-gray-500 ml-2" id="agreePercentage">(0%)</span>
+                                            <span class="text-gray-900 font-medium" id="career_success4Count">0</span>
+                                            <span class="text-gray-500 ml-2" id="career_success4Percentage">(0%)</span>
                                         </div>
                                     </div>
+
                                     <div class="flex justify-between items-center">
                                         <span class="text-gray-600">Strongly agree</span>
                                         <div class="flex items-center">
-                                            <span class="text-gray-900 font-medium" id="stronglyAgreeCount">0</span>
-                                            <span class="text-gray-500 ml-2" id="stronglyAgreePercentage">(0%)</span>
+                                            <span class="text-gray-900 font-medium" id="career_success5Count">0</span>
+                                            <span class="text-gray-500 ml-2" id="career_success5Percentage">(0%)</span>
                                         </div>
                                     </div>
+
                                     <div class="pt-4 border-t border-gray-200">
                                         <div class="flex justify-between items-center">
                                             <span class="text-gray-800 font-medium">Total Responses:</span>
-                                            <span class="text-gray-900 font-medium" id="totalSatisfactionResponses">0</span>
+                                            <span class="text-gray-900 font-medium" id="totalcareer_successResponses">0</span>
                                         </div>
                                     </div>
                                 </div>
@@ -837,166 +850,188 @@
                         </div>
 
                         <!-- Career Goals Progress -->
-                        <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+                        <div id="job-satisfaction-stats" class="bg-white shadow overflow-hidden sm:rounded-lg">
                             <div class="px-4 py-5 sm:px-6">
                                 <h3 class="text-lg leading-6 font-medium text-gray-900">I am satisfied with the progress I have made towards meeting my overall career goals.</h3>
                             </div>
+
                             <div class="border-t border-gray-200 p-6">
                                 <div class="space-y-4" id="careerGoalsStats">
                                     <div class="flex justify-between items-center">
                                         <span class="text-gray-600">Strongly disagree</span>
                                         <div class="flex items-center">
-                                            <span class="text-gray-900 font-medium" id="goalsStronglyDisagreeCount">0</span>
-                                            <span class="text-gray-500 ml-2" id="goalsStronglyDisagreePercentage">(0%)</span>
+                                            <span class="text-gray-900 font-medium" id="career_progress_overall1Count">0</span>
+                                            <span class="text-gray-500 ml-2" id="career_progress_overall1Percentage">(0%)</span>
                                         </div>
                                     </div>
+
                                     <div class="flex justify-between items-center">
                                         <span class="text-gray-600">Disagree to some extent</span>
                                         <div class="flex items-center">
-                                            <span class="text-gray-900 font-medium" id="goalsDisagreeCount">0</span>
-                                            <span class="text-gray-500 ml-2" id="goalsDisagreePercentage">(0%)</span>
+                                            <span class="text-gray-900 font-medium" id="career_progress_overall2Count">0</span>
+                                            <span class="text-gray-500 ml-2" id="career_progress_overall2Percentage">(0%)</span>
                                         </div>
                                     </div>
+
                                     <div class="flex justify-between items-center">
                                         <span class="text-gray-600">Uncertain</span>
                                         <div class="flex items-center">
-                                            <span class="text-gray-900 font-medium" id="goalsUncertainCount">0</span>
-                                            <span class="text-gray-500 ml-2" id="goalsUncertainPercentage">(0%)</span>
+                                            <span class="text-gray-900 font-medium" id="career_progress_overall3Count">0</span>
+                                            <span class="text-gray-500 ml-2" id="career_progress_overall3Percentage">(0%)</span>
                                         </div>
                                     </div>
+
                                     <div class="flex justify-between items-center">
                                         <span class="text-gray-600">Agree to some extent</span>
                                         <div class="flex items-center">
-                                            <span class="text-gray-900 font-medium" id="goalsAgreeCount">0</span>
-                                            <span class="text-gray-500 ml-2" id="goalsAgreePercentage">(0%)</span>
+                                            <span class="text-gray-900 font-medium" id="career_progress_overall4Count">0</span>
+                                            <span class="text-gray-500 ml-2" id="career_progress_overall4Percentage">(0%)</span>
                                         </div>
                                     </div>
                                     <div class="flex justify-between items-center">
+
                                         <span class="text-gray-600">Strongly agree</span>
                                         <div class="flex items-center">
-                                            <span class="text-gray-900 font-medium" id="goalsStronglyAgreeCount">0</span>
-                                            <span class="text-gray-500 ml-2" id="goalsStronglyAgreePercentage">(0%)</span>
+                                            <span class="text-gray-900 font-medium" id="career_progress_overall5Count">0</span>
+                                            <span class="text-gray-500 ml-2" id="career_progress_overall5Percentage">(0%)</span>
                                         </div>
                                     </div>
                                     <div class="pt-4 border-t border-gray-200">
+
                                         <div class="flex justify-between items-center">
                                             <span class="text-gray-800 font-medium">Total Responses:</span>
-                                            <span class="text-gray-900 font-medium" id="totalGoalsResponses">0</span>
+                                            <span class="text-gray-900 font-medium" id="totalcareer_progress_overallResponses">0</span>
                                         </div>
                                     </div>
                                 </div>
+
                             </div>
                         </div>
 
                         <!-- Income Goals -->
-                        <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+                        <div id="income-goals-stats" class="bg-white shadow overflow-hidden sm:rounded-lg">
                             <div class="px-4 py-5 sm:px-6">
                                 <h3 class="text-lg leading-6 font-medium text-gray-900">I am satisfied with the progress I have made towards meeting my goals for income.</h3>
                             </div>
+
                             <div class="border-t border-gray-200 p-6">
                                 <div class="space-y-4" id="incomeGoalsStats">
                                     <div class="flex justify-between items-center">
                                         <span class="text-gray-600">Strongly disagree</span>
                                         <div class="flex items-center">
-                                            <span class="text-gray-900 font-medium" id="incomeStronglyDisagreeCount">0</span>
-                                            <span class="text-gray-500 ml-2" id="incomeStronglyDisagreePercentage">(0%)</span>
+                                            <span class="text-gray-900 font-medium" id="career_progress_income1Count">0</span>
+                                            <span class="text-gray-500 ml-2" id="career_progress_income1Percentage">(0%)</span>
                                         </div>
                                     </div>
+
                                     <div class="flex justify-between items-center">
                                         <span class="text-gray-600">Disagree to some extent</span>
                                         <div class="flex items-center">
-                                            <span class="text-gray-900 font-medium" id="incomeDisagreeCount">0</span>
-                                            <span class="text-gray-500 ml-2" id="incomeDisagreePercentage">(0%)</span>
+                                            <span class="text-gray-900 font-medium" id="career_progress_income2Count">0</span>
+                                            <span class="text-gray-500 ml-2" id="career_progress_income2Percentage">(0%)</span>
                                         </div>
                                     </div>
                                     <div class="flex justify-between items-center">
+
                                         <span class="text-gray-600">Uncertain</span>
                                         <div class="flex items-center">
-                                            <span class="text-gray-900 font-medium" id="incomeUncertainCount">0</span>
-                                            <span class="text-gray-500 ml-2" id="incomeUncertainPercentage">(0%)</span>
+                                            <span class="text-gray-900 font-medium" id="career_progress_income3Count">0</span>
+                                            <span class="text-gray-500 ml-2" id="career_progress_income3Percentage">(0%)</span>
                                         </div>
                                     </div>
+
                                     <div class="flex justify-between items-center">
                                         <span class="text-gray-600">Agree to some extent</span>
                                         <div class="flex items-center">
-                                            <span class="text-gray-900 font-medium" id="incomeAgreeCount">0</span>
-                                            <span class="text-gray-500 ml-2" id="incomeAgreePercentage">(0%)</span>
+                                            <span class="text-gray-900 font-medium" id="career_progress_income4Count">0</span>
+                                            <span class="text-gray-500 ml-2" id="career_progress_income4Percentage">(0%)</span>
                                         </div>
                                     </div>
+
                                     <div class="flex justify-between items-center">
                                         <span class="text-gray-600">Strongly agree</span>
                                         <div class="flex items-center">
-                                            <span class="text-gray-900 font-medium" id="incomeStronglyAgreeCount">0</span>
-                                            <span class="text-gray-500 ml-2" id="incomeStronglyAgreePercentage">(0%)</span>
+                                            <span class="text-gray-900 font-medium" id="career_progress_income5Count">0</span>
+                                            <span class="text-gray-500 ml-2" id="career_progress_income5Percentage">(0%)</span>
                                         </div>
                                     </div>
+
                                     <div class="pt-4 border-t border-gray-200">
                                         <div class="flex justify-between items-center">
                                             <span class="text-gray-800 font-medium">Total Responses:</span>
-                                            <span class="text-gray-900 font-medium" id="totalIncomeResponses">0</span>
+                                                <span class="text-gray-900 font-medium" id="totalcareer_progress_incomeResponses">0</span>
                                         </div>
                                     </div>
                                 </div>
+
                             </div>
                         </div>
 
                         <!-- Advancement Goals -->
-                        <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+                        <div id="advancement-goals-stats" class="bg-white shadow overflow-hidden sm:rounded-lg">
                             <div class="px-4 py-5 sm:px-6">
                                 <h3 class="text-lg leading-6 font-medium text-gray-900">I am satisfied with the progress I have made towards meeting my goals for advancement.</h3>
                             </div>
+
                             <div class="border-t border-gray-200 p-6">
                                 <div class="space-y-4" id="advancementGoalsStats">
                                     <div class="flex justify-between items-center">
                                         <span class="text-gray-600">Strongly disagree</span>
                                         <div class="flex items-center">
-                                            <span class="text-gray-900 font-medium" id="advancementStronglyDisagreeCount">0</span>
-                                            <span class="text-gray-500 ml-2" id="advancementStronglyDisagreePercentage">(0%)</span>
+                                            <span class="text-gray-900 font-medium" id="career_progress_advancement1Count">0</span>
+                                            <span class="text-gray-500 ml-2" id="career_progress_advancement1Percentage">(0%)</span>
                                         </div>
                                     </div>
+
                                     <div class="flex justify-between items-center">
                                         <span class="text-gray-600">Disagree to some extent</span>
                                         <div class="flex items-center">
-                                            <span class="text-gray-900 font-medium" id="advancementDisagreeCount">0</span>
-                                            <span class="text-gray-500 ml-2" id="advancementDisagreePercentage">(0%)</span>
+                                            <span class="text-gray-900 font-medium" id="career_progress_advancement2Count">0</span>
+                                            <span class="text-gray-500 ml-2" id="career_progress_advancement2Percentage">(0%)</span>
                                         </div>
                                     </div>
+
                                     <div class="flex justify-between items-center">
                                         <span class="text-gray-600">Uncertain</span>
                                         <div class="flex items-center">
-                                            <span class="text-gray-900 font-medium" id="advancementUncertainCount">0</span>
-                                            <span class="text-gray-500 ml-2" id="advancementUncertainPercentage">(0%)</span>
+                                            <span class="text-gray-900 font-medium" id="career_progress_advancement3Count">0</span>
+                                            <span class="text-gray-500 ml-2" id="career_progress_advancement3Percentage">(0%)</span>
                                         </div>
                                     </div>
+
                                     <div class="flex justify-between items-center">
                                         <span class="text-gray-600">Agree to some extent</span>
                                         <div class="flex items-center">
-                                            <span class="text-gray-900 font-medium" id="advancementAgreeCount">0</span>
-                                            <span class="text-gray-500 ml-2" id="advancementAgreePercentage">(0%)</span>
+                                            <span class="text-gray-900 font-medium" id="career_progress_advancement4Count">0</span>
+                                            <span class="text-gray-500 ml-2" id="career_progress_advancement4Percentage">(0%)</span>
                                         </div>
                                     </div>
+
                                     <div class="flex justify-between items-center">
                                         <span class="text-gray-600">Strongly agree</span>
                                         <div class="flex items-center">
-                                            <span class="text-gray-900 font-medium" id="advancementStronglyAgreeCount">0</span>
-                                            <span class="text-gray-500 ml-2" id="advancementStronglyAgreePercentage">(0%)</span>
+                                            <span class="text-gray-900 font-medium" id="career_progress_advancement5Count">0</span>
+                                            <span class="text-gray-500 ml-2" id="career_progress_advancement5Percentage">(0%)</span>
                                         </div>
                                     </div>
+
                                     <div class="pt-4 border-t border-gray-200">
                                         <div class="flex justify-between items-center">
                                             <span class="text-gray-800 font-medium">Total Responses:</span>
-                                            <span class="text-gray-900 font-medium" id="totalAdvancementResponses">0</span>
+                                            <span class="text-gray-900 font-medium" id="totalcareer_progress_advancementResponses">0</span>
                                         </div>
                                     </div>
                                 </div>
+
                             </div>
                         </div>
 
                         <!-- Skills Development -->
-                        <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+                        <div id="skills-development-stats" class="bg-white shadow overflow-hidden sm:rounded-lg">
                             <div class="px-4 py-5 sm:px-6">
                                 <h3 class="text-lg leading-6 font-medium text-gray-900">I am satisfied with the progress I have made towards meeting my goals for the development of new skills.</h3>
                             </div>
+
                             <div class="border-t border-gray-200 p-6">
                                 <div class="space-y-4" id="skillsGoalsStats">
                                     <div class="flex justify-between items-center">
@@ -1045,10 +1080,11 @@
                         </div>
 
                         <!-- Work-Life Balance -->
-                        <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+                        <div id="work-life-balance-stats" class="bg-white shadow overflow-hidden sm:rounded-lg">
                             <div class="px-4 py-5 sm:px-6">
                                 <h3 class="text-lg leading-6 font-medium text-gray-900">I am satisfied with the degree to which I have achieved a healthy work-life balance.</h3>
                             </div>
+
                             <div class="border-t border-gray-200 p-6">
                                 <div class="space-y-4" id="workLifeBalanceStats">
                                     <div class="flex justify-between items-center">
@@ -1097,9 +1133,10 @@
                         </div>
 
                         <!-- Open Ended Response -->
-                        <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+                        <div id="open-ended-responses" class="bg-white shadow overflow-hidden sm:rounded-lg">
                             <div class="px-4 py-5 sm:px-6">
                                 <h3 class="text-lg leading-6 font-medium text-gray-900">Career Challenges and Opportunities</h3>
+
                                 <p class="mt-1 text-sm text-gray-500">Responses to open-ended question about career challenges and opportunities</p>
                             </div>
                             <div class="border-t border-gray-200 p-6">
@@ -4797,6 +4834,35 @@
             return { avg, min, max };
         }
 
+
+           
+        const satisfactionResponses = [
+                        1,
+                        2,
+                        3,
+                        4,
+                        5
+                    ];
+
+        function updateSatisfactionStats(data, questionId, responseTypes) {
+        const responses = data.assessments.filter(a => a.career_satisfaction?.[questionId] != null)
+            .map(a => a.career_satisfaction[questionId]);
+
+            console.log(responses);
+        
+        const totalResponses = responses.length;
+        document.getElementById(`total${questionId}Responses`).textContent = totalResponses;
+        responseTypes.forEach(type => {
+            const count = responses.filter(r => r === type).length;
+            const percentage = totalResponses > 0 ? ((count / totalResponses) * 100).toFixed(1) : 0;
+            const countElement = document.getElementById(`${questionId}${type}Count`);
+            const percentageElement = document.getElementById(`${questionId}${type}Percentage`);
+            if (countElement) countElement.textContent = count;
+            if (percentageElement) percentageElement.textContent = `(${percentage}%)`;
+
+        });
+    }
+
         async function loadDashboardData() {
             try {
                 const response = await fetch('/api/get-assessments');
@@ -4925,7 +4991,6 @@
                             unemployed: data.assessments.filter(a => a.personal_info?.industry_type === 'unemployed').length
                         };
 
-                        console.log(industryCounts);
 
 
                         const industryTotal = Object.values(industryCounts).reduce((a, b) => a + b, 0);
@@ -5093,27 +5158,17 @@
                     document.getElementById('supervisedRange').textContent = 
                         `${Math.min(...supervisionResponses)} - ${Math.max(...supervisionResponses)}`;
 
-                    // Update numeric statistics
-                    const yearsSinceStats = calculateNumericStats(data.assessments, 'years_since_designation');
-                    document.getElementById('avgYearsSince').textContent = yearsSinceStats.avg.toFixed(1);
-                    document.getElementById('yearsSinceRange').textContent = 
-                        `${yearsSinceStats.min} - ${yearsSinceStats.max}`;
+                    // Section B: Career Satisfaction
 
-                    const orgSizeStats = calculateNumericStats(data.assessments, 'organization_size');
-                    document.getElementById('avgOrgSize').textContent = orgSizeStats.avg.toFixed(0);
-                    document.getElementById('orgSizeRange').textContent = 
-                        `${orgSizeStats.min} - ${orgSizeStats.max}`;
 
-                    const compensationStats = calculateNumericStats(data.assessments, 'yearly_compensation');
-                    document.getElementById('avgCompensation').textContent = 
-                        `$${compensationStats.avg.toFixed(2)}`;
-                    document.getElementById('compensationRange').textContent = 
-                        `$${compensationStats.min} - $${compensationStats.max}`;
-
-                    const supervisedStats = calculateNumericStats(data.assessments, 'supervised_individuals');
-                    document.getElementById('avgSupervised').textContent = supervisedStats.avg.toFixed(1);
-                    document.getElementById('supervisedRange').textContent = 
-                        `${supervisedStats.min} - ${supervisedStats.max}`;
+            // Update statistics for each satisfaction question
+                updateSatisfactionStats(data, 'career_success', satisfactionResponses);
+                updateSatisfactionStats(data, 'career_progress_overall', satisfactionResponses);
+                updateSatisfactionStats(data, 'career_progress_income', satisfactionResponses);
+                updateSatisfactionStats(data, 'career_progress_advancement', satisfactionResponses);
+                // updateSatisfactionStats(data, 'career_progress_skills', satisfactionResponses);
+                // updateSatisfactionStats(data, 'career_progress_work_life', satisfactionResponses);
+                    
                 }
             } catch (error) {
                 console.error('Error loading dashboard data:', error);
@@ -5122,6 +5177,8 @@
 
         // Load data when page loads
         document.addEventListener('DOMContentLoaded', loadDashboardData);
+
+        
 
         function toggleSection(sectionId) {
             const section = document.getElementById(sectionId);
