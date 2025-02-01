@@ -4858,8 +4858,6 @@
         function updateSatisfactionStats(data, questionId, responseTypes) {
         const responses = data.assessments.filter(a => a.career_satisfaction?.[questionId] != null)
             .map(a => a.career_satisfaction[questionId]);
-
-            console.log(responses);
         
         const totalResponses = responses.length;
         document.getElementById(`total${questionId}Responses`).textContent = totalResponses;
@@ -4986,10 +4984,8 @@
                             document.getElementById('cpaBodyResponses').appendChild(li);
                         });
 
-                        // document.getElementById('cpaBodyCount').textContent = cpaBodyResponses.length;
-                        
-
-
+                
+                    
                         //industry type
                         const industryCounts = {
                             publicPractice: data.assessments.filter(a => a.personal_info?.industry_type === 'public_practice').length,
@@ -5072,8 +5068,6 @@
                             li.textContent = response;
                             document.getElementById('orgSizeResponses').appendChild(li);
                         });
-
-                        // document.getElementById('orgSizeCount').textContent = orgSizeResponses.length;
 
                   
                     //Work Nature
@@ -5179,12 +5173,13 @@
                 updateSatisfactionStats(data, 'career_progress_skills', satisfactionResponses);
                 updateSatisfactionStats(data, 'career_progress_work_life', satisfactionResponses);
 
-                const openEndedResponses = data.assessments.filter(a => a.personal_info?.staff_number != null).map(a => a.personal_info.staff_number);
-                        orgSizeResponses.forEach(response => {
+                const openEndedResponses = data.assessments.filter(a => a.career_satisfaction?.career_thoughts != null).map(a => a.career_satisfaction.career_thoughts);
+                        openEndedResponses.forEach(response => {
                             const li = document.createElement('li');
                             li.textContent = response;
-                            document.getElementById('orgSizeResponses').appendChild(li);
+                            document.getElementById('openEndedResponses').appendChild(li);
                         });
+
                     
                 }
             } catch (error) {
