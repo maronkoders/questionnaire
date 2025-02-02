@@ -5221,10 +5221,13 @@
                     document.getElementById('totalCPA').textContent = data.assessments.filter(assessment => assessment.personal_info != null).length;
                     document.getElementById('totalNonCPA').textContent = data.assessments.filter(assessment => assessment.personal_info == null).length;
 
-                    if (data.assessments.personal_info > 0) {
+
+                    console.log(data.assessments);
+            
+                    if (data.assessments[0].personal_info.length !== 0) {
 
                 
-                    
+    
                     const genderCounts = {
                             male: data.assessments.filter(a => a.personal_info?.gender === 'male').length,
                             female: data.assessments.filter(a => a.personal_info?.gender === 'female').length,
@@ -5340,6 +5343,9 @@
                         };
 
 
+                        console.log('industryCounts.unemployed', industryCounts.unemployed);
+
+
 
                         const industryTotal = Object.values(industryCounts).reduce((a, b) => a + b, 0);
 
@@ -5428,8 +5434,9 @@
                     document.getElementById('fullTimeCount').textContent = workNatureCounts.fullTime;
                     document.getElementById('partTimeCount').textContent = workNatureCounts.partTime;
                     document.getElementById('contractCount').textContent = workNatureCounts.contract;
-                    document.getElementById('unemployedCount').textContent = workNatureCounts.unemployed;
+                    document.getElementById('unemployedWorkCount').textContent = workNatureCounts.unemployed;
                     document.getElementById('retiredCount').textContent = workNatureCounts.retired;
+
 
                     document.getElementById('fullTimePercentage').textContent = 
                         `(${((workNatureCounts.fullTime / workNatureTotal) * 100).toFixed(1)}%)`;
@@ -5437,9 +5444,10 @@
                         `(${((workNatureCounts.partTime / workNatureTotal) * 100).toFixed(1)}%)`;
                     document.getElementById('contractPercentage').textContent = 
                         `(${((workNatureCounts.contract / workNatureTotal) * 100).toFixed(1)}%)`;
-                    document.getElementById('unemployedPercentage').textContent = 
+                    document.getElementById('unemployedWorkPercentage').textContent = 
                         `(${((workNatureCounts.unemployed / workNatureTotal) * 100).toFixed(1)}%)`;
                     document.getElementById('retiredPercentage').textContent = 
+
                         `(${((workNatureCounts.retired / workNatureTotal) * 100).toFixed(1)}%)`;
 
                     document.getElementById('totalWorkNatureResponses').textContent = workNatureTotal;

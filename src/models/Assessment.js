@@ -104,8 +104,13 @@ const assessmentSchema = new mongoose.Schema({
     personal_info: personalInfoSchema,
     career_satisfaction: careerSatisfactionSchema,
     emotional_intelligence: emotionalIntelligenceSchema,
-    created_at: { type: Date, default: Date.now }
+    created_at: { type: Date, default: Date.now },
+    deviceFingerprint: { type: String, required: true, index: true },
+    ipAddress: { type: String, required: true },
+    lastSubmission: { type: Date }
 });
+
+assessmentSchema.index({ deviceFingerprint: 1, ipAddress: 1 });
 
 const Assessment = mongoose.model('Assessment', assessmentSchema);
 

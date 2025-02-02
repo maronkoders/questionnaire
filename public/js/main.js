@@ -187,6 +187,25 @@ const submitButtonHtml = `
 // Insert submit button after the navigation buttons
 document.querySelector('.flex.justify-between.mt-4')?.insertAdjacentHTML('afterend', submitButtonHtml);
 
+async function generateDeviceFingerprint() {
+    const components = [
+        navigator.userAgent,
+        navigator.language,
+        new Date().getTimezoneOffset(),
+        navigator.hardwareConcurrency,
+        screen.colorDepth,
+        screen.width + 'x' + screen.height,
+        navigator.deviceMemory,
+        navigator.platform
+    ];
+
+    // Use SubtleCrypto for secure hashing
+    const msgBuffer = new TextEncoder().encode(components.join('###'));
+    const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
 function submitAssessment() {
     saveCurrentStepPartData(7);
     const form = document.getElementById('surveyForm');
@@ -235,28 +254,32 @@ function submitAssessment() {
     }
 
     if (validateAssessment()) {
-        const jsonData = JSON.stringify(assessmentData, null, 2);
-        
-        fetch('/api/submit-assessment', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: jsonData
-        })
-        .then(response => {
-            if (!response.ok) throw new Error('Network response was not ok');
-            return response.json();
-        })
-        .then(data => {
-            alert('Assessment submitted successfully!');
-            localStorage.removeItem('surveyFormData'); // Clear stored form data
-            form.reset();
-            showStep(1);
-        })
-        .catch((error) => {
-            console.error('Error:', error);
-            alert('Error submitting assessment. Please try again.');
+        generateDeviceFingerprint().then(fingerprint => {
+            assessmentData.deviceFingerprint = fingerprint;
+            
+            const jsonData = JSON.stringify(assessmentData, null, 2);
+            
+            fetch('/api/submit-assessment', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: jsonData
+            })
+            .then(response => {
+                if (!response.ok) return response.json().then(err => Promise.reject(err));
+                return response.json();
+            })
+            .then(data => {
+                alert('Assessment submitted successfully!');
+                localStorage.removeItem('surveyFormData');
+                form.reset();
+                showStep(1);
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                alert(error.message || 'Error submitting assessment. Please try again.');
+            });
         });
     }
 }

@@ -8,6 +8,7 @@ import session from 'express-session';
 import User from './models/User.js';
 import { connectDB } from './utils/db.js';
 import connectMongo from 'connect-mongo';
+import { createHash } from 'crypto';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -56,6 +57,13 @@ const requireAuth = (req, res, next) => {
     next();
 };
 
+// Add this middleware before your routes
+app.use((req, res, next) => {
+    // Get IP address
+    req.clientIp = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+    next();
+});
+
 // Routes
 app.get('/', (req, res) => {
     res.sendFile(join(__dirname, '../public/index.html'));
@@ -76,12 +84,42 @@ app.get('/dashboard', requireAuth, (req, res) => {
 app.post('/api/submit-assessment', async (req, res) => {
     try {
         const data = req.body;
+        const deviceFingerprint = data.deviceFingerprint; // This will come from client
+        const ipAddress = req.clientIp;
+
+        // Check for existing submission within 24 hours
+        const existingSubmission = await Assessment.findOne({
+            deviceFingerprint,
+            ipAddress,
+            created_at: { 
+                $gte: new Date(Date.now() - 24 * 60 * 60 * 1000) 
+            }
+        });
+
+        if (existingSubmission) {
+            return res.status(400).json({ 
+                success: false, 
+                message: 'You have already submitted an assessment in the last 24 hours.' 
+            });
+        }
+
+        // Add fingerprint and IP to the data
+        data.deviceFingerprint = deviceFingerprint;
+        data.ipAddress = ipAddress;
         data.created_at = new Date().toISOString();
+
         const assessment = new Assessment(data);
         await assessment.save();
-        res.status(200).json({ success: true, message: 'Survey has been saved' });
+        
+        res.status(200).json({ 
+            success: true, 
+            message: 'Survey has been saved' 
+        });
     } catch (error) {
-        res.status(500).json({ success: false, message: error.message });
+        res.status(500).json({ 
+            success: false, 
+            message: error.message 
+        });
     }
 });
 
