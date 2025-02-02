@@ -216,9 +216,13 @@ async function generateDeviceFingerprint() {
 }
 
 function submitAssessment() {
+    const submitButton = document.getElementById('submitButton');
+    submitButton.disabled = true;
+    submitButton.textContent = 'Submitting...';
     saveCurrentStepPartData(7);
     const form = document.getElementById('surveyForm');
     const formData = new FormData(form);
+
     const assessmentData = {
         personal_info: {},
         career_satisfaction: {},
@@ -277,17 +281,24 @@ function submitAssessment() {
             })
             .then(response => {
                 if (!response.ok) return response.json().then(err => Promise.reject(err));
+                submitButton.disabled = false;
+                submitButton.textContent = 'Submit Assessment';
                 return response.json();
             })
             .then(data => {
                 alert('Assessment submitted successfully!');
                 localStorage.removeItem('surveyFormData');
+                submitButton.disabled = false;
+                submitButton.textContent = 'Submit Assessment';
                 form.reset();
                 showStep(1);
             })
             .catch((error) => {
                 console.error('Error:', error);
+                submitButton.disabled = false;
+                submitButton.textContent = 'Submit Assessment';
                 alert(error.message || 'Error submitting assessment. Please try again.');
+
             });
         });
     }
