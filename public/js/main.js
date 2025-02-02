@@ -83,29 +83,38 @@ function handleCPAMembershipResponse(value) {
             status: 'non_member'
         };
 
-        const responseId = `survey_response_${Date.now()}`;
-        localStorage.setItem(responseId, JSON.stringify(responseData));
+        // Generate device fingerprint and add it to responseData
+        generateDeviceFingerprint().then(fingerprint => {
+            responseData.deviceFingerprint = fingerprint;
 
-        fetch('/api/submit-assessment', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(responseData),
-        })
-        .then(response => {
-            if (!response.ok) throw new Error('Server response was not ok');
-            setTimeout(() => {
-                nonMemberMessage.classList.add('hidden');
+            const responseId = `survey_response_${Date.now()}`;
+            localStorage.setItem(responseId, JSON.stringify(responseData));
+
+            fetch('/api/submit-assessment', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(responseData),
+            })
+            .then(response => {
+                if (!response.ok) throw new Error('Server response was not ok');
                 setTimeout(() => {
-                   //todo close tab
-                }, 500);
-            }, 1000);
-        })
-        .catch(error => {
-            console.error('Error submitting response:', error);
-            alert('Error submitting response. Please try again.');
+                    nonMemberMessage.classList.add('hidden');
+                    setTimeout(() => {
+                       //todo close tab
+                    }, 500);
+                }, 1000);
+            })
+            .catch(error => {
+                console.error('Error submitting response:', error);
+                alert('Error submitting response. Please try again.');
+            });
+        }).catch(error => {
+            console.error('Error generating device fingerprint:', error);
+            alert('Error generating device fingerprint. Please try again.');
         });
+        
     } else if (value === 'yes') {
         nextToStep2.disabled = false;
         nonMemberMessage.classList.add('hidden');

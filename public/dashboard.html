@@ -5221,15 +5221,16 @@
                     document.getElementById('totalCPA').textContent = data.assessments.filter(assessment => assessment.personal_info != null).length;
                     document.getElementById('totalNonCPA').textContent = data.assessments.filter(assessment => assessment.personal_info == null).length;
 
-
-                    console.log(data.assessments);
-            
-                    if (data.assessments[0].personal_info.length !== 0) {
-
                 
+                data.assessments.forEach(assessment => {
+                        console.log(assessment.personal_info);
+                        });
     
+    
+
                     const genderCounts = {
                             male: data.assessments.filter(a => a.personal_info?.gender === 'male').length,
+
                             female: data.assessments.filter(a => a.personal_info?.gender === 'female').length,
                             other: data.assessments.filter(a => a.personal_info?.gender === 'other').length,
                             preferNot: data.assessments.filter(a => a.personal_info?.gender === 'prefer_not_disclose').length
@@ -5341,11 +5342,6 @@
                             other: data.assessments.filter(a => a.personal_info?.industry_type === 'other').length,
                             unemployed: data.assessments.filter(a => a.personal_info?.industry_type === 'unemployed').length
                         };
-
-
-                        console.log('industryCounts.unemployed', industryCounts.unemployed);
-
-
 
                         const industryTotal = Object.values(industryCounts).reduce((a, b) => a + b, 0);
 
@@ -5515,7 +5511,7 @@
                     document.getElementById('supervisedRange').textContent = 
                         `${Math.min(...supervisionResponses)} - ${Math.max(...supervisionResponses)}`;
 
-                }
+            
 
             // Section B: Career Satisfaction
 
