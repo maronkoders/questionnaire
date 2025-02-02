@@ -96,11 +96,9 @@ function handleCPAMembershipResponse(value) {
         .then(response => {
             if (!response.ok) throw new Error('Server response was not ok');
             setTimeout(() => {
-                alert('Thank you for your interest. This survey is only for CPA members.');
                 nonMemberMessage.classList.add('hidden');
-                // Close the tab after a brief delay
                 setTimeout(() => {
-                    window.close();
+                   //todo close tab
                 }, 500);
             }, 1000);
         })
@@ -234,9 +232,6 @@ function submitAssessment() {
             assessmentData.emotional_intelligence[questionName] = parseInt(value);
         }
     }
-
-
-    console.log(assessmentData);
 
     if (validateAssessment()) {
         const jsonData = JSON.stringify(assessmentData, null, 2);
