@@ -5220,6 +5220,10 @@
                     document.getElementById('totalResponses').textContent = data.assessments.length;
                     document.getElementById('totalCPA').textContent = data.assessments.filter(assessment => assessment.personal_info != null).length;
                     document.getElementById('totalNonCPA').textContent = data.assessments.filter(assessment => assessment.personal_info == null).length;
+
+                    if (data.assessments.personal_info > 0) {
+
+                
                     
                     const genderCounts = {
                             male: data.assessments.filter(a => a.personal_info?.gender === 'male').length,
@@ -5503,6 +5507,8 @@
                     document.getElementById('supervisedRange').textContent = 
                         `${Math.min(...supervisionResponses)} - ${Math.max(...supervisionResponses)}`;
 
+                }
+
             // Section B: Career Satisfaction
 
             // Update statistics for each satisfaction question
@@ -5521,12 +5527,6 @@
                 updateSatisfactionStats(data, question, satisfactionResponses);
             });
 
-                // updateSatisfactionStats(data, 'career_success', satisfactionResponses);
-                // updateSatisfactionStats(data, 'career_progress_overall', satisfactionResponses);
-                // updateSatisfactionStats(data, 'career_progress_income', satisfactionResponses);
-                // updateSatisfactionStats(data, 'career_progress_advancement', satisfactionResponses);
-                // updateSatisfactionStats(data, 'career_progress_skills', satisfactionResponses);
-                // updateSatisfactionStats(data, 'career_progress_work_life', satisfactionResponses);
 
                 const openEndedResponses = data.assessments.filter(a => a.career_satisfaction?.career_thoughts != null).map(a => a.career_satisfaction.career_thoughts);
                         openEndedResponses.forEach(response => {
@@ -5653,7 +5653,4 @@
         });
     </script>
 </body>
-</html> 
-</html> 
-</html> 
 </html> 

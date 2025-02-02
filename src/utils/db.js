@@ -7,9 +7,16 @@ export async function connectDB() {
         const hosts = process.env.MONGODB_HOSTS;
         const database = process.env.MONGODB_DATABASE;
         const options = process.env.MONGODB_OPTIONS || '';
+
+        let mongoURI;
         
         // Construct connection string based on environment
-        const mongoURI = 'mongodb+srv://testdevcoder:w7PCNoCKjR1mxlNA@cpa.lzlm1.mongodb.net/?retryWrites=true&w=majority&appName=cpa';
+        if (process.env.NODE_ENV === 'development') {
+            const localURI = 'mongodb://localhost:27017/questionnaire';
+            mongoURI = localURI;
+        } else {
+            mongoURI = 'mongodb+srv://testdevcoder:w7PCNoCKjR1mxlNA@cpa.lzlm1.mongodb.net/?retryWrites=true&w=majority&appName=cpa';
+        }
         
         if (!mongoURI) {
             throw new Error('MongoDB connection parameters are not properly defined');

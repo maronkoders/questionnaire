@@ -249,7 +249,6 @@ function submitAssessment() {
             return response.json();
         })
         .then(data => {
-            console.log('Success:', data);
             alert('Assessment submitted successfully!');
             localStorage.removeItem('surveyFormData'); // Clear stored form data
             form.reset();
