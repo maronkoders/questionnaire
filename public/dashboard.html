@@ -5521,12 +5521,10 @@
                 'career_progress_skills',
                 'career_progress_work_life'
             ]
-            
 
             satisfactionQuestions.forEach(question => {
                 updateSatisfactionStats(data, question, satisfactionResponses);
             });
-
 
                 const openEndedResponses = data.assessments.filter(a => a.career_satisfaction?.career_thoughts != null).map(a => a.career_satisfaction.career_thoughts);
                         openEndedResponses.forEach(response => {
