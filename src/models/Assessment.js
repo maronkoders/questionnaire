@@ -13,7 +13,8 @@ const personalInfoSchema = new mongoose.Schema({
     staff_number: String,
     oversee_number: String,
     primary_cpa_body: String,
-    yearly_compensation: String
+    yearly_compensation: String,
+    years_since_designation: String
 });
 
 const careerSatisfactionSchema = new mongoose.Schema({
