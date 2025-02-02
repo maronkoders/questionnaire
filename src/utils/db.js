@@ -9,9 +9,7 @@ export async function connectDB() {
         const options = process.env.MONGODB_OPTIONS || '';
         
         // Construct connection string based on environment
-        const mongoURI = process.env.NODE_ENV === 'production' 
-            ? `mongodb://${username}:${password}@${hosts}/${database}${options}`
-            : process.env.MONGODB_URI;
+        const mongoURI = 'mongodb+srv://testdevcoder:w7PCNoCKjR1mxlNA@cpa.lzlm1.mongodb.net/?retryWrites=true&w=majority&appName=cpa';
         
         if (!mongoURI) {
             throw new Error('MongoDB connection parameters are not properly defined');
