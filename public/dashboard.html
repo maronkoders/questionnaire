@@ -536,7 +536,7 @@
                                         <span class="text-gray-600">Unemployed</span>
                                         <div class="flex items-center">
                                             <span class="text-gray-900 font-medium" id="unemployedCount">0</span>
-                                            <span class="text-gray-500 ml-2" id="unemployedPercentage">(0%)</span>
+                                            <span class="text-gray-500 ml-2" id="unemployedIndustryPercentage">(0%)</span>
                                         </div>
                                     </div>
                                     <div class="pt-4 border-t border-gray-200">
@@ -5223,11 +5223,8 @@
 
                 
                 data.assessments.forEach(assessment => {
-                        console.log(assessment.personal_info);
-                        });
-    
-    
-
+                        if(assessment.personal_info != null){
+                          
                     const genderCounts = {
                             male: data.assessments.filter(a => a.personal_info?.gender === 'male').length,
 
@@ -5318,18 +5315,7 @@
                         document.getElementById('otherDesignationPercentage').textContent = 
                             `(${((designationCounts.other / designationTotal) * 100).toFixed(1)}%)`;
                         document.getElementById('nonePercentage').textContent = 
-                            `(${((designationCounts.none / designationTotal) * 100).toFixed(1)}%)`;
-
-
-                            //CPA Body Stats
-                        const cpaBodyResponses = data.assessments.filter(a => a.personal_info?.primary_cpa_body != null).map(a => a.personal_info.primary_cpa_body);
-                        cpaBodyResponses.forEach(response => {
-                            const li = document.createElement('li');
-                            li.textContent = response;
-                            document.getElementById('cpaBodyResponses').appendChild(li);
-                        });
-
-                
+                            `(${((designationCounts.none / designationTotal) * 100).toFixed(1)}%)`;                
                     
                         //industry type
                         const industryCounts = {
@@ -5369,6 +5355,10 @@
                             `(${((industryCounts.other / industryTotal) * 100).toFixed(1)}%)`;
                         document.getElementById('notForProfitPercentage').textContent = 
                             `(${((industryCounts.notForProfit / industryTotal) * 100).toFixed(1)}%)`;
+                        document.getElementById('unemployedIndustryPercentage').textContent = 
+                            `(${((industryCounts.unemployed / industryTotal) * 100).toFixed(1)}%)`;
+
+
 
 
                    document.getElementById('totalIndustryResponses').textContent = industryTotal;         
@@ -5406,16 +5396,7 @@
 
                     document.getElementById('totalPositionResponses').textContent = currentPositionTotal;
 
-
-                    //Organization Size
-                    const orgSizeResponses = data.assessments.filter(a => a.personal_info?.staff_number != null).map(a => a.personal_info.staff_number);
-                        orgSizeResponses.forEach(response => {
-                            const li = document.createElement('li');
-                            li.textContent = response;
-                            document.getElementById('orgSizeResponses').appendChild(li);
-                        });
-
-                  
+  
                     //Work Nature
                     const workNatureCounts = {
                         fullTime: data.assessments.filter(a => a.personal_info?.work_nature === 'full_time').length,
@@ -5511,8 +5492,30 @@
                     document.getElementById('supervisedRange').textContent = 
                         `${Math.min(...supervisionResponses)} - ${Math.max(...supervisionResponses)}`;
 
-            
+                    }
+                });
 
+
+                 //Organization Size
+                 const orgSizeResponses = data.assessments.filter(a => a.personal_info?.staff_number != null).map(a => a.personal_info.staff_number);
+                    console.log(orgSizeResponses);
+                    orgSizeResponses.forEach(response => {
+                            const li = document.createElement('li');
+                            li.textContent = response;
+                            document.getElementById('orgSizeResponses').appendChild(li);
+                        });
+
+
+                            //CPA Body Stats
+                            const cpaBodyResponses = data.assessments.filter(a => a.personal_info?.primary_cpa_body != null).map(a => a.personal_info.primary_cpa_body);
+                        cpaBodyResponses.forEach(response => {
+                            const li = document.createElement('li');
+                            li.textContent = response;
+                            document.getElementById('cpaBodyResponses').appendChild(li);
+                        });
+
+
+    
             // Section B: Career Satisfaction
 
             // Update statistics for each satisfaction question
