@@ -2,12 +2,12 @@ import express from 'express';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 import dotenv from 'dotenv';
-import { createClient } from '@supabase/supabase-js';
 import mongoose from 'mongoose';
 import Assessment from './models/Assessment.js';
 import session from 'express-session';
 import User from './models/User.js';
 import { connectDB } from './utils/db.js';
+import connectMongo from 'connect-mongo';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -18,27 +18,33 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 // Initialize Supabase client
-const supabase = createClient(
-    process.env.VITE_SUPABASE_URL,
-    process.env.VITE_SUPABASE_ANON_KEY
-);
-
 // Connect to MongoDB
 await connectDB();
+
+// Configure session store
+const MongoStore = connectMongo.create({
+    mongoUrl: process.env.MONGODB_URI || 'mongodb://localhost:27017/questionnaire',
+    collectionName: 'sessions'
+});
+
+// Trust the first proxy (necessary for secure cookies on Heroku)
+app.set('trust proxy', 1);
 
 // Middleware
 app.use(express.static(join(__dirname, '../public')));
 app.use('/assets', express.static(join(__dirname, '../src/assets')));
 app.use(express.json());
 
-// Add session middleware after other middleware
+// Session middleware with MongoDB store
 app.use(session({
     secret: process.env.SESSION_SECRET || 'your-secret-key',
     resave: false,
     saveUninitialized: false,
+    store: MongoStore,
     cookie: {
         secure: process.env.NODE_ENV === 'production',
-        maxAge: 24 * 60 * 60 * 1000 // 24 hours
+        maxAge: 24 * 60 * 60 * 1000, // 24 hours
+        sameSite: 'lax' // Adjust as needed
     }
 }));
 
@@ -73,25 +79,25 @@ app.post('/api/submit-assessment', async (req, res) => {
         data.created_at = new Date().toISOString();
         const assessment = new Assessment(data);
         await assessment.save();
-        res.status(200).json({success: true, message:'Survey has been saved'});
+        res.status(200).json({ success: true, message: 'Survey has been saved' });
     } catch (error) {
-        res.status(500).json({success: false, message: error.message });
+        res.status(500).json({ success: false, message: error.message });
     }
 });
 
 app.get('/api/get-assessments', requireAuth, async (req, res) => {
     try {
         const assessments = await Assessment.find();
-        res.status(200).json({success: true, assessments});
+        res.status(200).json({ success: true, assessments });
     } catch (error) {
-        res.status(500).json({success: false, message: error.message });
+        res.status(500).json({ success: false, message: error.message });
     }
 });
 
 app.get('/api/responses', async (req, res) => {
     try {
         let responses = [];
-        
+
         if (supabase) {
             const { data, error } = await supabase
                 .from('survey_responses')
@@ -101,7 +107,7 @@ app.get('/api/responses', async (req, res) => {
             if (error) throw error;
             responses = data;
         }
-        
+
         res.json(responses);
     } catch (error) {
         console.error('Error fetching responses:', error);
@@ -119,7 +125,7 @@ app.delete('/api/responses/:id', async (req, res) => {
 
             if (error) throw error;
         }
-        
+
         res.json({ success: true });
     } catch (error) {
         console.error('Error deleting response:', error);
@@ -159,12 +165,7 @@ app.post('/api/logout', (req, res) => {
     res.json({ success: true });
 });
 
-// Protect your existing admin routes
-app.get('/admin', requireAuth, (req, res) => {
-    res.sendFile(join(__dirname, '../public/admin.html'));
-});
-
 app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);
-    console.log(`Admin dashboard available at http://localhost:${port}/admin`);
+    console.log(`Admin dashboard available at http://localhost:${port}/login`);
 }); 

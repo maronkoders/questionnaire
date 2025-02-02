@@ -1,12 +1,14 @@
-import mongoose from 'mongoose';
 import dotenv from 'dotenv';
+import mongoose from 'mongoose';
 import User from '../models/User.js';
 
+// Load environment variables
 dotenv.config();
 
 async function seedAdmin() {
     try {
-        await mongoose.connect(process.env.MONGODB_URI);
+        const uri = process.env.MONGODB_URI || 'mongodb://localhost:27017/questionnaire';
+        await mongoose.connect(uri);
         
         // Check if admin already exists
         const existingAdmin = await User.findOne({ email: 'admin@genosei.com' });
@@ -28,6 +30,8 @@ async function seedAdmin() {
     } catch (error) {
         console.error('Error seeding admin user:', error);
         process.exit(1);
+    } finally {
+        await mongoose.disconnect();
     }
 }
 
