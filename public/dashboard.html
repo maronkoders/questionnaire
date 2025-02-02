@@ -96,9 +96,11 @@
                         <a href="#language-stats" class="nav-question">Language Preference</a>
                         <a href="#designation-stats" class="nav-question">Legacy Designation</a>
                         <a href="#cpa-body-stats" class="nav-question">Provincial CPA Body</a>
+                        <a href="#designation-period-stats" class="nav-question">Designation Period</a>
                         <a href="#industry-stats" class="nav-question">Industry Type</a>
                         <a href="#position-stats" class="nav-question">Current Position</a>
                         <a href="#org-size-stats" class="nav-question">Organization Size</a>
+
                         <a href="#work-nature-stats" class="nav-question">Nature of Work</a>
                         <a href="#yearly-compensation-stats" class="nav-question">Yearly Compensation</a>
                         <a href="#job-title-stats" class="nav-question">Job Title</a>
@@ -301,14 +303,11 @@
                     <div id="gender-stats" class="mt-8 bg-white shadow overflow-hidden sm:rounded-lg">
                         <div class="px-4 py-5 sm:px-6">
                             <h3 class="text-lg leading-6 font-medium text-gray-900">
-                                Gender Distribution
+                                Please select the gender you are most comfortable disclosing:
                             </h3>
                         </div>
                         <div class="border-t border-gray-200">
                             <div class="p-6">
-                                <h4 class="text-md font-medium text-gray-800 mb-4">
-                                    Please select the gender you are most comfortable disclosing:
-                                </h4>
                                 <div class="space-y-4">
                                     <div class="flex justify-between items-center">
                                         <span class="text-gray-600">Male</span>
@@ -467,11 +466,26 @@
                         <!-- Provincial CPA Body -->
                         <div id="cpa-body-stats" class="bg-white shadow overflow-hidden sm:rounded-lg">
                             <div class="px-4 py-5 sm:px-6">
-                                <h3 class="text-lg leading-6 font-medium text-gray-900">Primary Provincial CPA Body</h3>
+                                <h3 class="text-lg leading-6 font-medium text-gray-900">Please name the Primary Provincial CPA body you are a member of</h3>
                             </div>
                             <div class="border-t border-gray-200 p-6">
                                 <div class="space-y-4" id="cpaBodyResponses">
+
                                   
+                                </div>
+                            </div>
+                        </div>
+
+                         <!-- Designation Period -->
+                         <div id="designation-period-stats" class="bg-white shadow overflow-hidden sm:rounded-lg">
+                            <div class="px-4 py-5 sm:px-6">
+                                <h3 class="text-lg leading-6 font-medium text-gray-900">Please indicate the years since you obtained your designation (including legacy designations)</h3>
+
+                            </div>
+                            <div class="border-t border-gray-200 p-6">
+                                <div class="space-y-4" id="designationPeriodResponses">
+                                  
+
                                 </div>
                             </div>
                         </div>
@@ -5514,6 +5528,16 @@
                             document.getElementById('cpaBodyResponses').appendChild(li);
                         });
 
+
+                        //Designation Period
+                        const designationPeriodResponses = data.assessments.filter(a => a.personal_info?.years_since_designation != null).map(a => a.personal_info.years_since_designation);
+                        designationPeriodResponses.forEach(response => {
+                            const li = document.createElement('li');
+                            li.textContent = response;
+                            document.getElementById('designationPeriodResponses').appendChild(li);
+                        });
+
+                        
 
     
             // Section B: Career Satisfaction
