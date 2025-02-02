@@ -17,15 +17,15 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT || 3000;
 
-// Initialize Supabase client
 // Connect to MongoDB
 await connectDB();
 
 // Configure session store
 const MongoStore = connectMongo.create({
-    mongoUrl: process.env.MONGODB_URI || 'mongodb://localhost:27017/questionnaire',
+    mongoUrl: process.env.NODE_ENV === 'development' ?  'mongodb://localhost:27017/questionnaire' : process.env.MONGODB_URI,
     collectionName: 'sessions'
 });
+
 
 // Trust the first proxy (necessary for secure cookies on Heroku)
 app.set('trust proxy', 1);
