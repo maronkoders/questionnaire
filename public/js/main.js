@@ -125,15 +125,45 @@ function handleCPAMembershipResponse(value) {
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('surveyForm');
     
+    const consentDialog = document.getElementById('consentDialog');
+    const acceptConsentBtn = document.getElementById('acceptConsent');
+    const nextToStep2Btn = document.getElementById('nextToStep2');
+    let hasConsented = false;
+
     // Add event listener for CPA membership radio buttons
     const cpaMemberRadios = document.querySelectorAll('input[name="cpa_member"]');
     cpaMemberRadios.forEach(radio => {
         radio.addEventListener('change', (e) => {
-            handleCPAMembershipResponse(e.target.value);
-            formData.cpa_member = e.target.value;
-            saveToLocalStorage(formData);
+            if (e.target.value === 'yes') {
+                // Show consent dialog with animation
+                consentDialog.classList.remove('translate-y-full');
+                nextToStep2Btn.disabled = !hasConsented;
+            } else {
+                // Hide consent dialog
+                consentDialog.classList.add('translate-y-full');
+                handleCPAMembershipResponse(e.target.value);
+            }
         });
     });
+
+    // Handle consent acceptance
+    acceptConsentBtn.addEventListener('click', () => {
+        hasConsented = true;
+        nextToStep2Btn.disabled = false;
+        consentDialog.classList.add('translate-y-full');
+        
+        // Store consent in localStorage
+        localStorage.setItem('surveyConsent', 'true');
+    });
+
+    // Check for existing consent
+    if (localStorage.getItem('surveyConsent') === 'true') {
+        hasConsented = true;
+        const cpaYesRadio = document.querySelector('input[name="cpa_member"][value="yes"]');
+        if (cpaYesRadio?.checked) {
+            nextToStep2Btn.disabled = false;
+        }
+    }
 
     // Navigation event listeners
     document.getElementById('nextToStep2')?.addEventListener('click', () => {
