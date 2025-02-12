@@ -14,6 +14,11 @@ function showStep(stepNumber) {
     });
 }
 
+if (localStorage.getItem('cpaYesRadioDisabled') === true) {
+    document.querySelector('input[name="cpa_member"][value="yes"]').disabled = true;
+    document.querySelector('input[name="cpa_member"][value="yes"]').checked = false;
+}
+
 function showPart(part) {
     // Hide all parts
     for (let i = 1; i <= totalParts; i++) {
@@ -132,6 +137,17 @@ function handleCPAMembershipResponse(value) {
             }).showToast();
         });
         
+        //disable the  yes radio button
+        const cpaYesRadio = document.querySelector('input[name="cpa_member"][value="yes"]');
+        if (cpaYesRadio) {
+            cpaYesRadio.disabled = true;
+            //store this in the local storage
+            localStorage.setItem('cpaYesRadioDisabled', 'true');
+            //even after reload
+            if (localStorage.getItem('cpaYesRadioDisabled') === 'true') {
+                cpaYesRadio.disabled = true;
+            }
+        }
     } else if (value === 'yes') {
         nextToStep2.disabled = false;
         nonMemberMessage.classList.add('hidden');
@@ -152,11 +168,8 @@ document.addEventListener('DOMContentLoaded', () => {
     cpaMemberRadios.forEach(radio => {
         radio.addEventListener('change', (e) => {
             if (e.target.value === 'yes') {
-                // Show consent dialog with animation
-
                 consentDialog.classList.remove('translate-y-full');
                 document.getElementById('nonMemberMessage').classList.add('hidden');
-                nextToStep2Btn.disabled = !hasConsented;
             } else {
                 // Hide consent dialog
                 consentDialog.classList.add('translate-y-full');
@@ -170,8 +183,6 @@ document.addEventListener('DOMContentLoaded', () => {
         hasConsented = true;
         nextToStep2Btn.disabled = false;
         consentDialog.classList.add('translate-y-full');
-        
-        // Store consent in localStorage
         localStorage.setItem('surveyConsent', 'true');
     });
 
@@ -273,6 +284,7 @@ function submitAssessment() {
     const formData = new FormData(form);
 
     const assessmentData = {
+        surveryConsent: localStorage.getItem('surveyConsent') === 'true',
         personal_info: {},
         career_satisfaction: {},
         emotional_intelligence: {}

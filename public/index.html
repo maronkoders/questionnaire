@@ -8,7 +8,6 @@
     <link href="/css/styles.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
-
     <style>
         /* Enhanced table header styles while keeping existing classes */
         .min-w-full th {
@@ -2225,14 +2224,13 @@ minutes to complete.
     </div>
     <div id="consentDialog" class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 transform translate-y-full transition-transform duration-300 ease-in-out shadow-lg">
         <div class="max-w-screen-xl mx-auto px-4 py-3 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between flex-wrap">
-                <div class="w-0 flex-1 flex items-center">
-                    <p class="ml-3 font-medium text-gray-600">
-                        <span class="md:hidden">Please note that by clicking the agree button you are consenting that your data is strictly being used for survey purposes and will be deleted in no time.</span>
-                        <span class="hidden md:inline">Please note that by clicking the agree button you are consenting that your data is strictly being used for survey purposes and will be deleted in no time.</span>
+            <div class="flex items-center justify-between">
+                <div class="flex-grow pr-4">
+                    <p class="text-gray-800 text-sm">
+                        Please note that by clicking the agree button you are consenting that your data is strictly being used for survey purposes and will be deleted in no time.
                     </p>
                 </div>
-                <div class="order-3 mt-2 flex-shrink-0 w-full sm:order-2 sm:mt-0 sm:w-auto">
+                <div class="flex-shrink-0">
                     <button id="acceptConsent" class="flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700">
                         I Agree
                     </button>
@@ -2240,6 +2238,7 @@ minutes to complete.
             </div>
         </div>
     </div>
+
     <script src="/js/main.js"></script>
     <script>
         // Function to update all table headers with the new format
@@ -2268,49 +2267,7 @@ minutes to complete.
             updateTableHeaders();
         });
 
-        // Theme toggle functionality
-        document.addEventListener('DOMContentLoaded', () => {
-            const themeToggle = document.getElementById('themeToggle');
-            const lightIcon = document.getElementById('lightIcon');
-            const darkIcon = document.getElementById('darkIcon');
-            
-            // Check for saved theme preference or default to light
-            const savedTheme = localStorage.getItem('theme') || 'light';
-            document.documentElement.setAttribute('data-theme', savedTheme);
-            updateThemeIcons(savedTheme);
-
-            themeToggle.addEventListener('click', () => {
-                const currentTheme = document.documentElement.getAttribute('data-theme');
-                const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-                
-                document.documentElement.setAttribute('data-theme', newTheme);
-                localStorage.setItem('theme', newTheme);
-                updateThemeIcons(newTheme);
-            });
-
-            function updateThemeIcons(theme) {
-                if (theme === 'dark') {
-                    darkIcon.classList.add('active');
-                    lightIcon.classList.remove('active');
-                } else {
-                    lightIcon.classList.add('active');
-                    darkIcon.classList.remove('active');
-                }
-            }
-
-            // Update section indicator based on current step
-            function updateSectionIndicator(currentSection) {
-                const sectionIndicator = document.getElementById('sectionIndicator');
-                sectionIndicator.textContent = `Section ${currentSection} of 5`;
-            }
-
-            // Add this to your existing navigation functions
-            const existingShowStep = window.showStep;
-            window.showStep = function(step) {
-                existingShowStep(step);
-                updateSectionIndicator(step);
-            };
-        });
+       
     </script>
 </body>
 </html> 
