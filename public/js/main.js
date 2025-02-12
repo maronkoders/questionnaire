@@ -115,7 +115,7 @@ function handleCPAMembershipResponse(value) {
             })
             .catch(error => {
                 Toastify({
-                    text: error.message,
+                    text: '"You have already submitted your assessment.',
                     duration: 3000,
                     gravity: "top",
                     position: "right",
