@@ -153,7 +153,9 @@ document.addEventListener('DOMContentLoaded', () => {
         radio.addEventListener('change', (e) => {
             if (e.target.value === 'yes') {
                 // Show consent dialog with animation
+
                 consentDialog.classList.remove('translate-y-full');
+                document.getElementById('nonMemberMessage').classList.add('hidden');
                 nextToStep2Btn.disabled = !hasConsented;
             } else {
                 // Hide consent dialog
