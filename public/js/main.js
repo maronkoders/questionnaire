@@ -115,7 +115,7 @@ function handleCPAMembershipResponse(value) {
             })
             .catch(error => {
                 Toastify({
-                    text: '"You have already submitted your assessment.',
+                    text: 'You have already submitted your assessment.',
                     duration: 3000,
                     gravity: "top",
                     position: "right",
@@ -402,7 +402,13 @@ function validateCurrentStep(stepNumber) {
     });
 
     if (!allFilled) {
-        alert('Please answer all required questions before continuing.');
+        Toastify({
+            text: 'Please answer all required questions before continuing.',
+            duration: 3000,
+            gravity: "top",
+            position: "right",
+            backgroundColor: "#FF3B30",
+        }).showToast();
     }
 
     return allFilled;
@@ -486,3 +492,4 @@ function toggleButtons() {
 
 showPart(currentPart);
 document.getElementById('submitButton')?.addEventListener('click', submitAssessment);
+
