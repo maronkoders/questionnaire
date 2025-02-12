@@ -99,6 +99,13 @@ function handleCPAMembershipResponse(value) {
             })
             .then(response => {
                 if (!response.ok) throw new Error('Server response was not ok');
+                Toastify({
+                    text: "Response submitted successfully!",
+                    duration: 3000, 
+                    gravity: "top", 
+                    position: "right",
+                    backgroundColor: "#4BB543",
+                }).showToast();
                 setTimeout(() => {
                     nonMemberMessage.classList.add('hidden');
                     setTimeout(() => {
@@ -107,12 +114,22 @@ function handleCPAMembershipResponse(value) {
                 }, 1000);
             })
             .catch(error => {
-                console.error('Error submitting response:', error);
-                alert('Error submitting response. Please try again.');
+                Toastify({
+                    text: error.message,
+                    duration: 3000,
+                    gravity: "top",
+                    position: "right",
+                    backgroundColor: "#FF3B30",
+                }).showToast();
             });
         }).catch(error => {
-            console.error('Error generating device fingerprint:', error);
-            alert('Error generating device fingerprint. Please try again.');
+            Toastify({
+                text: error.message,
+                duration: 3000,
+                gravity: "top",
+                position: "right",
+                backgroundColor: "#FF3B30",
+            }).showToast();
         });
         
     } else if (value === 'yes') {
