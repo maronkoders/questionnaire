@@ -1015,3 +1015,68 @@ video {
     padding-right: 2rem;
   }
 } 
+
+
+
+
+.responsive-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.responsive-table th,
+.responsive-table td {
+  padding: 10px;
+  text-align: center;
+  border: 1px solid #ccc;
+}
+
+.responsive-table th {
+  background-color: #f4f4f9;
+  font-weight: bold;
+}
+
+@media screen and (max-width: 768px) {
+  .responsive-table table,
+  .responsive-table thead,
+  .responsive-table tbody,
+  .responsive-table th,
+  .responsive-table td,
+  .responsive-table tr {
+    display: block;
+    width: 100%;
+  }
+
+  .responsive-table tr {
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+  }
+
+  .responsive-table td {
+    text-align: left;
+    padding: 10px 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: none;
+    border-bottom: 1px solid #eee;
+  }
+
+  .responsive-table td:before {
+    content: attr(data-label);
+    font-weight: bold;
+    flex-basis: 50%;
+    text-align: left;
+  }
+
+  .responsive-table td:last-child {
+    border-bottom: none;
+  }
+
+  .responsive-table thead {
+    display: none;
+  }
+}
