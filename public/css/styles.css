@@ -1057,9 +1057,9 @@ video {
 
   .responsive-table td {
     text-align: left;
-    padding: 10px 5px;
+    padding: 10px 0px;
     display: flex;
-    justify-content: space-between;
+    justify-content: start;
     align-items: center;
     border: none;
     border-bottom: 1px solid #eee;
@@ -1071,7 +1071,6 @@ video {
 
   .responsive-table td:before {
     content: attr(data-label);
-    text-align: left;
     margin-right: 0px;
   }
 
@@ -1082,4 +1081,8 @@ video {
   .responsive-table thead {
     display: none;
   }
+  .responsive-table td input[type="radio"] {
+      margin-left: auto;
+  }
+
 }
