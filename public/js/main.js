@@ -151,8 +151,11 @@ function handleCPAMembershipResponse(value) {
             }
         }
     } else if (value === 'yes') {
-        nextToStep2.disabled = false;
-        nonMemberMessage.classList.add('hidden');
+        if(localStorage.getItem('cpaYesRadioDisabled') !== 'true'){
+            nextToStep2.disabled = false;
+            nonMemberMessage.classList.add('hidden');
+        }
+        document.querySelector('#cpaYesRadioDisabled').classList.remove('hidden');
     }
 }
 
@@ -183,9 +186,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // Handle consent acceptance
     acceptConsentBtn.addEventListener('click', () => {
         hasConsented = true;
-        nextToStep2Btn.disabled = false;
-        consentDialog.classList.add('translate-y-full');
-        localStorage.setItem('surveyConsent', 'true');
+        if(localStorage.getItem('cpaYesRadioDisabled') !== 'true'){
+            nextToStep2Btn.disabled = false;
+            consentDialog.classList.add('translate-y-full');
+            localStorage.setItem('surveyConsent', 'true');
+        } 
+        if(localStorage.getItem('cpaYesRadioDisabled') === 'true'){
+            document.querySelector('#cpaYesRadioDisabled').classList.remove('hidden');
+        }
     });
 
     // Check for existing consent
