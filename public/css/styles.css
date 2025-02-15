@@ -1065,11 +1065,14 @@ video {
     border-bottom: 1px solid #eee;
   }
 
+  .responsive-table td label {
+    font-weight: bold;  
+  }
+
   .responsive-table td:before {
     content: attr(data-label);
-    font-weight: bold;
-    flex-basis: 50%;
     text-align: left;
+    margin-right: 0px;
   }
 
   .responsive-table td:last-child {
