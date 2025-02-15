@@ -42,11 +42,13 @@ function showPart(part) {
 }
 
 function showNextPart() {
-    if (currentPart < totalParts) {
-        saveCurrentStepPartData(currentPart);
-        currentPart++;
-        showPart(currentPart);
-        toggleButtons();
+    if(validateCurrentStepPart(currentPart)){
+        if (currentPart < totalParts) {
+            saveCurrentStepPartData(currentPart);
+            currentPart++;
+            showPart(currentPart);
+            toggleButtons();
+        }
     }
 }
 
@@ -55,10 +57,8 @@ function showPreviousPart() {
         currentPart--;
         showPart(currentPart);
     } else {
-        // If we're at the first part of section 4, go back to section 3
         const emotionalAssessment = document.getElementById('emotionalAssessment');
         const step3 = document.getElementById('step3');
-
         if (emotionalAssessment && step3) {
             emotionalAssessment.classList.add('hidden');
             step3.classList.remove('hidden');
@@ -79,12 +79,11 @@ function handleCPAMembershipResponse(value) {
     const surveyForm = document.getElementById('surveyForm'); // Get form reference
 
     if (value === 'no') {
-        if(localStorage.getItem('cpaYesRadioDisabled') !== 'true'){
+        if(localStorage.getItem('cpaYesRadioDisabled') !== 'true') {
             nonMemberMessage.classList.remove('hidden');
         }
        
         nextToStep2.disabled = true;
-
         const responseData = {
             cpa_member: 'no',
             submitted_at: new Date().toISOString(),
@@ -94,7 +93,6 @@ function handleCPAMembershipResponse(value) {
         // Generate device fingerprint and add it to responseData
         generateDeviceFingerprint().then(fingerprint => {
             responseData.deviceFingerprint = fingerprint;
-
             const responseId = `survey_response_${Date.now()}`;
             localStorage.setItem(responseId, JSON.stringify(responseData));
 
@@ -163,7 +161,6 @@ function handleCPAMembershipResponse(value) {
 // Add event listeners when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('surveyForm');
-    
     const consentDialog = document.getElementById('consentDialog');
     const acceptConsentBtn = document.getElementById('acceptConsent');
     const nextToStep2Btn = document.getElementById('nextToStep2');
@@ -250,7 +247,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Load data for the current step on page load
     loadCurrentStepData(2);
-
     toggleButtons();
 });
 
@@ -287,10 +283,13 @@ async function generateDeviceFingerprint() {
 }
 
 function submitAssessment() {
+    if(validateCurrentStepPart(7)){
+        saveCurrentStepPartData(7);
+
     const submitButton = document.getElementById('submitButton');
     submitButton.disabled = true;
     submitButton.textContent = 'Submitting...';
-    saveCurrentStepPartData(7);
+   
     const form = document.getElementById('surveyForm');
     const formData = new FormData(form);
 
@@ -338,7 +337,6 @@ function submitAssessment() {
         }
     }
 
-    if (validateAssessment()) {
         generateDeviceFingerprint().then(fingerprint => {
             assessmentData.deviceFingerprint = fingerprint;
             
@@ -358,64 +356,62 @@ function submitAssessment() {
                 return response.json();
             })
             .then(data => {
-                // Toastify({
-                //     text: 'Assessment submitted successfully!',
-                //     duration: 3000,
-                //     gravity: "top",
-                //     position: "right",
-                //     backgroundColor: "#4BB543",
-                // }).showToast();
-
                 localStorage.removeItem('surveyFormData');
                 submitButton.disabled = false;
                 submitButton.textContent = 'Submit Assessment';
                 form.reset();
                 window.location.href = '/done';
-                // showStep(1);
             })
             .catch((error) => {
-                console.error('Error:', error);
                 submitButton.disabled = false;
                 submitButton.textContent = 'Submit Assessment';
-                alert(error.message || 'Error submitting assessment. Please try again.');
+                Toastify({
+                    text: error.message || 'Error submitting assessment. Please try again.',
+                    duration: 3000,
+                    gravity: "top",
+                    position: "right",
+                    backgroundColor: "#FF3B30",
+                }).showToast();
 
             });
         });
-    }
 }
-
-function validateAssessment() {
-    return true;
-    // Validation logic for all sections
-    const personalInfoFields = ['cpa_member', 'birth_year', 'gender', 'education', 'experience', 'industry'];
-    for (const field of personalInfoFields) {
-        if (!document.querySelector(`input[name="${field}"]:checked`) && 
-            !document.getElementById(field)?.value) {
-            alert('Please complete all personal information fields');
-            return false;
-        }
-    }
-
-    // Validate all sections
-    const sections = {
-        'career satisfaction': '[name^="career_satisfaction_"]',
-        'work preferences': '[name^="work_preference_"]',
-        'emotional intelligence': 'input[name$="_70"]'
-    };
-
-    for (const [section, selector] of Object.entries(sections)) {
-        const questions = document.querySelectorAll(selector);
-        if (!questions.length || Array.from(questions).some(q => !q.checked)) {
-            alert(`Please complete all ${section} questions`);
-            return false;
-        }
-    }
-
-    return true;
 }
 
 function validateCurrentStep(stepNumber) {
     const step = document.getElementById(`step${stepNumber}`);
+    const requiredInputs = step.querySelectorAll('input[required]');
+    let allFilled = true;
+
+    requiredInputs.forEach(input => {
+        if (input.type === 'radio') {
+            const name = input.name;
+            const group = step.querySelectorAll(`input[name="${name}"]`);
+            const isChecked = Array.from(group).some(radio => radio.checked);
+            if (!isChecked) {
+                allFilled = false;
+            }
+        } else if (!input.value) {
+            allFilled = false;
+        }
+    });
+
+    if (!allFilled) {
+        Toastify({
+            text: 'Please answer all required questions before continuing.',
+            duration: 3000,
+            gravity: "top",
+            position: "right",
+            backgroundColor: "#FF3B30",
+        }).showToast();
+    }
+
+    return allFilled;
+}
+
+
+function validateCurrentStepPart(stepNumber) {
+    const step = document.getElementById(`part${stepNumber}`);
     const requiredInputs = step.querySelectorAll('input[required]');
     let allFilled = true;
 
@@ -470,7 +466,6 @@ function saveCurrentStepPartData(partNumber) {
 
 function saveCurrentStepData(stepNumber) {
     const step = document.getElementById(`step${stepNumber}`);
-    
     const inputs = step.querySelectorAll('input, select, textarea');
     const stepData = {};
 
