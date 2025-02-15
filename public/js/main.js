@@ -358,12 +358,20 @@ function submitAssessment() {
                 return response.json();
             })
             .then(data => {
-                alert('Assessment submitted successfully!');
+                // Toastify({
+                //     text: 'Assessment submitted successfully!',
+                //     duration: 3000,
+                //     gravity: "top",
+                //     position: "right",
+                //     backgroundColor: "#4BB543",
+                // }).showToast();
+
                 localStorage.removeItem('surveyFormData');
                 submitButton.disabled = false;
                 submitButton.textContent = 'Submit Assessment';
                 form.reset();
-                showStep(1);
+                window.location.href = '/done';
+                // showStep(1);
             })
             .catch((error) => {
                 console.error('Error:', error);

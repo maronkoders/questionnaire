@@ -69,6 +69,11 @@ app.get('/', (req, res) => {
     res.sendFile(join(__dirname, '../public/index.html'));
 });
 
+// thank you page
+app.get('/done', (req, res) => {
+    res.sendFile(join(__dirname, '../public/done.html'));
+});
+
 app.get('/login', (req, res) => {
     if (req.session.user) {
         return res.redirect('/dashboard');
