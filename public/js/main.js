@@ -154,8 +154,9 @@ function handleCPAMembershipResponse(value) {
         if(localStorage.getItem('cpaYesRadioDisabled') !== 'true'){
             nextToStep2.disabled = false;
             nonMemberMessage.classList.add('hidden');
+        }else {
+            document.querySelector('#cpaYesRadioDisabled').classList.remove('hidden');
         }
-        document.querySelector('#cpaYesRadioDisabled').classList.remove('hidden');
     }
 }
 
