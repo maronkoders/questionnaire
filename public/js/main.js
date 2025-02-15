@@ -79,7 +79,10 @@ function handleCPAMembershipResponse(value) {
     const surveyForm = document.getElementById('surveyForm'); // Get form reference
 
     if (value === 'no') {
-        nonMemberMessage.classList.remove('hidden');
+        if(localStorage.getItem('cpaYesRadioDisabled') !== 'true'){
+            nonMemberMessage.classList.remove('hidden');
+        }
+       
         nextToStep2.disabled = true;
 
         const responseData = {
@@ -119,6 +122,7 @@ function handleCPAMembershipResponse(value) {
                 }, 1000);
             })
             .catch(error => {
+                document.querySelector('#cpaYesRadioDisabled').classList.remove('hidden');
                 Toastify({
                     text: 'You have already submitted your assessment.',
                     duration: 3000,
@@ -141,9 +145,7 @@ function handleCPAMembershipResponse(value) {
         const cpaYesRadio = document.querySelector('input[name="cpa_member"][value="yes"]');
         if (cpaYesRadio) {
             cpaYesRadio.disabled = true;
-            //store this in the local storage
             localStorage.setItem('cpaYesRadioDisabled', 'true');
-            //even after reload
             if (localStorage.getItem('cpaYesRadioDisabled') === 'true') {
                 cpaYesRadio.disabled = true;
             }
