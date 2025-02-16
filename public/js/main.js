@@ -172,6 +172,7 @@ document.addEventListener('DOMContentLoaded', () => {
         radio.addEventListener('change', (e) => {
             if (e.target.value === 'yes') {
                 consentDialog.classList.remove('translate-y-full');
+                consentDialog.classList.add('translate-y-0');
                 document.getElementById('nonMemberMessage').classList.add('hidden');
             } else {
                 // Hide consent dialog
