@@ -190,7 +190,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if(localStorage.getItem('cpaYesRadioDisabled') !== 'true'){
             nextToStep2Btn.disabled = false;
             consentDialog.classList.remove('translate-y-full');
-            consentDialog.classList.add('translate-y-0');
+            consentDialog.classList.add('hidden');
             localStorage.setItem('surveyConsent', 'true');
         } 
         if(localStorage.getItem('cpaYesRadioDisabled') === 'true'){
