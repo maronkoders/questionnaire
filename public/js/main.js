@@ -111,6 +111,7 @@ function handleCPAMembershipResponse(value) {
                     gravity: "top", 
                     position: "right",
                     backgroundColor: "#4BB543",
+                    width: 'auto',
                 }).showToast();
                 setTimeout(() => {
                     nonMemberMessage.classList.add('hidden');
@@ -127,6 +128,7 @@ function handleCPAMembershipResponse(value) {
                     gravity: "top",
                     position: "right",
                     backgroundColor: "#FF3B30",
+                    width: 'auto',
                 }).showToast();
             });
         }).catch(error => {
@@ -136,6 +138,7 @@ function handleCPAMembershipResponse(value) {
                 gravity: "top",
                 position: "right",
                 backgroundColor: "#FF3B30",
+                width: 'auto',
             }).showToast();
         });
         
@@ -377,6 +380,7 @@ function submitAssessment() {
                     gravity: "top",
                     position: "right",
                     backgroundColor: "#FF3B30",
+                    width: 'auto',
                 }).showToast();
 
             });
@@ -409,6 +413,7 @@ function validateCurrentStep(stepNumber) {
             gravity: "top",
             position: "right",
             backgroundColor: "#FF3B30",
+            width: 'auto',
         }).showToast();
     }
 
@@ -441,6 +446,7 @@ function validateCurrentStepPart(stepNumber) {
             gravity: "top",
             position: "right",
             backgroundColor: "#FF3B30",
+            width: 'auto',
         }).showToast();
     }
 
