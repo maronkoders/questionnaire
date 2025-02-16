@@ -47,6 +47,10 @@ function showNextPart() {
             saveCurrentStepPartData(currentPart);
             currentPart++;
             showPart(currentPart);
+            document.getElementById(`part${currentPart}`)?.scrollIntoView({ 
+                behavior: 'smooth',
+                block: 'start'
+            });
             toggleButtons();
         }
     }
@@ -56,14 +60,10 @@ function showPreviousPart() {
     if (currentPart > 1) {
         currentPart--;
         showPart(currentPart);
-    } else {
-        const emotionalAssessment = document.getElementById('emotionalAssessment');
-        const step3 = document.getElementById('step3');
-        if (emotionalAssessment && step3) {
-            emotionalAssessment.classList.add('hidden');
-            step3.classList.remove('hidden');
-            currentSection = 3;
-        }
+    } 
+
+    if(currentPart === 1){
+        showStep(3)
     }
 }
 
@@ -218,6 +218,11 @@ document.addEventListener('DOMContentLoaded', () => {
         if (validateCurrentStep(3)) {
             saveCurrentStepData(3);
             showStep(4);
+
+            document.getElementById('emotionalAssessment')?.scrollIntoView({ 
+                behavior: 'smooth',
+                block: 'start'
+            });
         }
     });
     
