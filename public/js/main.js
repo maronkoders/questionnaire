@@ -109,7 +109,7 @@ function handleCPAMembershipResponse(value) {
                     text: "Response submitted successfully!",
                     duration: 3000, 
                     gravity: "top", 
-                    position: "right",
+                    position: "top-center",
                     backgroundColor: "#4BB543",
                     width: 'auto',
                 }).showToast();
@@ -126,7 +126,7 @@ function handleCPAMembershipResponse(value) {
                     text: 'You have already submitted your assessment.',
                     duration: 3000,
                     gravity: "top",
-                    position: "right",
+                    position: "top-center",
                     backgroundColor: "#FF3B30",
                     width: 'auto',
                 }).showToast();
@@ -136,7 +136,7 @@ function handleCPAMembershipResponse(value) {
                 text: error.message,
                 duration: 3000,
                 gravity: "top",
-                position: "right",
+                position: "top-center",
                 backgroundColor: "#FF3B30",
                 width: 'auto',
             }).showToast();
@@ -190,7 +190,8 @@ document.addEventListener('DOMContentLoaded', () => {
         hasConsented = true;
         if(localStorage.getItem('cpaYesRadioDisabled') !== 'true'){
             nextToStep2Btn.disabled = false;
-            consentDialog.classList.add('translate-y-full');
+            consentDialog.classList.remove('translate-y-full');
+            consentDialog.classList.add('translate-y-0');
             localStorage.setItem('surveyConsent', 'true');
         } 
         if(localStorage.getItem('cpaYesRadioDisabled') === 'true'){
@@ -378,7 +379,7 @@ function submitAssessment() {
                     text: error.message || 'Error submitting assessment. Please try again.',
                     duration: 3000,
                     gravity: "top",
-                    position: "right",
+                    position: "top-center",
                     backgroundColor: "#FF3B30",
                     width: 'auto',
                 }).showToast();
@@ -411,7 +412,7 @@ function validateCurrentStep(stepNumber) {
             text: 'Please answer all required questions before continuing.',
             duration: 3000,
             gravity: "top",
-            position: "right",
+                position: "top-center",
             backgroundColor: "#FF3B30",
             width: 'auto',
         }).showToast();
@@ -444,7 +445,7 @@ function validateCurrentStepPart(stepNumber) {
             text: 'Please answer all required questions before continuing.',
             duration: 3000,
             gravity: "top",
-            position: "right",
+            position: "top-center",
             backgroundColor: "#FF3B30",
             width: 'auto',
         }).showToast();
