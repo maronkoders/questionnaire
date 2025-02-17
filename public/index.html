@@ -159,7 +159,8 @@
                 <div class="title-section">
                     <div>
                         <h1 class="text-2xl font-bold">EI and Career Success of CPAs</h1>
-                        <small><p class="text-gray-600 mt-1">Complete your questionnaire to stand a chance to win an Amazon voucher worth $500 CAD.</p></small>
+                        <small><p class="text-gray-600 mt-1">Fully complete all questions to help shape the CPA profession and get a chance to win a $100 Visa gift card, your EI
+                            score, and an enhanced appreciation of work-related situations impacted by EI.</p></small>
                     </div>
                 </div>
             </div>
@@ -167,6 +168,11 @@
             <form id="surveyForm" class="survey-form space-y-8">
                 <div id="step1" class="step active">
                     <div class="mb-8">
+                        <div>
+                            <p>Thank you for your time. The submission of the questionnaire serves as a form of implied consent. It
+                            also confirms that you read and understood the consent information</p>
+                        </div>
+                        <br>
                         <div class="space-y-4">
                             <div class="question-group">
                                 <label class="block mb-2 font-medium">Are you a member of CPA Canada? <span class="text-red-500">*</span></label>
@@ -257,23 +263,23 @@
                             <label class="block mb-2 font-medium">Please indicate the legacy designation that you hold <span class="text-red-500">*</span></label>
                             <div class="space-y-2">
                                 <label class="flex items-center">
-                                    <input type="radio" name="legacy_designation" value="cga" required class="mr-2">
+                                    <input type="checkbox" name="legacy_designation" value="cga" required class="mr-2">
                                     <span>CGA</span>
                                 </label>
                                 <label class="flex items-center">
-                                    <input type="radio" name="legacy_designation" value="ca" required class="mr-2">
+                                    <input type="checkbox" name="legacy_designation" value="ca" required class="mr-2">
                                     <span>CA</span>
                                 </label>
                                 <label class="flex items-center">
-                                    <input type="radio" name="legacy_designation" value="cma" required class="mr-2">
+                                    <input type="checkbox" name="legacy_designation" value="cma" required class="mr-2">
                                     <span>CMA</span>
                                 </label>
                                 <label class="flex items-center">
-                                    <input type="radio" name="legacy_designation" value="other" required class="mr-2">
+                                    <input type="checkbox" name="legacy_designation" value="other" required class="mr-2">
                                     <span>Other</span>
                                 </label>
                                 <label class="flex items-center">
-                                    <input type="radio" name="legacy_designation" value="none" required class="mr-2">
+                                    <input type="checkbox" name="legacy_designation" value="none" required class="mr-2">
                                     <span>None</span>
                                 </label>
                             </div>
@@ -2329,10 +2335,10 @@ minutes to complete.
 
     document.addEventListener('DOMContentLoaded', () => {
         const rejectConsentBtn = document.getElementById('rejectConsent');
-        // Redirect to the "done" page when the button is clicked
+
         setInterval(() => {
             rejectConsentBtn.addEventListener('click', () => {
-                window.location.href = '/done'; // Replace '/done' with the actual URL of your done page
+                window.location.href = '/done';
             });
         }, 1000);
     });

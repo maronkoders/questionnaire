@@ -314,7 +314,7 @@ function submitAssessment() {
         cpa_member: document.querySelector('input[name="cpa_member"]:checked')?.value || null,
         languages: Array.from(document.querySelectorAll('input[name="languages"]:checked')).map(lang => lang.value) || [],
         gender: document.querySelector('input[name="gender"]:checked')?.value || null,
-        legacy_designation: document.querySelector('input[name="legacy_designation"]:checked')?.value || null,
+        legacy_designation: Array.from(document.querySelectorAll('input[name="legacy_designation"]:checked')).map(legacy => legacy.value) || [],
         industry_type: document.querySelector('input[name="industry_type"]:checked')?.value || null,
         current_position: document.querySelector('input[name="current_position"]:checked')?.value || null,
         work_nature: document.querySelector('input[name="work_nature"]:checked')?.value || null,

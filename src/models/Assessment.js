@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 const personalInfoSchema = new mongoose.Schema({
     cpa_member: String,
     gender: String,
-    legacy_designation: String,
+    legacy_designation: Array,
     languages: Array,
     industry_type: String,
     current_position: String,
