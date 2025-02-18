@@ -2250,12 +2250,10 @@ minutes to complete.
         </div>
     </div>
 
-
-
     <div id="consentDialog" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 transition-opacity duration-300 ease-in-out">
         <div class="max-w-3xl w-full mx-auto p-6 bg-white border border-gray-300 shadow-xl rounded-lg relative">
     
-            <!-- Header -->
+         
             <div class="text-center">
                 <h1 class="text-3xl font-bold text-gray-900">Consent Form</h1>
                 <p class="text-gray-600 text-sm mt-1">Please read the information below before proceeding.</p>
@@ -2263,7 +2261,7 @@ minutes to complete.
             <hr>
             <br>
     
-            <!-- Scrollable Content -->
+            
             <div class="mt-4 overflow-y-auto max-h-96 px-4 scrollbar-hidden hover:scrollbar-visible">
                 <p class="text-gray-800 text-sm leading-relaxed">
                     You are being invited to participate in a research study titled 
@@ -2319,10 +2317,14 @@ minutes to complete.
                    <p class="text-xs">USE THE ARROW KEYS TO SCROLL DOWN</p>
                </div>
            </div>
+
+
+           
     
     
         </div>
     </div>
+
     
 
 
@@ -2332,17 +2334,6 @@ minutes to complete.
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
     <script>
-
-    document.addEventListener('DOMContentLoaded', () => {
-        const rejectConsentBtn = document.getElementById('rejectConsent');
-
-        setInterval(() => {
-            rejectConsentBtn.addEventListener('click', () => {
-                window.location.href = '/done';
-            });
-        }, 1000);
-    });
-
 
     $('#yearPicker').datepicker({
             format: "yyyy",
