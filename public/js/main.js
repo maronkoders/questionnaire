@@ -13,13 +13,10 @@ function showStep(stepNumber) {
         step.classList.toggle('active', index + 1 === stepNumber);
     });
 
-    // Scroll to the top of the newly shown step
-    const activeStep = document.querySelector(`.step:nth-child(${stepNumber})`);
-    if (activeStep) {
-        window.scrollTo({
-            top: activeStep.offsetTop - 20, // Add small offset for visual padding
-            behavior: 'smooth'
-        });
+    // Scroll to the header container
+    const headerContainer = document.querySelector('.header-container');
+    if (headerContainer) {
+        headerContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 }
 
@@ -41,11 +38,12 @@ function showPart(part) {
     const currentPartElement = document.getElementById(`part${part}`);
     if (currentPartElement) {
         currentPartElement.classList.remove('hidden');
-        // Scroll to top of the part
-        window.scrollTo({
-            top: currentPartElement.offsetTop - 20,
-            behavior: 'smooth'
-        });
+        
+        // Scroll to the header container
+        const headerContainer = document.querySelector('.header-container');
+        if (headerContainer) {
+            headerContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
     }
     
     // Show/hide submit button on last part
