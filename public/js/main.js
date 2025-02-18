@@ -12,6 +12,15 @@ function showStep(stepNumber) {
         step.classList.toggle('hidden', index + 1 !== stepNumber);
         step.classList.toggle('active', index + 1 === stepNumber);
     });
+
+    // Scroll to the top of the newly shown step
+    const activeStep = document.querySelector(`.step:nth-child(${stepNumber})`);
+    if (activeStep) {
+        window.scrollTo({
+            top: activeStep.offsetTop - 20, // Add small offset for visual padding
+            behavior: 'smooth'
+        });
+    }
 }
 
 if (localStorage.getItem('cpaYesRadioDisabled') === true) {
@@ -32,6 +41,11 @@ function showPart(part) {
     const currentPartElement = document.getElementById(`part${part}`);
     if (currentPartElement) {
         currentPartElement.classList.remove('hidden');
+        // Scroll to top of the part
+        window.scrollTo({
+            top: currentPartElement.offsetTop - 20,
+            behavior: 'smooth'
+        });
     }
     
     // Show/hide submit button on last part
@@ -47,10 +61,6 @@ function showNextPart() {
             saveCurrentStepPartData(currentPart);
             currentPart++;
             showPart(currentPart);
-            document.getElementById(`part${currentPart}`)?.scrollIntoView({ 
-                behavior: 'smooth',
-                block: 'start'
-            });
             toggleButtons();
         }
     }
@@ -63,7 +73,7 @@ function showPreviousPart() {
     } 
 
     if(currentPart === 1){
-        showStep(3)
+        showStep(3);
     }
 }
 
@@ -204,7 +214,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Navigation event listeners
+    // Navigation event listeners with validation and scrolling
     document.getElementById('nextToStep2')?.addEventListener('click', () => {
         showStep(2);
     });
@@ -215,20 +225,15 @@ document.addEventListener('DOMContentLoaded', () => {
             showStep(3);
         }
     });
+
     document.getElementById('nextToStep4')?.addEventListener('click', () => {
         if (validateCurrentStep(3)) {
             saveCurrentStepData(3);
             showStep(4);
-
-            document.getElementById('emotionalAssessment')?.scrollIntoView({ 
-                behavior: 'smooth',
-                block: 'start'
-            });
         }
     });
-    
 
-    //Back button
+    // Back button handlers
     document.getElementById('backToStep1')?.addEventListener('click', () => showStep(1));
     document.getElementById('backToStep2')?.addEventListener('click', () => showStep(2));
     document.getElementById('backToStep3')?.addEventListener('click', () => showStep(3));
