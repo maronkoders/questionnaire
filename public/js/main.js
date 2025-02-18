@@ -116,7 +116,7 @@ function handleCPAMembershipResponse(value) {
                 setTimeout(() => {
                     nonMemberMessage.classList.add('hidden');
                     setTimeout(() => {
-                       //todo close tab
+                     window.location.href = '/done';
                     }, 500);
                 }, 1000);
             })
@@ -166,6 +166,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('surveyForm');
     const consentDialog = document.getElementById('consentDialog');
     const acceptConsentBtn = document.getElementById('acceptConsent');
+    const rejectConsentBtn = document.getElementById('rejectConsent');
     const nextToStep2Btn = document.getElementById('nextToStep2');
     let hasConsented = false;
 
@@ -174,28 +175,24 @@ document.addEventListener('DOMContentLoaded', () => {
     cpaMemberRadios.forEach(radio => {
         radio.addEventListener('change', (e) => {
             if (e.target.value === 'yes') {
-                consentDialog.classList.remove('translate-y-full');
-                document.getElementById('nonMemberMessage').classList.add('hidden');
+                consentDialog.classList.remove('hidden');
             } else {
-                // Hide consent dialog
-                consentDialog.classList.add('translate-y-full');
+                consentDialog.classList.add('hidden');
                 handleCPAMembershipResponse(e.target.value);
             }
         });
     });
 
+    // Redirect to the "done" page when the "I Do Not Agree" button is clicked
+    rejectConsentBtn?.addEventListener('click', () => {
+        window.location.href = '/done'; // Replace '/done' with the actual URL of your done page
+    });
+
     // Handle consent acceptance
-    acceptConsentBtn.addEventListener('click', () => {
-        hasConsented = true;
-        if(localStorage.getItem('cpaYesRadioDisabled') !== 'true'){
-            nextToStep2Btn.disabled = false;
-            consentDialog.classList.remove('translate-y-full');
-            consentDialog.classList.add('hidden');
-            localStorage.setItem('surveyConsent', 'true');
-        } 
-        if(localStorage.getItem('cpaYesRadioDisabled') === 'true'){
-            document.querySelector('#cpaYesRadioDisabled').classList.remove('hidden');
-        }
+    acceptConsentBtn?.addEventListener('click', () => {
+        consentDialog.classList.add('hidden');
+        nextToStep2Btn.disabled = false;
+        // Additional logic for when consent is accepted
     });
 
     // Check for existing consent
