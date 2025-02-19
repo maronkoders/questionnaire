@@ -129,7 +129,6 @@ function handleCPAMembershipResponse(value) {
                 }, 1000);
             })
             .catch(error => {
-                document.querySelector('#cpaYesRadioDisabled').classList.remove('hidden');
                 Toastify({
                     text: 'You have already submitted your assessment.',
                     duration: 3000,
@@ -163,8 +162,6 @@ function handleCPAMembershipResponse(value) {
         if(localStorage.getItem('cpaYesRadioDisabled') !== 'true'){
             nextToStep2.disabled = false;
             nonMemberMessage.classList.add('hidden');
-        }else {
-            document.querySelector('#cpaYesRadioDisabled').classList.remove('hidden');
         }
     }
 }
