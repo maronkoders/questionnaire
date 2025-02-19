@@ -14,7 +14,7 @@ function showStep(stepNumber) {
     });
 
     // Scroll to the header container
-    const headerContainer = document.querySelector('.header-container');
+    const headerContainer = document.querySelector('body.bg-gray-100');
     if (headerContainer) {
         headerContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
@@ -40,7 +40,7 @@ function showPart(part) {
         currentPartElement.classList.remove('hidden');
         
         // Scroll to the header container
-        const headerContainer = document.querySelector('.header-container');
+        const headerContainer = document.querySelector('body.bg-gray-100');
         if (headerContainer) {
             headerContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
