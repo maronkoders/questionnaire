@@ -54,13 +54,11 @@ function showPart(part) {
 }
 
 function showNextPart() {
-    if(validateCurrentStepPart(currentPart)){
-        if (currentPart < totalParts) {
-            saveCurrentStepPartData(currentPart);
-            currentPart++;
-            showPart(currentPart);
-            toggleButtons();
-        }
+    if (currentPart < totalParts) {
+        saveCurrentStepPartData(currentPart);
+        currentPart++;
+        showPart(currentPart);
+        toggleButtons();
     }
 }
 
