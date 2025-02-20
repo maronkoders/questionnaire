@@ -215,17 +215,13 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     
     document.getElementById('nextToStep3')?.addEventListener('click', () => {
-        if (validateCurrentStep(2)) {
-            saveCurrentStepData(2);
-            showStep(3);
-        }
+        saveCurrentStepData(2);
+        showStep(3);
     });
 
     document.getElementById('nextToStep4')?.addEventListener('click', () => {
-        if (validateCurrentStep(3)) {
-            saveCurrentStepData(3);
-            showStep(4);
-        }
+        saveCurrentStepData(3);
+        showStep(4);
     });
 
     // Back button handlers
@@ -289,9 +285,7 @@ async function generateDeviceFingerprint() {
 }
 
 function submitAssessment() {
-    if(validateCurrentStepPart(7)){
-        saveCurrentStepPartData(7);
-
+    saveCurrentStepPartData(7);
     const submitButton = document.getElementById('submitButton');
     submitButton.disabled = true;
     submitButton.textContent = 'Submitting...';
@@ -382,7 +376,6 @@ function submitAssessment() {
 
             });
         });
-}
 }
 
 function validateCurrentStep(stepNumber) {
