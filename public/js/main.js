@@ -378,8 +378,6 @@ function submitAssessment() {
     const voucherCode = generateVoucherCode();
     assessmentData.voucher_code = voucherCode;
 
-
-    alert(assessmentData.scoring);
         generateDeviceFingerprint().then(fingerprint => {
             assessmentData.deviceFingerprint = fingerprint;
             
@@ -388,7 +386,7 @@ function submitAssessment() {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: jsonData
+                body: JSON.stringify(assessmentData)
             })
             .then(response => {
                 if (!response.ok) return response.json().then(err => Promise.reject(err));
@@ -397,6 +395,8 @@ function submitAssessment() {
                 return response.json();
             })
             .then(data => {
+                localStorage.setItem('scoring', assessmentData.scoring);
+                localStorage.setItem('voucher_code', assessmentData.voucher_code);
                 localStorage.removeItem('surveyFormData');
                 submitButton.disabled = false;
                 submitButton.textContent = 'Submit Assessment';

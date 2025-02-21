@@ -132,7 +132,7 @@
         <h1>Thank You!</h1>
         <p>Your assessment has been successfully submitted. We appreciate your time and effort in completing this evaluation.</p>
         
-        <div class="result-box hidden">
+        <div class="result-box" style="display: none;">
             <div class="score-section">
                 <h2>Your Score</h2>
                 <p id="scoreDisplay">--</p>
@@ -151,12 +151,12 @@
             const voucherCode = localStorage.getItem('voucher_code');
 
             if(score !== null && voucherCode !== null) {
-                document.getElementById('result-box').classList.remove('hidden');
+                document.querySelector('.result-box').style.display = 'block';
                 document.getElementById('scoreDisplay').textContent = score;
                 document.getElementById('voucherDisplay').textContent = voucherCode;
             }
         
-            localStorage.clear();
+            // localStorage.clear();
         });
     </script>
 </body>
