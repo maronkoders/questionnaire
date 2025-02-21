@@ -84,6 +84,42 @@
                 transform: scale(1);
             }
         }
+
+        .result-box {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: #f8f9fa;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .score-section, .voucher-section {
+            text-align: center;
+            margin: 1rem 0;
+        }
+
+        .score-section h2, .voucher-section h2 {
+            color: #333;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        #scoreDisplay {
+            font-size: 2rem;
+            color: #2c3e50;
+            font-weight: bold;
+        }
+
+        .voucher-code {
+            font-family: monospace;
+            font-size: 1.5rem;
+            letter-spacing: 2px;
+            color: #2c3e50;
+            background: #e9ecef;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            display: inline-block;
+        }
     </style>
 </head>
 <body>
@@ -95,8 +131,34 @@
         </div>
         <h1>Thank You!</h1>
         <p>Your assessment has been successfully submitted. We appreciate your time and effort in completing this evaluation.</p>
-        <!-- <a href="/" class="button">Return to Home</a> -->
+        
+        <div class="result-box hidden">
+            <div class="score-section">
+                <h2>Your Score</h2>
+                <p id="scoreDisplay">--</p>
+            </div>
+            <div class="voucher-section">
+                <h2>Your Voucher Code</h2>
+                <p id="voucherDisplay" class="voucher-code">--</p>
+            </div>
+        </div>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get values from localStorage
+            const score = localStorage.getItem('scoring');
+            const voucherCode = localStorage.getItem('voucher_code');
+
+            if(score !== null && voucherCode !== null) {
+                document.getElementById('result-box').classList.remove('hidden');
+                document.getElementById('scoreDisplay').textContent = score;
+                document.getElementById('voucherDisplay').textContent = voucherCode;
+            }
+        
+            localStorage.clear();
+        });
+    </script>
 </body>
 </html>
 

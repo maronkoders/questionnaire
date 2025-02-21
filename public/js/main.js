@@ -335,10 +335,53 @@ function submitAssessment() {
         }
     }
 
+    assessmentData.scoring = 0;
+
+    //scoring for the first 50 questions
+    for(let i = 1; i <= 50; i++){
+        const questionName = document.querySelector(`input[name$="_${i}"]:checked`)?.name;
+        if (questionName) {
+            const value = document.querySelector(`input[name$="_${i}"]:checked`).value;
+            assessmentData.scoring += parseInt(value);
+        }
+    }
+
+    //scoring for the last 20 questions
+    for(let i = 51; i <= 70; i++){
+        const questionName = document.querySelector(`input[name$="_${i}"]:checked`)?.name;
+        if (questionName) {
+            const value = document.querySelector(`input[name$="_${i}"]:checked`).value;
+            const reversedValue = 6 - parseInt(value);
+            assessmentData.scoring += reversedValue; 
+        }
+    }
+
+    const generateVoucherCode = () => {
+        const letters = 'ABCDEFGHJKLMNPQRSTUVWXYZ'; // Excluding I and O to avoid confusion
+        const numbers = '123456789'; // Excluding 0 and 1 to avoid confusion
+        let code = '';
+        
+        // Add 3 random letters
+        for (let i = 0; i < 3; i++) {
+            code += letters.charAt(Math.floor(Math.random() * letters.length));
+        }
+        
+        // Add 4 random numbers
+        for (let i = 0; i < 4; i++) {
+            code += numbers.charAt(Math.floor(Math.random() * numbers.length));
+        }
+        
+        return code;
+    };
+
+    //generate a voucher code number add letters too
+    const voucherCode = generateVoucherCode();
+    assessmentData.voucher_code = voucherCode;
+
+
+    alert(assessmentData.scoring);
         generateDeviceFingerprint().then(fingerprint => {
             assessmentData.deviceFingerprint = fingerprint;
-            
-            const jsonData = JSON.stringify(assessmentData, null, 2);
             
             fetch('/api/submit-assessment', {
                 method: 'POST',
