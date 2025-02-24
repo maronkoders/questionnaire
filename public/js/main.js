@@ -88,6 +88,9 @@ function handleCPAMembershipResponse(value) {
         if(localStorage.getItem('cpaYesRadioDisabled') !== 'true') {
             nonMemberMessage.classList.remove('hidden');
         }
+
+        localStorage.removeItem('scoring');
+        localStorage.removeItem('voucher_code');
        
         nextToStep2.disabled = true;
         const responseData = {
@@ -309,7 +312,6 @@ function submitAssessment() {
         work_nature: document.querySelector('input[name="work_nature"]:checked')?.value || null,
         job_title: document.querySelector('input[name="job_title"]:checked')?.value || null,
         years_since_designation: document.querySelector('input[name="years_since_designation"]')?.value || null,
-
         birth_year: document.querySelector('input[name="birth_year"]')?.value || null,
         staff_number: document.querySelector('input[name="staff_number"]')?.value || null,
         oversee_number: document.querySelector('input[name="oversee_number"]')?.value || null,
