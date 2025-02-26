@@ -148,6 +148,47 @@
     .scrollbar-visible:hover::-webkit-scrollbar-track {
         background: rgba(0, 0, 0, 0.1);
     }
+
+    .responsive-table {
+        width: 100%;
+        overflow-x: hidden; /* Prevent horizontal scrolling */
+    }
+
+    @media screen and (max-width: 640px) { /* Smaller breakpoint for mobile phones */
+        .responsive-table table,
+        .responsive-table thead,
+        .responsive-table tbody,
+        .responsive-table th,
+        .responsive-table td,
+        .responsive-table tr {
+            display: block !important; /* Force block display */
+            width: 100% !important;
+            box-sizing: border-box;
+        }
+
+        .responsive-table {
+            max-width: 100vw; /* Ensure table doesn't exceed viewport width */
+        }
+
+        .responsive-table tr {
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 10px;
+        }
+
+        .responsive-table td {
+            text-align: left;
+            padding: 10px 5px;
+            display: flex !important;
+            justify-content: space-between;
+            align-items: center;
+            border: none;
+            border-bottom: 1px solid #eee;
+            word-break: break-word; /* Handle long content */
+        }
+    }
     </style>
 </head>
 <body class="bg-gray-100">
