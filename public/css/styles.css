@@ -1083,3 +1083,66 @@ video {
     display: none;
   }
 }
+
+@media screen and (max-width: 640px) { /* Smaller breakpoint for mobile phones */
+  .responsive-table table,
+  .responsive-table thead,
+  .responsive-table tbody,
+  .responsive-table th,
+  .responsive-table td,
+  .responsive-table tr {
+    display: block !important;
+    width: 100% !important;
+    box-sizing: border-box;
+  }
+
+  .responsive-table tr {
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+  }
+
+  .responsive-table td {
+    /* Remove flex display to prevent label from being pushed to top */
+    display: block !important;
+    text-align: left;
+    padding: 8px 5px;
+    border: none;
+    border-bottom: 1px solid #eee;
+  }
+
+  /* Style for the question text */
+  .responsive-table td:first-child {
+    font-weight: bold;
+    border-bottom: 2px solid #ddd;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+  }
+
+  /* Container for radio buttons */
+  .responsive-table td:not(:first-child) {
+    display: inline-block !important;
+    width: auto !important;
+    margin-right: 15px;
+    border: none;
+  }
+
+  /* Hide the table headers on mobile */
+  .responsive-table thead {
+    display: none !important;
+  }
+
+  /* Style for radio button labels */
+  .responsive-table td:not(:first-child) input[type="radio"] {
+    margin-right: 5px;
+  }
+
+  /* Add labels for radio options */
+  .responsive-table td:not(:first-child)::before {
+    content: attr(data-label);
+    margin-left: 5px;
+    font-size: 0.9rem;
+  }
+}
