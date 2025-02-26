@@ -1105,7 +1105,6 @@ video {
   }
 
   .responsive-table td {
-    /* Remove flex display to prevent label from being pushed to top */
     display: block !important;
     text-align: left;
     padding: 8px 5px;
@@ -1123,15 +1122,10 @@ video {
 
   /* Container for radio buttons */
   .responsive-table td:not(:first-child) {
-    display: inline-block !important;
-    width: auto !important;
+    display: flex; /* Use flex to align items */
+    align-items: center; /* Center items vertically */
     margin-right: 15px;
     border: none;
-  }
-
-  /* Hide the table headers on mobile */
-  .responsive-table thead {
-    display: none !important;
   }
 
   /* Style for radio button labels */
@@ -1144,5 +1138,16 @@ video {
     content: attr(data-label);
     margin-left: 5px;
     font-size: 0.9rem;
+  }
+
+  /* Ensure the question text and radio buttons are aligned */
+  .responsive-table td:not(:first-child) {
+    flex-direction: row; /* Align items in a row */
+    justify-content: flex-start; /* Align to the start */
+  }
+
+  /* Hide the table headers on mobile */
+  .responsive-table thead {
+    display: none !important;
   }
 }
