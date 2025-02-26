@@ -149,19 +149,18 @@
         background: rgba(0, 0, 0, 0.1);
     }
     </style>
-    <link rel="stylesheet" href="/css/bd.min.css">
+    <!-- <link rel="stylesheet" href="/css/bd.min.css">
 
-<!-- Bootstrap Datepicker CSS -->
+
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-datepicker@1.9.0/dist/css/bootstrap-datepicker.min.css" rel="stylesheet">
 
-<!-- jQuery (Required by Bootstrap JS and Datepicker) -->
+
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
 
-<!-- Bootstrap JS (Required by Datepicker) -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script> -->
 
-<!-- Bootstrap Datepicker JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap-datepicker@1.9.0/dist/js/bootstrap-datepicker.min.js"></script>
+
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap-datepicker@1.9.0/dist/js/bootstrap-datepicker.min.js"></script> -->
 </head>
 <body class="bg-gray-100">
     <div class="min-h-screen bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
@@ -219,7 +218,8 @@
                     <div class="space-y-6">
                         <div class="question-group">
                             <label class="block mb-2 font-medium">Please indicate the year you were born <span class="text-red-500">*</span></label>
-                            <input type="text" id="yearPicker" name="birth_year" required min="1940" max="2006"
+                            <small class="text-red-600"> Use numbers only (e.g 1956).</small>
+                            <input type="number" name="birth_year" required min="1940" max="2006"
                                 class="w-full border rounded p-2">
                         </div>
 
