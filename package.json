@@ -1,7 +1,7 @@
 {
   "name": "survey-form",
   "version": "0.0.0",
-  "type": "module",
+  "type": "commonjs",
   "scripts": {
     "start": "cross-env NODE_ENV=production node src/server.js",
     "dev": "cross-env NODE_ENV=development nodemon src/server.js",
