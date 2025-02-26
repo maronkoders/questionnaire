@@ -5303,15 +5303,20 @@
                         document.getElementById('totalLanguageResponses').textContent = totalLanguage;
 
                         //Designation Stats
+                        // english: data.assessments.filter(a => a.personal_info?.languages.includes('english')).length,
                         const designationCounts = {
-                            cga: data.assessments.filter(a => a.personal_info?.legacy_designation === 'cga').length,
-                            ca: data.assessments.filter(a => a.personal_info?.legacy_designation === 'ca').length,
-                            cma: data.assessments.filter(a => a.personal_info?.legacy_designation === 'cma').length,
-                            other: data.assessments.filter(a => a.personal_info?.legacy_designation === 'other').length,
-                            none: data.assessments.filter(a => a.personal_info?.legacy_designation === 'none').length
+                            cga: data.assessments.filter(a => a.personal_info?.legacy_designation.includes('cga')).length,
+                            ca: data.assessments.filter(a => a.personal_info?.legacy_designation.includes('ca')).length,
+                            cma: data.assessments.filter(a => a.personal_info?.legacy_designation.includes('cma')).length,
+                            other: data.assessments.filter(a => a.personal_info?.legacy_designation.includes('other')).length,
+                            none: data.assessments.filter(a => a.personal_info?.legacy_designation.includes('none')).length
                         };
 
+                        console.log(designationCounts);
+
                         const designationTotal = Object.values(designationCounts).reduce((a, b) => a + b, 0);
+
+                        console.log(designationTotal);
 
                         document.getElementById('cgaCount').textContent = designationCounts.cga;
                         document.getElementById('caCount').textContent = designationCounts.ca;
@@ -5512,7 +5517,6 @@
 
                  //Organization Size
                  const orgSizeResponses = data.assessments.filter(a => a.personal_info?.staff_number != null).map(a => a.personal_info.staff_number);
-                    console.log(orgSizeResponses);
                     orgSizeResponses.forEach(response => {
                             const li = document.createElement('li');
                             li.textContent = response;
