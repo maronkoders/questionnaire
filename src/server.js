@@ -9,9 +9,10 @@ import User from './models/User.js';
 import { connectDB } from './utils/db.js';
 import connectMongo from 'connect-mongo';
 import { createHash } from 'crypto';
+import path from 'path';
 
 const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+const __dirname = path.dirname(__filename);
 
 dotenv.config();
 
@@ -32,7 +33,7 @@ const MongoStore = connectMongo.create({
 app.set('trust proxy', 1);
 
 // Middleware
-app.use(express.static(join(__dirname, '../public')));
+app.use(express.static(path.join(__dirname, '../public')));
 app.use('/assets', express.static(join(__dirname, '../src/assets')));
 app.use(express.json());
 
@@ -61,6 +62,9 @@ const requireAuth = (req, res, next) => {
 app.use((req, res, next) => {
     // Get IP address
     req.clientIp = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+    if (req.url.endsWith('.css')) {
+        res.type('text/css');
+    }
     next();
 });
 
