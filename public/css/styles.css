@@ -1105,8 +1105,9 @@ video {
   }
 
   .responsive-table td {
-    display: block !important;
-    text-align: left;
+    display: flex; /* Use flex to align items */
+    justify-content: space-between; /* Space between label and radio buttons */
+    align-items: center; /* Center items vertically */
     padding: 8px 5px;
     border: none;
     border-bottom: 1px solid #eee;
@@ -1118,36 +1119,33 @@ video {
     border-bottom: 2px solid #ddd;
     margin-bottom: 10px;
     padding-bottom: 10px;
+    flex: 1; /* Allow the label to take available space */
+    text-align: left; /* Align text to the left */
   }
 
-  /* Container for radio buttons */
+  /* Style for radio button containers */
   .responsive-table td:not(:first-child) {
-    display: flex; /* Use flex to align items */
+    display: flex; /* Keep radio buttons in a row */
     align-items: center; /* Center items vertically */
-    margin-right: 15px;
-    border: none;
+    justify-content: flex-end; /* Align radio buttons to the right */
   }
 
   /* Style for radio button labels */
   .responsive-table td:not(:first-child) input[type="radio"] {
-    margin-right: 5px;
-  }
-
-  /* Add labels for radio options */
-  .responsive-table td:not(:first-child)::before {
-    content: attr(data-label);
-    margin-left: 5px;
-    font-size: 0.9rem;
-  }
-
-  /* Ensure the question text and radio buttons are aligned */
-  .responsive-table td:not(:first-child) {
-    flex-direction: row; /* Align items in a row */
-    justify-content: flex-start; /* Align to the start */
+    margin-left: 5px; /* Space between radio button and label */
   }
 
   /* Hide the table headers on mobile */
   .responsive-table thead {
     display: none !important;
+  }
+
+  /* Additional styling for better readability */
+  .responsive-table td {
+    padding: 10px; /* Increase padding for better touch targets */
+  }
+
+  .responsive-table label {
+    margin-right: 10px; /* Space between label and radio button */
   }
 }
