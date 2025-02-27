@@ -283,6 +283,12 @@
   .responsive-table label {
     margin-right: 10px; /* Space between label and radio button */
   }
+
+  #bottomInstruction {
+    display: none;
+  }
+
+  /* Pulse animation for the instruction text */
 }
 
 
@@ -2441,11 +2447,12 @@
             <br>
             <hr>
             <br>
-            <div class="relative">
-                <div class="absolute bottom-0 left-1/2 transform -translate-x-1/2 text-black-500">
+            <div id="bottomInstruction" class="relative">
+                <div  class="absolute bottom-0 left-1/2 transform -translate-x-1/2 text-black-500">
                     <p class="text-xs">USE THE ARROW KEYS TO SCROLL DOWN</p>
                 </div>
             </div>
+
         </div>
     </div>
 
