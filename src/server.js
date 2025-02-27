@@ -216,3 +216,8 @@ app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);
     console.log(`Admin dashboard available at http://localhost:${port}/login`);
 }); 
+
+
+// app.listen(3000, '192.168.8.111', () => {
+//     console.log('Server running at http://192.168.8.111:3000');
+// });
