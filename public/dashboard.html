@@ -546,13 +546,6 @@
                                             <span class="text-gray-500 ml-2" id="otherIndustryPercentage">(0%)</span>
                                         </div>
                                     </div>
-                                    <div class="flex justify-between items-center">
-                                        <span class="text-gray-600">Unemployed</span>
-                                        <div class="flex items-center">
-                                            <span class="text-gray-900 font-medium" id="unemployedCount">0</span>
-                                            <span class="text-gray-500 ml-2" id="unemployedIndustryPercentage">(0%)</span>
-                                        </div>
-                                    </div>
                                     <div class="pt-4 border-t border-gray-200">
                                         <div class="flex justify-between items-center">
                                             <span class="text-gray-800 font-medium">Total Responses:</span>
@@ -585,7 +578,7 @@
                                         </div>
                                     </div>
                                     <div class="flex justify-between items-center">
-                                        <span class="text-gray-600">Owner of a non-accounting firm</span>
+                                        <span class="text-gray-600">Owner of a non-accounting organisation</span>
                                         <div class="flex items-center">
                                             <span class="text-gray-900 font-medium" id="nonAccountingOwnerCount">0</span>
                                             <span class="text-gray-500 ml-2" id="nonAccountingOwnerPercentage">(0%)</span>
@@ -599,10 +592,17 @@
                                         </div>
                                     </div>
                                     <div class="flex justify-between items-center">
-                                        <span class="text-gray-600">Employee of a non-accounting firm</span>
+                                        <span class="text-gray-600">Employee of a non-accounting organisation</span>
                                         <div class="flex items-center">
                                             <span class="text-gray-900 font-medium" id="nonAccountingEmployeeCount">0</span>
                                             <span class="text-gray-500 ml-2" id="nonAccountingEmployeePercentage">(0%)</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-600">Other</span>
+                                        <div class="flex items-center">
+                                            <span class="text-gray-900 font-medium" id="otherPositionCount">0</span>
+                                            <span class="text-gray-500 ml-2" id="otherPositionPercentage">(0%)</span>
                                         </div>
                                     </div>
                                     <div class="pt-4 border-t border-gray-200">
@@ -771,6 +771,15 @@
                                             <span class="text-gray-500 ml-2" id="presidentCEOPercentage">(0%)</span>
                                         </div>
                                     </div>
+
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-600">Other</span>
+                                        <div class="flex items-center">
+                                            <span class="text-gray-900 font-medium" id="otherTitleCount">0</span>
+                                            <span class="text-gray-500 ml-2" id="otherTitlePercentage">(0%)</span>
+                                        </div>
+                                    </div>
+
                                     <div class="pt-4 border-t border-gray-200">
                                         <div class="flex justify-between items-center">
                                             <span class="text-gray-800 font-medium">Total Responses:</span>
@@ -5345,7 +5354,6 @@
                             government: data.assessments.filter(a => a.personal_info?.industry_type === 'government').length,
                             notForProfit: data.assessments.filter(a => a.personal_info?.industry_type === 'not_for_profit').length,
                             other: data.assessments.filter(a => a.personal_info?.industry_type === 'other').length,
-                            unemployed: data.assessments.filter(a => a.personal_info?.industry_type === 'unemployed').length
                         };
 
                         const industryTotal = Object.values(industryCounts).reduce((a, b) => a + b, 0);
@@ -5357,7 +5365,6 @@
                         document.getElementById('governmentCount').textContent = industryCounts.government;
                         document.getElementById('notForProfitCount').textContent = industryCounts.notForProfit;
                         document.getElementById('otherIndustryCount').textContent = industryCounts.other;
-                        document.getElementById('unemployedCount').textContent = industryCounts.unemployed;
 
 
                         document.getElementById('publicPracticePercentage').textContent = 
@@ -5374,11 +5381,6 @@
                             `(${((industryCounts.other / industryTotal) * 100).toFixed(1)}%)`;
                         document.getElementById('notForProfitPercentage').textContent = 
                             `(${((industryCounts.notForProfit / industryTotal) * 100).toFixed(1)}%)`;
-                        document.getElementById('unemployedIndustryPercentage').textContent = 
-                            `(${((industryCounts.unemployed / industryTotal) * 100).toFixed(1)}%)`;
-
-
-
 
                    document.getElementById('totalIndustryResponses').textContent = industryTotal;         
 
@@ -5390,6 +5392,7 @@
                         owner: data.assessments.filter(a => a.personal_info?.current_position === 'owner_non_accounting').length,
                         employee: data.assessments.filter(a => a.personal_info?.current_position === 'employee_accounting').length,
                         nonAccountingFirmEmployee: data.assessments.filter(a => a.personal_info?.current_position === 'employee_non_accounting').length,
+                        other:  data.assessments.filter(a => a.personal_info?.current_position === 'other_position').length,
                     };
 
                     const currentPositionTotal = Object.values(currentPositionCounts).reduce((a, b) => a + b, 0);
@@ -5399,6 +5402,7 @@
                     document.getElementById('nonAccountingOwnerCount').textContent = currentPositionCounts.owner;
                     document.getElementById('accountingEmployeeCount').textContent = currentPositionCounts.employee;
                     document.getElementById('nonAccountingEmployeeCount').textContent = currentPositionCounts.nonAccountingFirmEmployee;
+                    document.getElementById('otherPositionCount').textContent = currentPositionCounts.other;
 
                     document.getElementById('soleProprietorPercentage').textContent = 
                         `(${((currentPositionCounts.soleProprietor / currentPositionTotal) * 100).toFixed(1)}%)`;
@@ -5409,9 +5413,9 @@
                     document.getElementById('accountingEmployeePercentage').textContent = 
                         `(${((currentPositionCounts.employee / currentPositionTotal) * 100).toFixed(1)}%)`;
                     document.getElementById('nonAccountingEmployeePercentage').textContent = 
-
-
-                        `(${((currentPositionCounts.nonAccountingFirmEmployee / currentPositionTotal) * 100).toFixed(1)}%)`;
+                     `(${((currentPositionCounts.nonAccountingFirmEmployee / currentPositionTotal) * 100).toFixed(1)}%)`;
+                     document.getElementById('otherPositionPercentage').textContent = 
+                     `(${((currentPositionCounts.other / currentPositionTotal) * 100).toFixed(1)}%)`;
 
                     document.getElementById('totalPositionResponses').textContent = currentPositionTotal;
 
@@ -5467,7 +5471,8 @@
                         seniorManager: data.assessments.filter(a => a.personal_info?.job_title === 'senior_manager').length,
                         director: data.assessments.filter(a => a.personal_info?.job_title === 'director_vp').length,
                         instructor: data.assessments.filter(a => a.personal_info?.job_title === 'instructor_lecturer_professor').length,
-                        president: data.assessments.filter(a => a.personal_info?.job_title === 'president_ceo_owner').length
+                        president: data.assessments.filter(a => a.personal_info?.job_title === 'president_ceo_owner').length,
+                        other: data.assessments.filter(a => a.personal_info?.job_title === 'other_title').length
                     };
 
                     document.getElementById('solePractitionerCount').textContent = jobTitleCounts.soleProprietor;
@@ -5479,6 +5484,7 @@
                     document.getElementById('directorVPCount').textContent = jobTitleCounts.director;
                     document.getElementById('instructorCount').textContent = jobTitleCounts.instructor;
                     document.getElementById('presidentCEOCount').textContent = jobTitleCounts.president;
+                    document.getElementById('otherTitleCount').textContent = jobTitleCounts.other;
 
 
                   const totalJobTitle = Object.values(jobTitleCounts).reduce((a, b) => a + b, 0);       
@@ -5502,6 +5508,8 @@
                         `(${((jobTitleCounts.instructor / totalJobTitle) * 100).toFixed(1)}%)`;
                   document.getElementById('presidentCEOPercentage').textContent = 
                         `(${((jobTitleCounts.president / totalJobTitle) * 100).toFixed(1)}%)`;
+                    document.getElementById('otherTitlePercentage').textContent = 
+                        `(${((jobTitleCounts.other / totalJobTitle) * 100).toFixed(1)}%)`;
 
                     //Supervision Responsibility
                     const supervisionResponses = data.assessments.filter(a => a.personal_info?.oversee_number != null).map(a => a.personal_info.oversee_number);
