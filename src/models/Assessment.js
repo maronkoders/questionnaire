@@ -100,6 +100,19 @@ const emotionalIntelligenceSchema = new mongoose.Schema({
     discuss_frustration_70: Number
 });
 
+// const scoring = new mongoose.Schema({
+//     reverseScore:Number,
+//     emotionalSelfAwarebess: Number,
+//     emotionalExpression:Number,
+//     emotionalAwarenessOfOthers:Number,
+//     emotionalReasoning:Number,
+//     emotionalSelfManagement:Number,
+//     emotionalManagementOfOthers:Number,
+//     emotionalSelfControl:Number,
+//     totalEmotionalIntelligence:Number,
+
+// });
+
 const assessmentSchema = new mongoose.Schema({
     personal_info: personalInfoSchema,
     career_satisfaction: careerSatisfactionSchema,

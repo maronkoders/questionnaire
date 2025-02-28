@@ -285,6 +285,85 @@ async function generateDeviceFingerprint() {
     return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
 }
 
+
+function calculateReverseScores() {
+    // Array of questions that need reverse scoring
+    const reverseQuestions = [
+        'criticism_5',
+        'motivation_difficulty_9',
+        'wrong_people_11',
+        'fail_cooperate_12',
+        'positive_emotions_16',
+        'fail_identify_response_17',
+        'inappropriate_behavior_21',
+        'ruminate_26',
+        'under_stress_impulsive_30',
+        'fail_control_temper_35',
+        'fail_recognize_emotions_38',
+        'fail_recognize_feelings_43',
+        'impatient_49',
+        'colleagues_upset_55',
+        'identify_feelings_57',
+        'handle_stress_61',
+        'resolve_emotions_64',
+        'express_feelings_65',
+        'technical_focus_67',
+        'keep_calm_68'
+    ];
+
+    // Function to get value of a radio button
+    function getRadioValue(name) {
+        const radio = document.querySelector(`input[name="${name}"]:checked`);
+        return radio ? parseInt(radio.value) : 0;
+    }
+
+    // Function to reverse score (1->5, 2->4, 3->3, 4->2, 5->1)
+    function reverseScore(value) {
+        return value ? (6 - value) : 0;
+    }
+
+    // Calculate reversed scores and total
+    let totalScore = 0;
+    let scores = {};
+
+    reverseQuestions.forEach(questionName => {
+        const originalValue = getRadioValue(questionName);
+        const reversedValue = reverseScore(originalValue);
+        scores[questionName] = reversedValue;
+        totalScore += reversedValue;
+    });
+
+    return {
+        individualScores: scores,
+        total: totalScore,
+    };
+}
+
+
+function calculateRegularScores() {
+    let totalScore = 0;
+    
+    // Array of questions that need reverse scoring (to exclude them)
+    const reverseQuestions = [5, 9, 11, 12, 16, 17, 21, 26, 30, 35, 38, 43, 49, 55, 57, 61, 64, 65, 67, 68];
+    
+    // Loop through all questions from 1 to 70
+    for(let i = 1; i <= 70; i++) {
+        // Skip if this question number is in the reverse scoring list
+        if (!reverseQuestions.includes(i)) {
+            const questionName = document.querySelector(`input[name$="_${i}"]:checked`)?.name;
+            if (questionName) {
+                const value = document.querySelector(`input[name$="_${i}"]:checked`).value;
+                totalScore += parseInt(value);
+            }
+        }
+    }
+
+    return {
+        regularScore: totalScore,
+    };
+}
+
+
 function submitAssessment() {
     saveCurrentStepPartData(7);
     const submitButton = document.getElementById('submitButton');
@@ -337,26 +416,9 @@ function submitAssessment() {
         }
     }
 
-    assessmentData.scoring = 0;
+    assessmentData.scoring = calculateRegularScores().regularScore + calculateReverseScores().total;
 
-    //scoring for the first 50 questions
-    for(let i = 1; i <= 50; i++){
-        const questionName = document.querySelector(`input[name$="_${i}"]:checked`)?.name;
-        if (questionName) {
-            const value = document.querySelector(`input[name$="_${i}"]:checked`).value;
-            assessmentData.scoring += parseInt(value);
-        }
-    }
-
-    //scoring for the last 20 questions
-    for(let i = 51; i <= 70; i++){
-        const questionName = document.querySelector(`input[name$="_${i}"]:checked`)?.name;
-        if (questionName) {
-            const value = document.querySelector(`input[name$="_${i}"]:checked`).value;
-            const reversedValue = 6 - parseInt(value);
-            assessmentData.scoring += reversedValue; 
-        }
-    }
+    //reverse_scoring
 
     const generateVoucherCode = () => {
         const letters = 'ABCDEFGHJKLMNPQRSTUVWXYZ'; // Excluding I and O to avoid confusion
